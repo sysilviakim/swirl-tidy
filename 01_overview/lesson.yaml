@@ -1,0 +1,124 @@
+- Class: meta
+  Course: swirl-tidy
+  Lesson: 01_overview
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >-
+    Welcome aboard! These exercises are created to introduce you to tidyverse
+    through a series of interactive exercises. When you see ..., press Enter.
+    
+## demo_lesson(2)
+- Class: text
+  Output: >- 
+    One thing that should be clear is that people have different opinions about
+    which packages they want to rely on. Indeed, the introduction page to
+    tidyverse states that it is an "opinionated collection of R packages."
+    Using tidyverse as opposed to base R has its pros and cons, but because of
+    its consistent and intuitive grammar for data frames, it is widely used.
+    
+## demo_lesson(3)
+- Class: text
+  Output: >- 
+    For many simple operations, you do not need tidyverse. Besides, many
+    components of base R are incorporated into tidyverse code.
+    With that in mind, for more information about what tidyverse is, visit
+    https://www.tidyverse.org/.
+
+## demo_lesson(4)
+- Class: text
+  Output: >-
+    The current version of this swirl lesson assumes that you have some cursory
+    knowledge of the basics of R. These include things such as package
+    installation, working directory, library paths, basic arithmetics, objects,
+    assignments, Global Environment, and so on. I also suggest reviewing this:
+    https://r4ds.had.co.nz/workflow-basics.html.
+    
+## demo_lesson(5)
+- Class: text
+  Output: >- 
+    We will use (1) double quotes to indicate R object names, (2) single quotes
+    to indicate character strings, and (3) curly brackets to indicate R syntax
+    or package names, and (4) backticks to indicate column names in data frames
+    and function argument names.
+    All double/single quotes inside curly brackets are as-is.
+    
+# INSTALLATION =================================================================
+## demo_lesson(6)
+- Class: text
+  Output: >-
+    First, let's install tidyverse!
+    
+## demo_lesson(7)
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidyverse")}, if it is not already installed.
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package ‘XXX’ had non-zero exit status'.
+  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidyverse")',
+      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+    
+## demo_lesson(8)
+- Class: cmd_question
+  Output: >-
+    Now that tidyverse is installed, let us load it.
+    Type {library("tidyverse")}. This will load 8 different packages
+    (as of tidyverse 1.3.0): ggplot2, purrr, tibble, dplyr, tidyr, stringr,
+    readr, and forcats.
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Hint: >
+    Avoid using {require}. Use {library}.
+    See https://stackoverflow.com/questions/5595512 for more on this.
+    
+## demo_lesson(9)
+- Class: text
+  Output: >-
+    I will ask you to check installations/call libraries in each lesson.
+    This is to prevent an unwanted installation of a new version of an existing
+    package or messing with packages already open. 
+    
+## demo_lesson(10)
+- Class: text
+  Output: >-
+    The sequence of lessons follows the data science project workflow by R4DS:
+    Wickham, Hadley, and Garrett Grolemund. R for Data Science: Import,
+    Tidy, Transform, Visualize, and Model Data}. O'Reilly Media, Inc., 2016.
+    This is available at https://r4ds.had.co.nz/.
+    
+## demo_lesson(10)
+- Class: text
+  Output: >-
+    Together, we will move through (1) import, (2) tidy, (3) transform,
+    (4) visualize, (5) model, and (6) communication. Many of the exercises are
+    based on what R4DS book teaches, or tidyverse cheatsheets available at
+    https://rstudio.com/resources/cheatsheets/.
+    
+## demo_lesson(11)
+- Class: text
+  Output: >-
+    Lastly, sometimes it may be a good idea to call each package of tidyverse
+    individually as opposed to a one-line {library(tidyverse)}, especially if
+    you want to be mindful of which functions you are depending on in your code.
+    Sometimes, an issue with updated tidyverse/RStudio may cause the entire code
+    to fail. Another possibility is that conflicting function names may get
+    overwritten. But this is just for your precaution. In this preliminary foray
+    into tidyverse, there will be no such need!
+    
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    You have completed "01_overview" lesson of swirl-tidy!
+    I will see you in the next lesson.
