@@ -1,0 +1,79 @@
+- Class: meta
+  Course: swirl
+  Lesson: Model_with_tidymodels
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >
+    (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
+  
+  
+    Welcome back! Today we will continue to explore how to do statistical models
+    using {tidymodels} package. When you see ..., press Enter.
+    
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidymodels")}, if it is not already installed.
+    This is tidymodels not tidyverse!!
+    
+    
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package ‘XXX’ had non-zero exit status'.
+  CorrectAnswer: if (!require("tidymodels")) install.packages("tidymodels")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidymodels")',
+      'if (!require("tidymodels")) install.packages(pkgs = "tidymodels")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+    
+- Class: cmd_question
+  Output: 'Now load the tidymodels package.'
+  CorrectAnswer: library("tidymodels")
+  AnswerTests: any_of_exprs('library(tidymodels)', 'library("tidymodels")')
+  Hint: 'Avoid using {require}. Use {library}.'
+
+# PREAMBLE =====================================================================
+## demo_lesson(4)
+- Class: text
+  Output: >-
+    Just like the tidyverse, tidymodels is a *collection* of packages, such as
+    {parsnip}, {recipes}, and so on.
+    
+## demo_lesson(5)
+## demo_lesson(6)
+## demo_lesson(7)
+## demo_lesson(8)
+## demo_lesson(9)
+## demo_lesson(10)
+## demo_lesson(11)
+## demo_lesson(12)
+## demo_lesson(13)
+## demo_lesson(14)
+## demo_lesson(15)
+## demo_lesson(16)
+## demo_lesson(17)
+## demo_lesson(18)
+## demo_lesson(19)
+## demo_lesson(20)
+## demo_lesson(21)
+## demo_lesson(22)
+## demo_lesson(23)
+## demo_lesson(24)
+## demo_lesson(25)
+
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    You have completed "Model with tidymodels" lesson of swirl-tidy!
+    This is the last lesson as of version 0.1.0.
+    Congratulations on making this far. You've done really well!
+    Drop in to see what could be future development in "Epilogue".
+    

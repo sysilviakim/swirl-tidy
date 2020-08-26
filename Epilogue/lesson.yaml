@@ -1,0 +1,79 @@
+- Class: meta
+  Course: swirl
+  Lesson: Epilogue
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >
+    This is a wrap-up to the swirl-tidy lesson.
+    We covered a lot of ground in this series of twenty-something swirl lessons.
+    
+# PREAMBLE =====================================================================
+## demo_lesson(4)
+- Class: text
+  Output: >
+    We covered, using tidyverse packages,
+    
+    
+    (1) how to import data
+    
+    
+    (2) how to tidy the data
+    
+    
+    (3) how to transform the data
+    
+    
+    (4) how to visualize the data
+    
+    
+    (5) how to better program 
+    
+    
+    (6) how to create statistical models
+    
+## demo_lesson(5)
+- Class: text
+  Output: >
+    Some packages that are part of the tidyverse that are not covered here
+    include {DBI}, {httr}, {jsonlite}, {xml2} (although this is loaded when
+    we worked with {rvest}), {hms}, {blob}, and {glue}.
+    
+## demo_lesson(6)
+- Class: text
+  Output: >
+    I also haven't covered {magrittr}, which is commonly used, but currently
+    this package is undergoing a major overhaul to magrittr 2.0, so I will wait
+    to see what I want to include in the lesson.
+    
+## demo_lesson(7)
+- Class: text
+  Output: >
+    Again, as we saw with {rvest}, tidyverse alone may not be an answer to
+    everything. Look up StackOverflow if you have specific needs that are not
+    met.
+    
+## demo_lesson(8)
+- Class: text
+  Output: >
+    * If you work with large datasets, I urge you to check out {data.table} by
+    Matt Dowle at https://github.com/Rdatatable/data.table.
+    
+    
+    * If you work a lot with machine learning, check out {caret} by Max Kuhn
+    at https://topepo.github.io/caret/. 
+    
+    
+    * {xtable} is a great package to export your data/model summaries into 
+    tables, especially LaTeX files. This will be extremely useful in making
+    your results reproducible.
+    
+# OUTRO ========================================================================
+- Class: text
+  Output: >
+    Check back for more updates on swirl-tidy! Good luck on your R journey.
+    
