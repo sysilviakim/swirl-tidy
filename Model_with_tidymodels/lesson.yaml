@@ -30,6 +30,8 @@
     any_of_exprs(
       'install.packages(pkgs = "tidymodels")',
       'if (!require("tidymodels")) install.packages(pkgs = "tidymodels")',
+      'install.packages("tidymodels")',
+      'if (!require("tidymodels")) install.packages("tidymodels")',
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'

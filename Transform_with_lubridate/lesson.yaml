@@ -27,6 +27,8 @@
     any_of_exprs(
       'install.packages(pkgs = "tidyverse")',
       'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'install.packages("tidyverse")',
+      'if (!require("tidyverse")) install.packages("tidyverse")',
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
