@@ -9,66 +9,256 @@
 # INTRO ========================================================================
 - Class: text
   Output: >
-    (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
-  
-  
     Welcome back! Today we will explore how to export data using the {haven}
     package. When you see ..., press Enter.
     
 - Class: cmd_question
   Output: >-
-    Run {install.packages("tidyverse")}, if it is not already installed.
+    Run {install.packages("haven")}, if it is not already installed.
     You can type "skip()" if this package is already installed.
     Remember to close all other sessions of R (if Windows) before this step.
     Otherwise, you may run into error messages such as 'Warning in
     install.packages : installation of package ‘XXX’ had non-zero exit status'.
-  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  CorrectAnswer: if (!require("haven")) install.packages("haven")
   AnswerTests: >-
     any_of_exprs(
-      'install.packages(pkgs = "tidyverse")',
-      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
-      'install.packages("tidyverse")',
-      'if (!require("tidyverse")) install.packages("tidyverse")',
+      'install.packages(pkgs = "haven")',
+      'if (!require("haven")) install.packages(pkgs = "haven")',
+      'install.packages("haven")',
+      'if (!require("haven")) install.packages("haven")',
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
     
 - Class: cmd_question
-  Output: 'Now load the tidyverse package.'
-  CorrectAnswer: library("tidyverse")
-  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Output: 'Now load the haven package.'
+  CorrectAnswer: library("haven")
+  AnswerTests: any_of_exprs('library(haven)', 'library("haven")')
   Hint: 'Avoid using {require}. Use {library}.'
 
 # PREAMBLE =====================================================================
 ## demo_lesson(4)
 - Class: text
   Output: >-
-    The {haven} package is not one of the core tidyverse packages (as of 1.3.0).
+    The {haven} package is not one of the core tidyverse packages (as of 1.3.0),
+    but is nevertheless popular as many people work with files created from
+    other programming languages.
     This one lets you import from/export to Stata, SAS, and SPSS files.
+    This lesson will only deal with import/export between Stata and R.
 
 ## demo_lesson(5)
-## demo_lesson(6)
-## demo_lesson(7)
-## demo_lesson(8)
-## demo_lesson(9)
-## demo_lesson(10)
-## demo_lesson(11)
-## demo_lesson(12)
-## demo_lesson(13)
-## demo_lesson(14)
-## demo_lesson(15)
-## demo_lesson(16)
-## demo_lesson(17)
-## demo_lesson(18)
-## demo_lesson(19)
-## demo_lesson(20)
-## demo_lesson(21)
-## demo_lesson(22)
-## demo_lesson(23)
-## demo_lesson(24)
-## demo_lesson(25)
+- Class: cmd_question
+  Output: >-
+    Stata files have extensions `.dta`. To import a Stata file, use {read_dta}.
+    Read in a small dataset called
+    "cces_sample.dta" from file path called lesson_dir, just as we have done
+    in the {readr} lesson. Store this to object "df".
+  CorrectAnswer: df <- haven::read_dta(file.path(lesson_dir, "cces_sample.dta"))
+  AnswerTests: >-
+    any_of_exprs(
+      'df <- haven::read_dta(file.path(lesson_dir, "cces_sample.dta"))',
+      'df <- read_dta(file.path(lesson_dir, "cces_sample.dta"))',
+      'df <- haven::read_dta(file = file.path(lesson_dir, "cces_sample.dta"))',
+      'df <- read_dta(file = file.path(lesson_dir, "cces_sample.dta"))'
+    )
+  Hint: 'Use function {file.path} to specify the directory as {lesson_dir}.'
 
+## demo_lesson(6)
+- Class: cmd_question
+  Output: 'Excellent. Check out the class of "df".'
+  CorrectAnswer: class(df)
+  AnswerTests: any_of_exprs('class(df)')
+  Hint: 'Use function {class}. No quotation marks around the object name.'
+
+## demo_lesson(7)
+- Class: text
+  Output: >-
+    Note that true to the tidyverse, it has been imported as a tibble.
+
+## demo_lesson(8)
+- Class: cmd_question
+  Output: 'Print out "df" on the console.'
+  CorrectAnswer: df
+  AnswerTests: any_of_exprs('print(df)', 'df')
+  Hint: 'Use function {print}, if you will.'
+
+## demo_lesson(9)
+- Class: text
+  Output: >-
+    Now this is something we haven't seen so far!
+    Note the <dbl+lbl> in the variable `inputstate`, `gender`, `educ`, ...
+    This is a sample of the Cooperative Congressional Election Study (CCES)
+    administered in 2018. Most of the variables are entered as numbers, but
+    as they represent categories, they have been *labelled* with what they
+    truly mean.
+
+## demo_lesson(10)
+- Class: cmd_question
+  Output: >-
+    Print out the first element of the `gender` variable using indexing
+    ($ operator).
+  CorrectAnswer: df$gender[1]
+  AnswerTests: >-
+    any_of_exprs(
+      'df$gender[1]',
+      'df[1, ]$gender'
+    )
+  Hint: 'Use function {print}, if you will.'
+
+## demo_lesson(11)
+- Class: text
+  Output: >
+    You should see four value-label pairs printed, that says
+    
+    
+    Labels:
+    
+    
+     value     label
+     
+     
+     1      Male
+     
+     
+     2    Female
+     
+     
+     8   skipped
+     
+     
+     9 not asked
+
+## demo_lesson(12)
+- Class: cmd_question
+  Output: 'Check out the class of the `gender` column.'
+  CorrectAnswer: class(df$gender)
+  AnswerTests: >-
+    any_of_exprs(
+      'class(df$gender)',
+      'class(df[["gender"]])'
+    )
+  Hint: 'Use function {print}, if you will.'
+
+## demo_lesson(13)
+- Class: cmd_question
+  Output: >-
+    You should have seen '[1] "haven_labelled" "vctrs_vctr"     "double"'
+    printed on your console. Good!
+    You can print out the labels explicitly using {print_labels} function.
+    Print the labels of the `inputstate` column.
+  CorrectAnswer: print_labels(df$inputstate)
+  AnswerTests: >-
+    any_of_exprs(
+      'print_labels(df$inputstate)',
+      'print_labels(df[["inputstate"]])'
+    )
+  Hint: 'Use function {print_labels}. This will not accept a tibble.'
+
+## demo_lesson(14)
+- Class: cmd_question
+  Output: >-
+    If you are unfamiliar with or are not happy with Stata labels that have been
+    integrated into R by haven, you can always turn them into a factor. Try
+    applying {as_factor} to the `race` variable, without overwriting the
+    original data. Just print it on the console.
+  CorrectAnswer: as_factor(df$race)
+  AnswerTests: >-
+    any_of_exprs(
+      'as_factor(df$race)',
+      'as_factor(df[["race"]])'
+    )
+  Hint: 'We are doing variable `race` this time!'
+
+## demo_lesson(15)
+- Class: cmd_question
+  Output: >-
+    You should see a regular factor with 10 levels, with a "label" attribute.
+    For more on factors, you may want to check out the forcats package lesson.
+    
+    
+    What's neat about {as_factor} is that it accepts an *entire* tibble!
+    You do not have to take a separate action to convert all columns.
+    Try applying {as_factor} to "df" itself, and not to a specific column.
+  CorrectAnswer: as_factor(df)
+  AnswerTests: any_of_exprs('as_factor(df)')
+  Hint: 'Apply the function to the entire dataframe. No need for any indexing!'
+
+## demo_lesson(16)
+- Class: text
+  Output: >-
+    Just like that, all "haven_labelled" columns were turned neatly into factors
+    with the original numbers as levels and the labels as labels. Nice!
+
+## demo_lesson(17)
+- Class: cmd_question
+  Output: >-
+    You should see a regular factor with 10 levels, with a "label" attribute.
+    For more on factors, you may want to check out the forcats package lesson.
+    
+    
+    What's neat about {as_factor} is that it accepts an *entire* tibble!
+    You do not have to take a separate action to convert all columns.
+    Try applying {as_factor} to "df" itself, and not to a specific column.
+  CorrectAnswer: as_factor(df)
+  AnswerTests: any_of_exprs('as_factor(df)')
+  Hint: 'Apply the function to the entire dataframe. No need for any indexing!'
+
+## demo_lesson(18)
+- Class: cmd_question
+  Output: >-
+    You can of course also create a labelled haven vector from scratch.
+    I have already loaded a vector called "vec_nolabel", consisting of numbers
+    1 to 4. Let's say this is actually a survey response for home address,
+    and you want to code "1" as "DC", "2" as "Maryland", "3" as "Virginia", and
+    "4" as "Other".
+    
+    
+    Use function {labelled}. Look up its documentation by {?labelled} to
+    see how you would achieve this.
+  CorrectAnswer: >-
+    labelled(vec_nolabel, c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))
+  AnswerTests: >-
+    any_of_exprs(
+      'labelled(vec_nolabel, c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))',
+      'labelled(x = vec_nolabel, c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))',
+      'labelled(vec_nolabel, labels = c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))',
+      'labelled(x = vec_nolabel, labels = c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))'
+    )
+  Hint: 'Carefully read the documentation.'
+
+## demo_lesson(19)
+- Class: text
+  Output: >-
+    Excellent!! All that remains for you to do is export the tibble back
+    to a .dta file. This is achieved by {write_dta} and is pretty
+    straightforward since you successfully did {read_dta}, so I won't make you
+    do a demonstration.
+
+## demo_lesson(20)
+- Class: text
+  Output: >-
+    One last point that should be made though is that R allows you to specify
+    which versio of Stata that you are importing from or exporting to.
+    Suppose you have a Stata version 12 but your friend sent you a data file
+    written with Stata 14. Your Stata 12 will not be able to read it! 
+    
+## demo_lesson(21)
+- Class: text
+  Output: >-
+    So what to do? Read it into R using {haven::read_dta} using `version = 14`
+    argument, and then export it to a .dta again with {haven::write_dta}
+    using `version = 12`! Voila, your Stata can now read that file!
+    
+    
+    Neat, wouldn't you say?
+    
 # OUTRO ========================================================================
+- Class: text
+  Output: >-
+    So that's a wrap on {haven}! Check out the parts about
+    tagging missing values and removing attributes at
+    https://haven.tidyverse.org/reference/index.html. 
+    
 - Class: text
   Output: >-
     You have completed "Import with haven" lesson of swirl-tidy!
