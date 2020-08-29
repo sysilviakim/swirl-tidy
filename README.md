@@ -22,7 +22,7 @@ Table of Contents:
 2. Introduction_to_tibbles
 3. Introduction_to_pipes
 4. Import_with_readr
-5. Import_with_haven *
+5. Import_with_haven
 6. Import_with_readxl *
 7. Import_with_rvest *
 8. Tidy_with_tibble *

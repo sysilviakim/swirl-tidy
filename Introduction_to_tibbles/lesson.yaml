@@ -55,7 +55,11 @@
     
 ## demo_lesson(6)
 - Class: cmd_question
-  Output: 'Check the class of the "mtcars" object, lazy loaded as a <Promise>.' 
+  Output: >-
+    Check the class of the "mtcars" object. 
+    This should be lazy loaded as a <Promise>.
+    (This simply means that they are not loaded until they are needed.
+    Check out http://adv-r.had.co.nz/Functions.html#lazy-evaluation.)
   CorrectAnswer: class("mtcars")
   AnswerTests: any_of_exprs('class("mtcars")', 'class(mtcars)')
   Hint: 'Use {class} function.' 
@@ -105,7 +109,7 @@
 - Class: cmd_question
   Output: >- 
     You can convert a tibble back to a dataframe using {base::as.data.frame}.
-    Find out the class of "mtcars_tbl" subject to {as.data.frame}.
+    Find out the class of "mtcars_tbl" using the {as.data.frame} function.
   CorrectAnswer: class(as.data.frame(mtcars_tbl))
   AnswerTests: >-
     any_of_exprs(
@@ -124,34 +128,13 @@
     the function is compatible with tibbles. See also R4DS Chapter 10.4:
     Interacting with older code. 
     
-## demo_lesson(14)
-- Class: cmd_question
-  Output: >- 
-    Now, find out the class of "mtcars_tbl" subject to {tibble::as_data_frame}.
-    Note that this is not {base::as.data.frame}.
-  CorrectAnswer: class(as_data_frame(mtcars_tbl))
-  AnswerTests: >-
-    any_of_exprs(
-      'class(as_data_frame(mtcars_tbl))',
-      'class(tibble::as_data_frame(mtcars_tbl))'
-    )
-  Hint: 'Use {as_data_frame} and then {class}.'
-  
-## demo_lesson(15)  
-- Class: text
-  Output: >-
-    You will see the following printed on your console:
-    '[1] "tbl_df"     "tbl"        "data.frame"'.
-    So this does not revert it back to the {data.frame} only.
-    You can also check this by
-    {all(class(as_data_frame(mtcars_tbl)) == class(mtcars_tbl))}.
-
 # CREATING TIBBLES =============================================================
 ## demo_lesson(16)
 - Class: text
   Output: >- 
     You can of course create tibbles from scratch, just as you would have done
-    with {base::data.frame}. 
+    with {base::data.frame}. If you haven't tried such exercise, look up
+    {base::data.frame} in the play() mode.
     
 ## demo_lesson(17)
 - Class: cmd_question
@@ -189,7 +172,7 @@
       'tibble(x = letters[1:5],    y = c(1, 2, 3, 4, 5))',
       'tibble(x = c("a", "b", "c", "d", "e"), y = c(1, 2, 3, 4, 5))'
     )
-  Hint: 'Use {tibble}.'
+  Hint: 'Use function {tibble}.'
   
 ## demo_lesson(18)
 - Class: cmd_question
@@ -260,13 +243,6 @@
     You will see that column "y" was created automatically, with values that 
     correspond to column "x".
     
-## demo_lesson(26)
-- Class: cmd_question
-  Output: 'Now do the same exercise with {tibble}.'
-  CorrectAnswer: tibble(x = 1:5, y = x ^ 2)
-  AnswerTests: omnitest(correctExpr = 'tibble(x = 1:5, y = x ^ 2)')
-  Hint: 'Just copy-paste it!'
-  
 # PRINTING TIBBLES =============================================================
 ## demo_lesson(27)
 - Class: text
@@ -326,8 +302,10 @@
 ## demo_lesson(33)
 - Class: cmd_question
   Output: >-
-    Lastly, tibbles will not allow partial matching when subsetting the data
-    frame using $. Try finding/printing column "m" from the regular data frame
+    Lastly, tibbles differ from data frames in how they subset the data. 
+    Tibbles will not allow partial matching when subsetting the data
+    frame using $ operator.
+    Try finding/printing column "m" from the regular data frame
     "mtcars" using the $ operator (not [[).
   CorrectAnswer: mtcars$m
   AnswerTests: >-
@@ -355,6 +333,22 @@
     'Warning message: Unknown or uninitialised column: `m`.'
     With tibbles you need to input the column name as is.
     This helps prevent mistakes. 
+  
+## demo_lesson(36)
+- Class: cmd_question
+  Output: >-
+    If you reference a single column using indexing, a data.frame will return
+    a vector. Try this with {mtcars[, "mpg"]}.
+  CorrectAnswer: mtcars[, "mpg"]
+  AnswerTests: any_of_exprs('mtcars[, "mpg"]')
+  Hint: 'Just copy-paste it!'
+  
+## demo_lesson(37)
+- Class: cmd_question
+  Output: 'Now try the same on "mtcars_tbl" and watch how they differ.'
+  CorrectAnswer: mtcars_tbl[, "mpg"]
+  AnswerTests: any_of_exprs('mtcars_tbl[, "mpg"]')
+  Hint: 'Just copy-paste it!'
   
 # OUTRO ========================================================================
 - Class: text

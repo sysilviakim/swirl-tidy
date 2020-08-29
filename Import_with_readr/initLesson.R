@@ -7,7 +7,7 @@
 
 lesson_dir <- file.path(
   path.package(substring(find("swirl")[1], 9)), "Courses",
-  "swirl-tidy", "04_import_readr"
+  "swirl-tidy", "Import_with_readr"
 )
 
 # write_file("a,b,c\n1,2,3\n4,5,NA", file.path(lesson_dir, "file.csv")) 
