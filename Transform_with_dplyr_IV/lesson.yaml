@@ -53,28 +53,257 @@
     Lastly, we will explore how to combine data using dplyr, such as function
     {left_join}. This requires a little preamble about relational data.
 
+# BIND ROWS AND COLUMNS ========================================================
 ## demo_lesson(6)
+- Class: text
+  Output: >-
+    But first, let's do a more simple type of table combining.
+    Suppose you are keeping track of book sales. You have data from 2016 to 2018
+    in data frame "df1". You want to update them with 2019 and 2020 sales data. 
+
 ## demo_lesson(7)
+- Class: cmd_question
+  Output: 'Print out "df1" and see how it looks like.'
+  CorrectAnswer: df1
+  AnswerTests: any_of_exprs('df1', 'print(df1)')
+  Hint: 'You can {print} or just type it into the console.'
+    
 ## demo_lesson(8)
+- Class: cmd_question
+  Output: >-
+    You want to expand "df1" so that you have two more columns
+    `year2019` and `year2020`
+    
+    
+    While you *can* do something like df1$year2020 <- c(30, 42, 31, 25, 48),
+    suppose you have another data frame "df2" that contains
+    them as a similarly structured tibble. Print out "df2".
+  CorrectAnswer: df2
+  AnswerTests: any_of_exprs('df2', 'print(df2)')
+  Hint: 'You can {print} or just type it into the console.'
+    
 ## demo_lesson(9)
+- Class: cmd_question
+  Output: >-
+    All that remains now is to snap these tibbles together! This can be done
+    with {bind_cols} function. The data frame names just need to be separated
+    by a comma. Try combining it in the order so that years are increasing
+    from columns left to right.
+  CorrectAnswer: bind_cols(df1, df2)
+  AnswerTests: omnitest(correctExpr = 'bind_cols(df1, df2)')
+  Hint: 'Look up the documentation by {?bind_cols} if you are not sure.'
+    
 ## demo_lesson(10)
+- Class: cmd_question
+  Output: >-
+    Suppose now that the data is transposed! You want to combine "df3" and
+    "df4" now. Print "df3" out.
+  CorrectAnswer: df3
+  AnswerTests: any_of_exprs('df3', 'print(df3)')
+  Hint: 'You can {print} or just type it into the console.'
+
 ## demo_lesson(11)
+- Class: cmd_question
+  Output: >-
+    This time, instead of columns, you want to bind rows. So now try {bind_rows}
+    for "df3" and "df4". Enter them in this order as arguments.
+  CorrectAnswer: bind_rows(df1, df2)
+  AnswerTests: omnitest(correctExpr = 'bind_rows(df3, df4)')
+  Hint: 'Look up the documentation by {?bind_rows} if you are not sure.'
+    
 ## demo_lesson(12)
+- Class: text
+  Output: >-
+    Now, the {bind} operations we just performed assume that the data is
+    properly configured so that the rows (or columns) correspond to each other
+    in their position. 
+    
+    
+    Well, real life data is never usually that simple...
+    
+# JOIN OPERATIONS PRIMER =======================================================
 ## demo_lesson(13)
+- Class: cmd_question
+  Output: >-
+    Print out "df5". This is similar to "df1", but this time you have `Year`
+    explicitly as a variable instead of rownames.
+  CorrectAnswer: df5
+  AnswerTests: any_of_exprs('df5', 'print(df5)')
+  Hint: 'You can {print} or just type it into the console.'
+
 ## demo_lesson(14)
+- Class: cmd_question
+  Output: 'Print out "df6", which is what we want to merge with "df5".'
+  CorrectAnswer: df6
+  AnswerTests: any_of_exprs('df6', 'print(df6)')
+  Hint: 'You can {print} or just type it into the console.'
+
 ## demo_lesson(15)
+- Class: text
+  Output: >-
+    What do you see? The row orders of "df6" are no longer arranged neatly by
+    variable `Year`. If you {bind_cols} directly to "df5" and "df6" as before,
+    you would be merging wrongly + have a duplicate `Year` variable! 
+    
 ## demo_lesson(16)
+- Class: text
+  Output: >-
+    So what should you do? You should tell R that instead of matching the
+    columns of two tibbles using their row position, it should match based on
+    the values of variable `Year`.
+  
 ## demo_lesson(17)
+- Class: text
+  Output: >-
+    (I mean, you can do {arrange}, {select}, and *then* {bind_cols}, but my, the
+    hassle!)
+
+# LEFT_JOIN DEMONSTRATION ======================================================
 ## demo_lesson(18)
+- Class: cmd_question
+  Output: >-
+    You achieve this simply by {*_join} functions. Here, {left_join} seems
+    to be a good place to start. Just as you have applied {bind_rows} to "df1"
+    and "df2", apply {left_join} to "df5" and "df6". Put df5 as the first
+    argument.
+  CorrectAnswer: left_join(df5, df6)
+  AnswerTests: omnitest(correctExpr = 'left_join(df5, df6)')
+  Hint: 'Look up {?left_join} if you are not too sure.'
+
 ## demo_lesson(19)
+- Class: text
+  Output: >-
+    The console just said 'Joining, by = "Year"' and magically, we have a
+    dataframe with all the data in the right place. What just happened?!
+    
+    
+    Unbeknownst to you, you have told R that "df5" and "df6" are *relational
+    data*, and given no instruction on how they were related, found the only
+    common variable `Year`, and used it as a *key* to connect the two tibbles.
+
 ## demo_lesson(20)
+- Class: text
+  Output: >-
+    We can't cover relational data in a single swirl exercise,
+    so if you are interested, you should start from
+    https://r4ds.had.co.nz/relational-data.html. 
+
 ## demo_lesson(21)
+- Class: text
+  Output: >-
+    There are a few different join functions, such as {right_join}, 
+    {inner_join}, {full_join}, {anti_join}, ...
+    
+    
+    left_join(x, y) tells you that you want to include *all* rows in *x*
+    (the first argument) but not y. In this simple example, the keys matched
+    exactly, so it actually didn't matter too much which *_join function you
+    used.
+    
 ## demo_lesson(22)
+- Class: cmd_question
+  Output: >-
+    Let's check out what would happen if the keys didn't match exactly, then.
+    Do the same {left_join}, but this time with only the top 4 rows of "df6"
+    as the second argument.
+  CorrectAnswer: left_join(df5, df6[1:4, ])
+  AnswerTests: >-
+    any_of_exprs(
+      'left_join(df5, df6[1:4, ])',
+      'left_join(df5, df6[seq(4), ])',
+      'left_join(df5, df6 %>% dplyr::slice(1:4))',
+      'left_join(df5, df6 %>% dplyr::slice(seq(4)))',
+      'left_join(df5, df6 %>% slice(1:4))',
+      'left_join(df5, df6 %>% slice(seq(4)))',
+      'left_join(df5, head(df6, 4))'
+    )
+  Hint: >-
+    Use only the top 4 rows of "df6", while using the same "df5".
+    Remember indexing? {head}? You could even use {dplyr::slice}!
+
 ## demo_lesson(23)
+- Class: text
+  Output: >-
+    Because we used {left_join} with "df5" as the reference (`x`), all "df5"
+    rows are kept. The missing row for "df6" is filled by NA, hence two missing
+    values.
+    
 ## demo_lesson(24)
+- Class: mult_question
+  Output: >-
+    Suppose we change the function to {right_join} in our previous exercise.
+    What would be the dimension of the resulting tibble?
+  AnswerChoices: 5 x 6; 5 x 5; 4 x 5; 4 x 6; 4 x 4
+  CorrectAnswer: 4 x 6
+  AnswerTests: omnitest(correctVal = '4 x 6')
+  Hint: 'left vs. right, so the {right_join} would keep all the rows for...'
+
 ## demo_lesson(25)
+- Class: text
+  Output: >-
+    Good job! Yes, that's because {right_join} includes all rows in `y`,
+    or the second argument. This means that rows in `x` will be kept if they
+    contain a matching key, but not otherwise. Row for Year 2020 will be
+    dropped in this case.
+
+# BY ARGUMENT ==================================================================
+## demo_lesson(26)
+- Class: text
+  Output: >-
+    Now in our example, between the tibbles, there was a common variable named
+    `Year`. If no common variable can be found, you cannot "join" unless you
+    tell the computer what the common variables are. 
+
+## demo_lesson(27)
+- Class: cmd_question
+  Output: 'Print out "df7", which is *slightly* different from "df6".'
+  CorrectAnswer: df7
+  AnswerTests: any_of_exprs('df7', 'print(df7)')
+  Hint: 'You can {print} or just type it into the console.'
+
+## demo_lesson(28)
+- Class: text
+  Output: >-
+    What's different from "df7"?! Well, look closer... variable `Year` is now
+    `year` with a lowercase y. Because R is case-sensitive, such details can
+    really mess things up.
+    
+    
+    So when you perform {left_join(df5, df7)}, you will be doused in an error
+    message that says "Error: `by` must be supplied when `x` and `y` have no
+    common variables. i use by = character()` to perform a cross-join."
+
+## demo_lesson(29)
+- Class: cmd_question
+  Output: >-
+    Do {left_join} between "df5" and "df7" but with argument
+    `by = c("Year" = "year")`. It tells you what key you should merge the
+    data by.
+    
+    
+    The left hand side is the variable in the first
+    tibble, and the right hand side is the variable in the second tibble.
+  CorrectAnswer: left_join(df5, df7, by = c("Year" = "year"))
+  AnswerTests: >-
+    omnitest(correctExpr = 'left_join(df5, df7, by = c("Year" = "year"))')
+  Hint: 'Copy-paste the argument and put it inside {left_join}!'
+
+## demo_lesson(30)
+- Class: text
+  Output: >-
+    I hope you tried the wrong code {left_join(df5, df7)} too, in the play mode.
+    If you have several overlapping variables but want to join only on some of
+    them, `by` argument can be used there as well. But note that you'll end up
+    with a bunch of variables with ".x" or ".y" suffix, as R wants to not have
+    two columns with the same name.
 
 # OUTRO ========================================================================
+- Class: text
+  Output: >-
+    So that's a wrap on table joins with {dplyr}! Explore what other types of
+    *_join functions do as well. Joins are particularly useful if you are merging
+    data from different sources about the thing.
+    
 - Class: text
   Output: >-
     You have completed "Transform with dplyr IV" lesson of swirl-tidy!

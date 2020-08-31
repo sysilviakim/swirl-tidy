@@ -30,7 +30,7 @@ Table of Contents:
 10. Transform_with_dplyr_I *
 11. Transform_with_dplyr_II *
 12. Transform_with_dplyr_III *
-13. Transform_with_dplyr_IV *
+13. Transform_with_dplyr_IV
 14. Transform_with_forcats *
 15. Transform_with_stringr *
 16. Transform_with_lubridate *
