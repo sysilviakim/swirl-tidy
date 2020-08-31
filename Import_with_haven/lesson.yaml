@@ -46,6 +46,7 @@
     This one lets you import from/export to Stata, SAS, and SPSS files.
     This lesson will only deal with import/export between Stata and R.
 
+# IMPORTING ====================================================================
 ## demo_lesson(5)
 - Class: cmd_question
   Output: >-
@@ -75,6 +76,7 @@
   Output: >-
     Note that true to the tidyverse, it has been imported as a tibble.
 
+# LABELLED COLUMNS =============================================================
 ## demo_lesson(8)
 - Class: cmd_question
   Output: 'Print out "df" on the console.'
@@ -154,6 +156,7 @@
     )
   Hint: 'Use function {print_labels}. This will not accept a tibble.'
 
+# TO FACTORS ===================================================================
 ## demo_lesson(14)
 - Class: cmd_question
   Output: >-
@@ -226,6 +229,7 @@
     )
   Hint: 'Carefully read the documentation.'
 
+# EXPORTING ====================================================================
 ## demo_lesson(19)
 - Class: text
   Output: >-
