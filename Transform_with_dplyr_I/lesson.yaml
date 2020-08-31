@@ -52,26 +52,168 @@
   Output: >-
     Accordingly, the lesson is split into four parts.
     In this lesson we will cover {select}, {filter}, and {arrange}.
+    
 ## demo_lesson(6)
+- Class: cmd_question
+  Output: >-
+    Load the "midwest" data, as we have done in the Intro to pipes.
+    This is part of the {ggplot2} package.
+  CorrectAnswer: data(midwest)
+  AnswerTests: omnitest(correctExpr = 'data(midwest)')
+  Hint: 'Do not use quotes within function {data}.'
+
+# SELECT =======================================================================
 ## demo_lesson(7)
+- Class: cmd_question
+  Output: >-
+    Now you might remember these functions from our Intro to pipes lesson.
+    With the dplyr package, I suggest that every line should be a
+    separate function linked by a pipe.
+    
+    
+    To refresh your memory and to get you started with using {dplyr::select},
+    I've written down a two-line code for you! Print this by using
+    {cat(pipe_1).}
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_1)')
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(8)
+- Class: text
+  Output: >-
+    The {select} function will explicitly select which columns you want from
+    your tibble. In this case, this code can be translated as 'take tibble
+    "midwest", and take only columns `county`, `state`, and `poptotal`.'
+    
 ## demo_lesson(9)
+- Class: cmd_question
+  Output: 'Try this out by copy-pasting the code and executing it.'
+  CorrectAnswer: >-
+    midwest %>%
+      select(county, state, poptotal)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      midwest %>%
+      select(county, state, poptotal)
+      '
+    )
+  Hint: 'Just copy-paste what {cat(pipe_1)} printed!'
+
 ## demo_lesson(10)
+- Class: mult_question
+  Output: 'What is the dimension of the original tibble?'
+  AnswerChoices: 437 x 3; 10 x 3; 437 x 28; 10 x 28
+  CorrectAnswer: 437 x 3
+  AnswerTests: omnitest(correctVal = '437 x 28')
+  Hint: 'Look at the Global Environment!'
+  
 ## demo_lesson(11)
+- Class: mult_question
+  Output: 'What is the dimension of the outputed tibble by {select}?'
+  AnswerChoices: 437 x 3; 10 x 3; 437 x 28; 10 x 28
+  CorrectAnswer: 437 x 3
+  AnswerTests: omnitest(correctVal = '437 x 3')
+  Hint: 'What did the {select} function do to the tibble?'
+  
 ## demo_lesson(12)
+- Class: text
+  Output: >-
+    Great job! Keep using the piping structure in your answers throughout this
+    lesson.
+    
+    
+    Now, do you have to enter *all* variable names? What if
+    you want to get rid of a single variable? {select} has you covered!
+
 ## demo_lesson(13)
+- Class: cmd_question
+  Output: >-
+    To *exclude* a variable instead of including, you would need to use the -
+    operator or ! operator right before the variable name you want to exclude. 
+    Exclude the `PID` column from "midwest". Don't store this anywhere just yet.
+  CorrectAnswer: >-
+    midwest %>%
+      select(- PID)
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% select(-PID)',
+      'midwest %>% select(!PID)'
+    )
+  Hint: 'Look up the documentation of {?select} if you are not sure.'
+    
 ## demo_lesson(14)
+- Class: cmd_question
+  Output: >-
+    See how the tibble dimension has decreased from 437 x 28 to 437 x 27?
+  
+  
+    You can combine with with a selection helper function called {everything}
+    to *push back* a column to the very end. Do the same code but add
+    {everything()} right after either {-PID} or {!PID} within your {select}.
+  CorrectAnswer: >-
+    midwest %>%
+      select(- PID, everything())
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% select(-PID, everything())',
+      'midwest %>% select(!PID, everything())'
+    )
+  Hint: 'Look up the documentation with {?select} if you are not sure.'
+    
 ## demo_lesson(15)
+- Class: mult_question
+  Output: 'What is the dimension of the outputed tibble just now?'
+  AnswerChoices: 437 x 27; 10 x 27; 437 x 28; 10 x 28
+  CorrectAnswer: 437 x 28
+  AnswerTests: omnitest(correctVal = '437 x 28')
+  
 ## demo_lesson(16)
+- Class: text
+  Output: >-
+    You can also select (or exclude) variables by their name patterns.
+    Some prominent helpers, exported from package {tidyselect}, include
+    functions such as {contains}, {ends_with}, {starts_with}, and so on.
+
 ## demo_lesson(17)
+- Class: cmd_question
+  Output: >-
+    Suppose you want to delete all the calculated percentages from the "midwest"
+    data frame because there was a mistake, and want to re-calculate all the
+    percentages. You want to delete all variables that start with "perc".
+    Using the - or ! operator with {starts_with("perc")}.
+  CorrectAnswer: >-
+    midwest %>%
+      select(- PID, everything())
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% select(-starts_with("perc"))',
+      'midwest %>% select(!starts_with("perc"))'
+    )
+  Hint: 'Look up the documentation of {?starts_with} if you are not sure.'
+    
 ## demo_lesson(18)
+- Class: mult_question
+  Output: 'What is the dimension of the outputed tibble just now?'
+  AnswerChoices: 437 x 15; 437 x 28; 437 x 27; 437 x 10;
+  CorrectAnswer: 437 x 15
+  AnswerTests: omnitest(correctVal = '437 x 28')
+  
 ## demo_lesson(19)
+- Class: text
+  Output: >-
+    Very good. I will leave you to experiment with other selection helpers.
+    Now let us move on to {filter}.
+
 ## demo_lesson(20)
 ## demo_lesson(21)
 ## demo_lesson(22)
 ## demo_lesson(23)
 ## demo_lesson(24)
 ## demo_lesson(25)
+
+# FILTER =======================================================================
+# ARRANGE ======================================================================
 
 # OUTRO ========================================================================
 - Class: text

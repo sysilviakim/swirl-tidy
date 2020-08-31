@@ -75,10 +75,13 @@
     We covered a lot of things indeed!
     
     
-    dplyr can do a *lot* more. You can create lagged variables with
-    `lag`, mutate all variables in a single line by `mutate_all`, mutate only
-    some types of variables by `mutate_if`, create random samples using
-    `sample_n`, rename variables with `rename`, and so on.
+    dplyr can do a *lot* more. You can slice certain rows using {slice},
+    create lagged variables with {lag}, mutate all variables in a single line
+    by {mutate_all}, mutate only some types of variables by {mutate_if},
+    create random samples using {sample_n}, rename variables with {rename},
+    and so on. But we don't have room to cover everything, so look them up!
+    The cheat sheet is your friend at
+    https://rawgit.com/rstudio/cheatsheets/master/data-transformation.pdf.
     
     
     The next lesson will be our last dplyr lesson, where we will cover
