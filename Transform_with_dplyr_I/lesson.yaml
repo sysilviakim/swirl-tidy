@@ -9,9 +9,6 @@
 # INTRO ========================================================================
 - Class: text
   Output: >
-    (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
-  
-  
     Welcome back! Today we will explore how to wrangle the data using the
     {dplyr} package. When you see ..., press Enter.
     
@@ -82,8 +79,8 @@
 - Class: text
   Output: >-
     The {select} function will explicitly select which columns you want from
-    your tibble. In this case, this code can be translated as 'take tibble
-    "midwest", and take only columns `county`, `state`, and `poptotal`.'
+    your tibble. In this case, this code can be translated as 'From tibble
+    "midwest", and select only columns `county`, `state`, and `poptotal`.'
     
 ## demo_lesson(9)
 - Class: cmd_question
@@ -102,8 +99,10 @@
 
 ## demo_lesson(10)
 - Class: mult_question
-  Output: 'What is the dimension of the original tibble?'
-  AnswerChoices: 437 x 3; 10 x 3; 437 x 28; 10 x 28
+  Output: >
+    What is the dimension of the *original* tibble?
+    Check the Global Environment to get this information.
+  AnswerChoices: 437 x 3; 10 x 3; 437 x 28; 10 x 28; 427 x 28; 427 x 3
   CorrectAnswer: 437 x 3
   AnswerTests: omnitest(correctVal = '437 x 28')
   Hint: 'Look at the Global Environment!'
@@ -111,7 +110,7 @@
 ## demo_lesson(11)
 - Class: mult_question
   Output: 'What is the dimension of the outputed tibble by {select}?'
-  AnswerChoices: 437 x 3; 10 x 3; 437 x 28; 10 x 28
+  AnswerChoices: 437 x 3; 10 x 3; 437 x 28; 10 x 28; 427 x 28; 427 x 3
   CorrectAnswer: 437 x 3
   AnswerTests: omnitest(correctVal = '437 x 3')
   Hint: 'What did the {select} function do to the tibble?'
@@ -119,19 +118,26 @@
 ## demo_lesson(12)
 - Class: text
   Output: >-
-    Great job! Keep using the piping structure in your answers throughout this
-    lesson.
+    Great job! 
     
     
-    Now, do you have to enter *all* variable names? What if
-    you want to get rid of a single variable? {select} has you covered!
+    Keep using the piping structure in your answers throughout this
+    lesson for the "correct" answer!!
+    
+    
+    One question you might have is whether you always have to enter variable
+    names *manually*. What if you want to get rid of a single variable? Do you
+    have to input *all* variable names except that?
+    
+    Not at all! {select} has you covered!
 
 ## demo_lesson(13)
 - Class: cmd_question
   Output: >-
     To *exclude* a variable instead of including, you would need to use the -
     operator or ! operator right before the variable name you want to exclude. 
-    Exclude the `PID` column from "midwest". Don't store this anywhere just yet.
+    Try excluding column `PID` from "midwest".
+    Don't store this anywhere just yet.
   CorrectAnswer: >-
     midwest %>%
       select(- PID)
@@ -140,7 +146,9 @@
       'midwest %>% select(-PID)',
       'midwest %>% select(!PID)'
     )
-  Hint: 'Look up the documentation of {?select} if you are not sure.'
+  Hint: >-
+    Look up the documentation of {?select} if you are not sure.
+    Keep using the piping structure.
     
 ## demo_lesson(14)
 - Class: cmd_question
@@ -159,12 +167,14 @@
       'midwest %>% select(-PID, everything())',
       'midwest %>% select(!PID, everything())'
     )
-  Hint: 'Look up the documentation with {?select} if you are not sure.'
+  Hint: >-
+    Look up the documentation of {?select} if you are not sure.
+    Keep using the piping structure.
     
 ## demo_lesson(15)
 - Class: mult_question
   Output: 'What is the dimension of the outputed tibble just now?'
-  AnswerChoices: 437 x 27; 10 x 27; 437 x 28; 10 x 28
+  AnswerChoices: 437 x 27; 10 x 27; 437 x 28; 10 x 28; 427 x 27; 427 x 28
   CorrectAnswer: 437 x 28
   AnswerTests: omnitest(correctVal = '437 x 28')
   
@@ -181,24 +191,27 @@
     Suppose you want to delete all the calculated percentages from the "midwest"
     data frame because there was a mistake, and want to re-calculate all the
     percentages. You want to delete all variables that start with "perc".
-    Using the - or ! operator with {starts_with("perc")}.
+    Try this using the - or ! operator with {starts_with("perc")}.
   CorrectAnswer: >-
     midwest %>%
-      select(- PID, everything())
+      select(-starts_with("perc"))
   AnswerTests: >-
     any_of_exprs(
       'midwest %>% select(-starts_with("perc"))',
       'midwest %>% select(!starts_with("perc"))'
     )
-  Hint: 'Look up the documentation of {?starts_with} if you are not sure.'
+  Hint: >-
+    Look up the documentation of {?starts_with} if you are not sure.
+    Keep using the piping structure.
     
 ## demo_lesson(18)
 - Class: mult_question
   Output: 'What is the dimension of the outputed tibble just now?'
   AnswerChoices: 437 x 15; 437 x 28; 437 x 27; 437 x 10;
   CorrectAnswer: 437 x 15
-  AnswerTests: omnitest(correctVal = '437 x 28')
+  AnswerTests: omnitest(correctVal = '437 x 15')
   
+# FILTER =======================================================================
 ## demo_lesson(19)
 - Class: text
   Output: >-
@@ -206,18 +219,164 @@
     Now let us move on to {filter}.
 
 ## demo_lesson(20)
-## demo_lesson(21)
-## demo_lesson(22)
-## demo_lesson(23)
-## demo_lesson(24)
-## demo_lesson(25)
+- Class: cmd_question
+  Output: >-
+    While {select} worked to select certain *columns*, {filter} is filtering
+    certain *rows* that fit a condition. 
 
-# FILTER =======================================================================
+
+    To get you kickstarted with using {dplyr::filter},
+    I've written down another two-line code for you! Print this by using
+    {cat(pipe_2).}
+  CorrectAnswer: cat(pipe_2)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_2)')
+  Hint: 'Just copy-paste it!'
+
+## demo_lesson(21)
+- Class: text
+  Output: >-
+    In this case, what I have told R to do is take tibble "midwest" and return
+    only those rows with `state` column entries "OH". I'm subsetting so that
+    only counties in Ohio show up in my console.
+
+
+    In base R, this would have been achieved by
+    {subset(midwest, state == "OH")}. The two outputs are the same.
+    
+## demo_lesson(22)
+- Class: cmd_question
+  Output: >-
+    Now try outputing midwest counties with total population (`poptotal`) 
+    exceeding 100,000. 
+  CorrectAnswer: >-
+    midwest %>%
+      filter(poptotal > 100000)
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% filter(poptotal > 100000)',
+      'midwest %>% filter(poptotal > 1e5)'
+    )
+  Hint: >-
+    Look up the documentation of {?filter} if you are not sure.
+    Keep using the piping structure.
+    
+## demo_lesson(23)
+- Class: cmd_question
+  Output: >-
+    Excellent. Now, how about counties in *Ohio* with `poptotal`
+    exceeding 100,000? You will need to combine the two expressions with an &
+    operator. Try this out. 
+  CorrectAnswer: >-
+    midwest %>%
+      filter(state == "OH" & poptotal > 100000)
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% filter(state == "OH" & poptotal > 100000)',
+      'midwest %>% filter(state == "OH" & poptotal > 1e5)',
+      'midwest %>% filter(poptotal > 100000 & state == "OH")',
+      'midwest %>% filter(poptotal > 1e5 & state == "OH")',
+      'midwest %>% filter((state == "OH") & (poptotal > 100000))',
+      'midwest %>% filter((state == "OH") & (poptotal > 1e5))',
+      'midwest %>% filter((poptotal > 100000) & (state == "OH"))',
+      'midwest %>% filter((poptotal > 1e5) & (state == "OH"))'
+    )
+  Hint: >-
+    Combine the two conditions with the & operator.
+    Keep using the piping structure.
+    
 # ARRANGE ======================================================================
+## demo_lesson(24)
+- Class: cmd_question
+  Output: >-
+    Excellent! {filter} is straightforward, so we will now move onto {arrange}.
+
+
+    To get you kickstarted with using {dplyr::arrange},
+    I've written down the last two-line code of the day for you! Print this
+    by using {cat(pipe_3).}
+  CorrectAnswer: cat(pipe_3)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_3)')
+  Hint: 'Just copy-paste it!'
+
+## demo_lesson(25)
+- Class: mult_question
+  Output: >-
+    Great! What happened? See how the rows were rearranged according to the
+    value of `poptotal`? 
+    
+    Are the rows arranged so that poptotal is increasing or decreasing?
+  CorrectAnswer: increasing; decreasing
+  AnswerTests: omnitest(correctExpr = 'increasing')
+  Hint: 'See the output of {cat(pipe_3)} that you just printed on the console.'
+
+## demo_lesson(26)
+- Class: cmd_question
+  Output: >-
+    The default behavior of {arrange} is to sort a variable in the ascending
+    order. Now suppose you want to do it the other way around. You need to
+    wrap `poptotal` within the `desc` function to create an order descending
+    in total population. Try this out. 
+  CorrectAnswer: >-
+    midwest %>%
+      arrange(desc(poptotal))
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% arrange(desc(poptotal))'
+    )
+  Hint: >-
+    Look up the documentation of {?arrange} if you are not sure.
+    Keep using the piping structure.
+    
+## demo_lesson(27)
+- Class: cmd_question
+  Output: >-
+    Excellent! Now try sorting the rows according the the alphabetical order of
+    `county`, this time in an ascending order. 
+  CorrectAnswer: >-
+    midwest %>%
+      arrange(county)
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% arrange(county)'
+    )
+  Hint: >-
+    Look up the documentation of {?arrange} if you are not sure.
+    Keep using the piping structure.
+    
+## demo_lesson(28)
+- Class: cmd_question
+  Output: >-
+    You find that now the orders are jumbled because you see four Adams counties
+    from four different states! You wanted to order within the state. 
+    
+    
+    You can use {group_by} to achieve this, but let's try arranging by (1) state
+    and then (2) county. You can do this by using {state, county} within
+    {arrange}. Try this out.
+  CorrectAnswer: >-
+    midwest %>%
+      arrange(state, county)
+  AnswerTests: >-
+    any_of_exprs(
+      'midwest %>% arrange(state, county)'
+    )
+  Hint: >-
+    Look up the documentation of {?arrange} if you are not sure.
+    Keep using the piping structure.
+    
+## demo_lesson(29)
+- Class: text
+  Output: >-
+    Awesome. Note that the first 10 rows look just the "midwest" tibble as it is
+    but in fact it is not---"midwest" is sorted by `PID`. Check this out in the
+    play mode if you are interested. Quick test:
+    {all((midwest %>% arrange(state, county)) == midwest, na.rm = TRUE)}
+    will evaluate to FALSE. 
 
 # OUTRO ========================================================================
 - Class: text
   Output: >-
+    So that's it for {select}, {filter}, and {arrange}!
     You have completed "Transform with dplyr I" lesson of swirl-tidy!
     I will see you in the next lesson.
-    
+

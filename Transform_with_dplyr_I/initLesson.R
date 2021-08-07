@@ -4,3 +4,5 @@
 # throughout the lesson.
 
 pipe_1 <- "midwest %>%\n  select(county, state, poptotal)"
+pipe_2 <- "midwest %>%\n  filter(state == \"OH\")"
+pipe_3 <- "midwest %>%\n  arrange(poptotal)"

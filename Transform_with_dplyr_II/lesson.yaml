@@ -48,6 +48,15 @@
     {mutate} and {if_else}. This could be a tough lesson, so buckle up...
 
 ## demo_lesson(5)
+- Class: text
+  Output: >-
+    This lesson will work with a sample from real survey data. I have loaded
+    a sample of the Cooperative Congressional Election Study (CCES) 2016 data.
+    For the full codebook, see https://doi.org/10.7910/DVN/GDF6Z0. 
+    
+    Suppose we are interested in the presidential vote choice. We have 500 
+    U.S. residents surveyed in a dataframe called `cces`. 
+
 ## demo_lesson(6)
 ## demo_lesson(7)
 ## demo_lesson(8)

@@ -74,5 +74,8 @@
 - Class: text
   Output: >-
     You have completed "Program with purrr" lesson of swirl-tidy!
+    For more on functional programming using tidyverse, check out
+    Functional Programming by Sara Altman, Bill Behrman, Hadley Wickham at
+    https://dcl-prog.stanford.edu. 
     I will see you in the next lesson.
     
