@@ -23,7 +23,7 @@ Table of Contents:
 3. Introduction_to_pipes
 4. Import_with_readr
 5. Import_with_haven
-6. Import_with_readxl *
+6. Import_with_readxl
 7. Import_with_rvest *
 8. Tidy_with_tibble *
 9. Tidy_with_tidyr *
@@ -35,7 +35,7 @@ Table of Contents:
 15. Transform_with_stringr *
 16. Transform_with_lubridate *
 17. Program_with_purrr *
-18. Visualize_with_ggplot2_I *
+18. Visualize_with_ggplot2_I
 19. Visualize_with_ggplot2_II *
 20. Visualize_with_ggplot2_III *
 21. Model_with_tidymodels *

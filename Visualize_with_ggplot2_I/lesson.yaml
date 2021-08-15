@@ -57,22 +57,186 @@
     take a look at a key function called {aes}, short for *aesthetics*.
 
 ## demo_lesson(6)
+- Class: cmd_question
+  Output: >-
+    Let's first load a dataset that we will use. Load the "diamonds" dataset.
+    Note that this is not achieved through {load} but with {data}!
+  CorrectAnswer: data("diamonds")
+  AnswerTests: any_of_exprs('data(diamonds)', 'data("diamonds")', 'skip()')
+  Hint: 'Use {data} function to load the "diamonds" dataset.'
+
 ## demo_lesson(7)
+- Class: cmd_question
+  Output: >-
+    Let's take a look at the dataset. Print the first six lines of "diamonds."
+  CorrectAnswer: head(diamonds)
+  AnswerTests: >-
+    any_of_exprs(
+      'head(diamonds, 6)', 
+      'head(diamonds)',
+      'print(head(diamonds, 6))', 
+      'print(head(diamonds))',
+      'skip()'
+    )
+  Hint: 'Use {head} function to print the first few lines of the data.'
+
 ## demo_lesson(8)
+- Class: text
+  Output: >-
+    Let's say that we want to visualize the distribution of `carat`. 
+    We are going to draw a histogram. While in base R, the code is simply 
+    {hist(diamonds$carat)}, ggplot2's structure is slightly different.
+
 ## demo_lesson(9)
+- Class: cmd_question
+  Output: >-
+    The main function that'll be used is {ggplot} (note that there is no 2!).
+    Try {ggplot(diamonds)}.
+  CorrectAnswer: ggplot(diamonds)
+  AnswerTests: any_of_exprs('ggplot(diamonds)', 'skip()')
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(10)
+- Class: text
+  Output: >-
+    You won't see anything but a gray screen in the Plots pane. This is normal!
+    This is because we haven't specified what to draw with the new ggplot 
+    object. 
+
 ## demo_lesson(11)
+- Class: cmd_question
+  Output: >-
+    Let's try informing {ggplot} that we mean to draw the `carat` column.
+    This can be achieved by the `mapping` argument in {ggplot}.
+    Let's first check what that is with {args(ggplot)}.
+  CorrectAnswer: args(ggplot)
+  AnswerTests: any_of_exprs('args(ggplot)', 'skip()')
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(12)
+- Class: text
+  Output: >-
+    `aes` stands for aesthetics. That is to say, we are going to tell {ggplot}
+    which parts of the data correspond to the visual properties (= aesthetics).
+    {aes} function takes `x` and `y` as arguments. 
+
 ## demo_lesson(13)
+- Class: cmd_question
+  Output: >-
+    Since a histogram only requires one variable, try 
+    {ggplot(diamonds, aes(x = carat))}. In fact, {ggplot(diamonds, aes(carat))}
+    is also fine.
+  CorrectAnswer: ggplot(diamonds, aes(x = carat))
+  AnswerTests: >-
+    any_of_exprs(
+      'ggplot(diamonds, aes(x = carat))',
+      'ggplot(diamonds, aes(carat))',
+      'skip()'
+    )
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(14)
+- Class: text
+  Output: >-
+    You'll see that the x-axis is specified, but besides that and a few lines,
+    the pane is still gray and empty. This is because we specified the mapping,
+    but didn't tell {ggplot} *what* to draw. We'll achieve this using the 
+    {geom_histogram} function.
+    
+    How do we merge {geom_histogram} to what we have? Given a blank canvas, 
+    adding elements to ggplot objects is achieved by the `+` operator. Think of
+    this as a pipe but for {ggplot2}.
+    
 ## demo_lesson(15)
+- Class: cmd_question
+  Output: Type in {ggplot(diamonds, aes(x = carat)) + geom_histogram()}.
+  CorrectAnswer: >-
+    ggplot(diamonds, aes(x = carat)) +
+      geom_histogram()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'ggplot(diamonds, aes(x = carat)) + geom_histogram()'
+    )
+  Hint: 'Just copy-paste it! You can also give a line break after the `+`.'
+
 ## demo_lesson(16)
+- Class: text
+  Output: >-
+    Excellent! You've now drawn your first ggplot2. Congratulations! 
+    We will cover how to beautify this or control the display in other lessons.
+    
 ## demo_lesson(17)
+- Class: cmd_question
+  Output: >-
+    Now try drawing a bar plot for the `cut` variable. 
+    Unlike `carat`, which was continuous, the `cut` variable is a categorical
+    variable, so the bar plot is more appropriate. 
+    Instead of {geom_histogram}, you would be using {geom_bar}.
+  CorrectAnswer: >-
+    ggplot(diamonds, aes(x = cut)) +
+      geom_bar()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'ggplot(diamonds, aes(x = cut)) + geom_bar()'
+    )
+  Hint: 'The answer is similar to the previous exercise.'
+
 ## demo_lesson(18)
+- Class: text
+  Output: >-
+    Good job! This shows the distribution of the five types of diamond cuts in
+    the given data.
+    
+    So far, we've drawn distributions of a single variable. But what should we
+    do to visualize the distribution of two variables jointly?
+    
 ## demo_lesson(19)
+- Class: cmd_question
+  Output: >-
+    Let's draw a scatterplot between `carat` and `price` to visualize the 
+    relationship between them. Now we will rely on {geom_point}, but we must 
+    also tell {aes} function that we now have a `y` variable, too. 
+    
+    Draw a scatterplot between `carat` and `price`, with `carat` as the aes 
+    x-variable and `price` as y-variable.
+  CorrectAnswer: >-
+    ggplot(diamonds, aes(x = carat, y = price)) +
+      geom_point()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'ggplot(diamonds, aes(x = carat, y = price)) + geom_point()'
+    )
+  Hint: 'The answer is similar to the previous exercise.'
+
 ## demo_lesson(20)
+- Class: text
+  Output: >-
+    Great work! But we can take one further step to make this more informative. 
+    `clarity` might be interacting with `carat` to determine the diamond price.
+    Let's see if we can visualize this through {aes}'s `colour` argument.
+    
 ## demo_lesson(21)
+- Class: cmd_question
+  Output: >-
+    Add `colour = clarity` to the previous answer's {aes} function.
+  CorrectAnswer: >-
+    ggplot(diamonds, aes(x = carat, y = price, colour = clarity)) +
+      geom_point()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(diamonds, aes(x = carat, y = price, colour = clarity)) + 
+      geom_point()
+      '
+    )
+  Hint: 'The answer is similar to the previous exercise.'
+
 ## demo_lesson(22)
+- Class: text
+  Output: >-
+    This clearly shows that on average, given the same carat, diamonds with 
+    higher clarity (IF is the highest level of clarity) have higher price.
+    
 ## demo_lesson(23)
 ## demo_lesson(24)
 ## demo_lesson(25)
@@ -80,8 +244,9 @@
 # OUTRO ========================================================================
 - Class: text
   Output: >-
-    Excellent! We covered {geom_bar}, {geom_line}, {geom_point},
-    {geom_histogram}, and basics of {aes}. 
+    Excellent! We covered {geom_bar}, {geom_point},
+    {geom_histogram}, and basics of {aes}. We will cover {geom_line} 
+    in the next lesson.
     
 - Class: text
   Output: >-

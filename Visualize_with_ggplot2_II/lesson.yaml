@@ -45,7 +45,7 @@
   Output: >-
     Welcome back. We covered a lot of basic one- to two-variable visualization
     in the first lesson of {ggplot2}. In this lesson, we will cover scales,
-    labels, legends, and themes. 
+    labels, legends, themes, and faceting. 
 
 ## demo_lesson(5)
 ## demo_lesson(6)
