@@ -44,8 +44,8 @@
 - Class: text
   Output: >-
     You've done so well to complete the previous two lessons! 
-    We covered {select}, {filter}, {arrange}, {mutate}, and {if_else}.
-    Today we will explore {group_by} and {summarise}.
+    We covered {select}, {filter}, {arrange}, {mutate}, {if_else}, and 
+    {case_when}. Today we will explore {group_by}, {ungroup}, and {summarise}.
 
 ## demo_lesson(5)
 ## demo_lesson(6)

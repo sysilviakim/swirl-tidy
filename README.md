@@ -28,7 +28,7 @@ Table of Contents:
 8. Tidy_with_tibble *
 9. Tidy_with_tidyr *
 10. Transform_with_dplyr_I
-11. Transform_with_dplyr_II *
+11. Transform_with_dplyr_II
 12. Transform_with_dplyr_III *
 13. Transform_with_dplyr_IV
 14. Transform_with_forcats *

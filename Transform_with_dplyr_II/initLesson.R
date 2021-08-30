@@ -6,7 +6,7 @@
 # load("CCES16_Common_OUTPUT_Feb2018_VV.RData")
 # set.seed(123)
 # cces <- x %>%
-#   select(CC16_410a, pid7, birthyr, gender, race, educ, faminc, CC16_326) %>%
+#   select(CC16_410a, pid7, gender, race, educ, faminc, CC16_326) %>%
 #   sample_n(500)
 # dput(cces)
 cces <- structure(
@@ -101,110 +101,7 @@ cces <- structure(
     ), comment = "7 point Party ID", class = c(
       "ordered",
       "factor"
-    )), birthyr = structure(c(
-      NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_, NA_integer_, NA_integer_, NA_integer_,
-      NA_integer_, NA_integer_
-    ), .Label = c("Skipped", "Not Asked"), 
-    comment = "Birth year", class = "factor"),
+    )),
     gender = structure(c(
       2L, 1L, 2L, 1L, 2L, 1L, 2L, 1L, 2L,
       1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 2L, 2L,
@@ -495,5 +392,14 @@ cces <- structure(
   ), class = "data.frame"
 )
 pipe_1 <- "cces %>%\n  mutate()"
-pipe_2 <- "midwest %>%\n  mutate(ifelse())"
-pipe_3 <- "midwest %>%\n  mutate(if_else())"
+pipe_2 <- paste0(
+  'cces %>%\n  mutate(vc = if_else(', 
+  'CC16_410a == "Hillary Clinton (Democrat)", 0, 1',
+  '))'
+)
+pipe_3 <- paste0(
+  'cces %>%\n  mutate(\n    pid7_number = case_when(\n',
+  '      pid7 == "Strong Democrat" ~ 3,\n',
+  '      pid7 == "Not very strong Democrat" ~ 2\n',
+  '    )\n  )'
+)
