@@ -44,8 +44,12 @@
 - Class: text
   Output: >-
     Welcome back. We covered a lot of basic one- to two-variable visualization
-    in the first lesson of {ggplot2}. In this lesson, we will cover scales,
-    labels, legends, themes, and faceting. 
+    in the first lesson of {ggplot2}. 
+    
+    
+    In this lesson, we will cover {geom_line} that draws a line plot, 
+    {geom_smooth} that shows conditional means on a scatterplot, 
+    and {geom_boxplot} that displays box plots.
 
 ## demo_lesson(5)
 ## demo_lesson(6)

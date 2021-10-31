@@ -49,9 +49,9 @@
 ## demo_lesson(5)
 - Class: text
   Output: >-
-    So what's left? In this final ggplot2 lesson, we will cover (1) visualizing
-    errors with functions such as {geom_errorbar}, and (2) using stat_*
-    functions to create new variables to plot. 
+    So what's left? In this final ggplot2 lesson, we will cover a few important
+    aesthetical choices such as axis titles and labels, legend positions, 
+    facets, and adding horizontal/vertical lines.
 
 ## demo_lesson(6)
 ## demo_lesson(7)
