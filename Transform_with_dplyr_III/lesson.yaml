@@ -48,22 +48,235 @@
     {case_when}. Today we will explore {group_by}, {ungroup}, and {summarise}.
 
 ## demo_lesson(5)
+- Class: text
+  Output: >-
+    What should we do when we want to calculate certain things based on group-
+    level characteristics, such as averages by groups? This is when {group_by}
+    comes in handy.
+
 ## demo_lesson(6)
+- Class: cmd_question
+  Output: >-
+    In this lesson, we will use a dataframe called "diamonds" from {ggplot2}
+    package. Load it using the function {data}.
+  CorrectAnswer: data("diamonds")
+  AnswerTests: >-
+    any_of_exprs(
+      'data(diamonds)',
+      'data("diamonds")',
+      'data(diamonds, package = "ggplot2")',
+      'data("diamonds", package = "ggplot2")'
+    )
+  Hint: 'Use {data} function to load a dataset called "diamonds."'
+
 ## demo_lesson(7)
+- Class: cmd_question
+  Output: >-
+    Let's take a look at the dataset. Print the first six lines of "diamonds."
+  CorrectAnswer: head(diamonds)
+  AnswerTests: >-
+    any_of_exprs(
+      'head(diamonds, 6)', 
+      'head(diamonds)',
+      'print(head(diamonds, 6))', 
+      'print(head(diamonds))',
+      'skip()'
+    )
+  Hint: 'Use {head} function to print the first few lines of the data.'
+
 ## demo_lesson(8)
+- Class: cmd_question
+  Output: >-
+    We see several different characteristics of diamonds which may determine
+    their price. 
+    
+    
+    Let's say that we want to know how much the `cut` variable affects `price`.
+    We would first like to see what the average prices are for each levels of
+    the cut. 
+    
+    
+    First, we would like to group the data by `cut`.
+    To get you started with using {dplyr::group_by},
+    I've written down a two-line code for you! Print this by using
+    {cat(pipe_1).}
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_1)')
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(9)
+- Class: cmd_question
+  Output: >-
+    We are storing the grouped version of "diamonds" to another dataframe
+    named "diamonds_grouped". Execute the above code.
+  CorrectAnswer: >-
+    diamonds_grouped <- diamonds %>%
+      group_by(cut)
+  AnswerTests: >- 
+    omnitest(
+      correctExpr = '
+      diamonds_grouped <- diamonds %>%
+        group_by(cut)
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(10)
+- Class: cmd_question
+  Output: >-
+    Let's take a look at the new dataset. 
+    Print "diamonds_grouped" (without using {head} this time.)
+  CorrectAnswer: head(diamonds)
+  AnswerTests: >-
+    any_of_exprs(
+      'diamonds_grouped', 
+      'print(diamonds_grouped)',
+      'skip()'
+    )
+  Hint: 'Use {head} function to print the first few lines of the data.'
+
 ## demo_lesson(11)
+- Class: cmd_question
+  Output: >-
+    Notice that unlike when we did {head(diamonds)}, it now says the following:
+    # Groups:   cut [5]. The [5] means that there are five distinct groups.
+    
+    Check that there are indeed only five different cut values
+    using {table} on the `cut` column of either dataset. 
+  CorrectAnswer: head(diamonds)
+  AnswerTests: >-
+    any_of_exprs(
+      'table(diamonds$cut)', 
+      'table(diamonds_grouped$cut)',
+      'table(diamonds[["cut"]])', 
+      'table(diamonds_grouped[["cut"]])',
+      'table(diamonds[, "cut"])', 
+      'table(diamonds_grouped[, "cut"])',
+      'skip()'
+    )
+  Hint: 'Use {head} function to print the first few lines of the data.'
+
 ## demo_lesson(12)
+- Class: cmd_question
+  Output: >-
+    Now that we've created a grouped dataframe, we are going to use 
+    {summarise}. (In fact, {summarize} is also fine.)
+    
+    To get you started with {summarize}, I've written some code for you. 
+    Print this by using {cat(pipe_2).}
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_2)')
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(13)
+- Class: cmd_question
+  Output: >-
+    Execute that code!
+  CorrectAnswer: >-
+    diamonds_grouped %>%
+      summarise(mean_price = mean(price))
+  AnswerTests: >- 
+    omnitest(
+      correctExpr = '
+      diamonds_grouped %>%
+        summarise(mean_price = mean(price))
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
 ## demo_lesson(14)
+- Class: text
+  Output: >-
+    We have created a dataframe that summarizes the average price of diamonds
+    by their cut! Notice that the rows are ordered because `cut` is an ordered 
+    factor variable! Notice the <ord> right below the `cut`.
+
 ## demo_lesson(15)
+- Class: cmd_question
+  Output: >-
+    Using the same principle, create from "diamonds" (without using 
+    "diamonds_grouped") a summary dataframe that produces the average price by
+    `clarity`. Notice that we are no longer interested in average price by 
+    `cut`. Name this summarized value to be `mean_price` as before.
+  CorrectAnswer: >-
+    diamonds %>%
+      group_by(clarity) %>%
+      summarise(mean_price = mean(price))
+  AnswerTests: >- 
+    omnitest(
+      correctExpr = '
+      diamonds %>%
+        group_by(clarity) %>%
+        summarise(mean_price = mean(price))
+      '
+    )
+  Hint: 'Review the code printed via cat(pipe_2).'
+
 ## demo_lesson(16)
+- Class: text
+  Output: >-
+    Very good! Now, although {summarise} produces a new, neat dataframe, 
+    notice that all other columns that existed are missing.
+    It only concerns itself with the group variable (in the last case, 
+    `clarity`) and the summary statistics. 
+    
+    But perhaps we are interested in keeping all other variables and using the 
+    summarized values for something else. In that case, you would want to use
+    {mutate}, not {summarise}.
+
 ## demo_lesson(17)
+- Class: cmd_question
+  Output: >-
+    Using "diamonds_grouped", calculate `mean_price` again, but substitute 
+    {summarise} by {mutate}.
+  CorrectAnswer: >-
+    diamonds_grouped %>%
+      mutate(mean_price = mean(price))
+  AnswerTests: >- 
+    omnitest(
+      correctExpr = '
+      diamonds_grouped %>%
+        mutate(mean_price = mean(price))
+      '
+    )
+  Hint: 'Review the code printed via cat(pipe_2).'
+  
 ## demo_lesson(18)
+- Class: text
+  Output: >-
+    Great work! Notice three things: the number of rows are no longer just 5, 
+    but all 53,940 rows are now intact. What's more, the number of variables are
+    11, not 2. Finally, the `mean_price` values are---obviously---repeated for
+    the same values of `cut`. 
+
 ## demo_lesson(19)
+- Class: cmd_question
+  Output: >-
+    You sometimes would like to disable the grouped nature of the dataframe.
+    This is performed by {ungroup}. Try using {ungroup} on "diamonds_grouped."
+    (This time, don't use pipes for brevity.) 
+  CorrectAnswer: >-
+    ungroup(diamonds_grouped)
+  AnswerTests: >- 
+    omnitest(
+      correctExpr = 'ungroup(diamonds_grouped)'
+    )
+  Hint: 'This time, do not use pipes for brevity.'
+  
 ## demo_lesson(20)
+- Class: text
+  Output: >-
+    Notice that the printed output no longer says # Groups:   cut [5]. 
+    The grouping has been removed from this dataset.
+
 ## demo_lesson(21)
+- Class: text
+  Output: >-
+    A word of advice: once the group-level operations/calculations have been 
+    completed, make sure to {ungroup} your dataframes. Sometimes, you may 
+    forget that your dataframe is still grouped, creating errors in your 
+    calculations.
+
 ## demo_lesson(22)
 ## demo_lesson(23)
 ## demo_lesson(24)
@@ -72,16 +285,20 @@
 # OUTRO ========================================================================
 - Class: text
   Output: >-
+    That's it for the third lesson of {dplyr}. 
     We covered a lot of things indeed!
     
     
     dplyr can do a *lot* more. You can slice certain rows using {slice},
-    create lagged variables with {lag}, mutate all variables in a single line
-    by {mutate_all}, mutate only some types of variables by {mutate_if},
+    create lagged variables with {lag}, mutate all or some variables at the
+    same time using {across},
     create random samples using {sample_n}, rename variables with {rename},
     and so on. But we don't have room to cover everything, so look them up!
     The cheat sheet is your friend at
     https://rawgit.com/rstudio/cheatsheets/master/data-transformation.pdf.
+    
+    
+    In the next lesson, we will cover different types of joining operations.
     
     
     The next lesson will be our last dplyr lesson, where we will cover

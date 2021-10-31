@@ -27,7 +27,7 @@ Table of Contents:
 07. Tidy_with_tidyr *
 08. Transform_with_dplyr_I
 09. Transform_with_dplyr_II
-10. Transform_with_dplyr_III *
+10. Transform_with_dplyr_III
 11. Transform_with_dplyr_IV
 12. Visualize_with_ggplot2_I
 13. Visualize_with_ggplot2_II *
