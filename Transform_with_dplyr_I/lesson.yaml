@@ -177,6 +177,8 @@
   AnswerChoices: 437 x 27; 10 x 27; 437 x 28; 10 x 28; 427 x 27; 427 x 28
   CorrectAnswer: 437 x 28
   AnswerTests: omnitest(correctVal = '437 x 28')
+  Hint: >-
+    Investigate your global environment!
   
 ## demo_lesson(16)
 - Class: text
@@ -210,6 +212,8 @@
   AnswerChoices: 437 x 15; 437 x 28; 437 x 27; 437 x 10;
   CorrectAnswer: 437 x 15
   AnswerTests: omnitest(correctVal = '437 x 15')
+  Hint: >-
+    Investigate the tibble outputed before
   
 # FILTER =======================================================================
 ## demo_lesson(19)
@@ -305,7 +309,8 @@
     value of `poptotal`? 
     
     Are the rows arranged so that poptotal is increasing or decreasing?
-  CorrectAnswer: increasing; decreasing
+  AnswerChoices: increasing; decreasing
+  CorrectAnswer: increasing
   AnswerTests: omnitest(correctExpr = 'increasing')
   Hint: 'See the output of {cat(pipe_3)} that you just printed on the console.'
 
