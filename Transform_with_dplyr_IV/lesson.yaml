@@ -9,9 +9,6 @@
 # INTRO ========================================================================
 - Class: text
   Output: >
-    (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
-  
-  
     Welcome back! This is our final {dplyr} lesson!!
     When you see ..., press Enter.
     
@@ -301,8 +298,8 @@
 - Class: text
   Output: >-
     So that's a wrap on table joins with {dplyr}! Explore what other types of
-    *_join functions do as well. Joins are particularly useful if you are merging
-    data from different sources about the thing.
+    *_join functions do as well. Joins are particularly useful if you are 
+    merging data from different sources about the thing.
     
 - Class: text
   Output: >-

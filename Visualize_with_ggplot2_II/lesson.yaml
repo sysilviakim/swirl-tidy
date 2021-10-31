@@ -9,9 +9,6 @@
 # INTRO ========================================================================
 - Class: text
   Output: >
-    (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
-  
-  
     Welcome back! Today we will continue to explore how to visualize your data
     using {ggplot2} package. When you see ..., press Enter.
     
@@ -52,6 +49,14 @@
     and {geom_boxplot} that displays box plots.
 
 ## demo_lesson(5)
+- Class: cmd_question
+  Output: >-
+    Let's again load the dataset that we will use: "diamonds."
+    Note that this is not achieved through {load} but with {data}!
+  CorrectAnswer: data("diamonds")
+  AnswerTests: any_of_exprs('data(diamonds)', 'data("diamonds")', 'skip()')
+  Hint: 'Use {data} function to load the "diamonds" dataset.'
+
 ## demo_lesson(6)
 ## demo_lesson(7)
 ## demo_lesson(8)

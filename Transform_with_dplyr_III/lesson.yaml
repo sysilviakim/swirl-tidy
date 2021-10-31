@@ -9,9 +9,6 @@
 # INTRO ========================================================================
 - Class: text
   Output: >
-    (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
-  
-  
     Welcome back! Today we will continue to explore data wrangling with {dplyr}.
     When you see ..., press Enter.
     
