@@ -187,6 +187,8 @@
     
     * Donald Trump (Republican) ---> 1
 
+
+
     I've done the first {mutate} + {if_else} for you! Print this by using
     {cat(pipe_2).}
   CorrectAnswer: cat(pipe_2)
