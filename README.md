@@ -30,7 +30,7 @@ Table of Contents:
 10. Transform_with_dplyr_IV
 11. Visualize_with_ggplot2_I
 12. Visualize_with_ggplot2_II
-13. Visualize_with_ggplot2_III *
+13. Visualize_with_ggplot2_III
 14. Epilogue
 ```
 

@@ -47,20 +47,231 @@
 - Class: text
   Output: >-
     So what's left? In this final ggplot2 lesson, we will cover a few important
-    aesthetical choices such as axis titles and labels, legend positions, 
-    facets, and adding horizontal/vertical lines.
+    aesthetical choices such as axis titles and labels and 
+    adding horizontal/vertical lines.
 
 ## demo_lesson(6)
+- Class: cmd_question
+  Output: >-
+    Let's again load the dataset that we will use: "economics."
+    Note that this is not achieved through {load} but with {data}!
+  CorrectAnswer: data("economics")
+  AnswerTests: any_of_exprs('data(economics)', 'data("economics")', 'skip()')
+  Hint: 'Use {data} function to load the "economics" dataset.'
+
 ## demo_lesson(7)
+- Class: cmd_question
+  Output: >-
+    Draw a time-series of `date` and `psaavert` as we have done before, using 
+    {geom_line}. For this question, make sure that {aes} is specified within 
+    {ggplot}, not {geom_line}.
+  CorrectAnswer: >-
+    ggplot(economics, aes(x = date, y = psavert)) +
+      geom_line()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(economics, aes(x = date, y = psavert)) + geom_line()'
+    )
+  Hint: 'Add a line using {geom_line} to the previous answer!'
+
 ## demo_lesson(8)
+- Class: text
+  Output: >-
+    Note how the y-axis label, although technically correct, is not very 
+    informative. We will definitely forget what `psavert` stood for, and other 
+    people who may use this plot will also need to look up the data 
+    description!
+    
+    
+    To prevent this, let's put a more informative label on the y-axis.
+
 ## demo_lesson(9)
+- Class: cmd_question
+  Output: >-
+    There are several ways to do this, but let's first learn to use functions 
+    such as {ylab} and {xlab}. Add a line to the last code using the `+` 
+    operator: {ylab("Personal Savings Rate")}. 
+  CorrectAnswer: >-
+    ggplot(economics, aes(x = date, y = psavert)) +
+      geom_line() + 
+      ylab("Personal Savings Rate")
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(economics, aes(x = date, y = psavert)) + 
+        geom_line() + 
+        ylab("Personal Savings Rate")
+      '
+    )
+  Hint: 'Add a line using {ylab} to the previous answer!'
+
 ## demo_lesson(10)
+- Class: cmd_question
+  Output: >-
+    Excellent! Notice how the y-axis label has changed. Now on top of that, 
+    try changing the x-axis label to "Year". You should use {xlab} for this.
+  CorrectAnswer: >-
+    ggplot(economics, aes(x = date, y = psavert)) +
+      geom_line() + 
+      ylab("Personal Savings Rate") + 
+      xlab("Year")
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(economics, aes(x = date, y = psavert)) + 
+        geom_line() + 
+        ylab("Personal Savings Rate") + 
+        xlab("Year")
+      '
+    )
+  Hint: 'Add a line using {xlab} to the previous answer!'
+
 ## demo_lesson(11)
+- Class: text
+  Output: >-
+    Very good! 
+    
+    
+    Now, note how our y-axis is probably percentages, and we might want to 
+    explicitly specify that. We can do {ylab("Personal Savings Rate (%)"}, 
+    but let's say that we want to turn it to a value between 0-1 instead. 
+    In that case, we have to rescale the y-axis. 
+
 ## demo_lesson(12)
+- Class: cmd_question
+  Output: >-
+    While we can {mutate} the original dataframe, we can implement this change
+    with {ggplot2} as well.
+    
+    
+    Since this y-variable is continuous, we will use the following function: 
+    {scale_y_continuous}. Add {scale_y_continuous(labels = function(x) x / 100)}
+    to the last answer. 
+  CorrectAnswer: >-
+    ggplot(economics, aes(x = date, y = psavert)) +
+      geom_line() + 
+      ylab("Personal Savings Rate") + 
+      xlab("Year") + 
+      scale_y_continuous(labels = function(x) x / 100)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(economics, aes(x = date, y = psavert)) +
+        geom_line() + 
+        ylab("Personal Savings Rate") + 
+        xlab("Year") + 
+        scale_y_continuous(labels = function(x) x / 100)
+      '
+    )
+  Hint: 'Add a line using {scale_y_continuous} to the previous answer!'
+
 ## demo_lesson(13)
+- Class: text
+  Output: >-
+    Great work. The underlying data has not changed, but the labels have changed
+    to fit our purposes. 
+    
+    
+    If you want to, conversely, turn a value in 0-1 into a percentage, you can 
+    work with the function(x) part, but also use the following: 
+    {scale_y_continuous(labels = scales::percent)}. Note that the {scales} 
+    package must be installed. 
+    
+    
+    If you want to work with variables other than continuous variables, 
+    there are functions such as {scale_y_discrete}, {scale_x_datetime}, and so 
+    on.
+
 ## demo_lesson(14)
+- Class: cmd_question
+  Output: >-
+    Suppose we are not too happy with the limits specified in the axis. 
+    Suppose we want to see 0% on the y-axis. We can then use the same 
+    {scale_y_continuous} to specify the limits. 
+    
+    
+    Substitute {scale_y_continuous(labels = function(x) x / 100)} from the 
+    previous answer with {scale_y_continuous(limits = c(0, 20))}.
+  CorrectAnswer: >-
+    ggplot(economics, aes(x = date, y = psavert)) +
+      geom_line() + 
+      ylab("Personal Savings Rate") + 
+      xlab("Year") + 
+      scale_y_continuous(limits = c(0, 20))
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(economics, aes(x = date, y = psavert)) +
+        geom_line() + 
+        ylab("Personal Savings Rate") + 
+        xlab("Year") + 
+        scale_y_continuous(limits = c(0, 20))
+      '
+    )
+  Hint: "Substitute the last answer's last line!"
+
 ## demo_lesson(15)
+- Class: cmd_question
+  Output: >-
+    To make this more informative, we may want to add horizontal or vertical 
+    lines to the existing plot. Suppose we want to plot the bankruptcy of 
+    Lehman Brothers during the 2007-2008 economic crisis to see how it fits 
+    to the current pattern.
+    
+    
+    We can use {geom_vline} to plot a vertical line. 
+    On top of the last code (that uses limits from 0 to 20), 
+    add {geom_vline(xintercept = as.Date("2008-09-15"))}. 
+  CorrectAnswer: >-
+    ggplot(economics, aes(x = date, y = psavert)) +
+      geom_line() + 
+      ylab("Personal Savings Rate") + 
+      xlab("Year") + 
+      scale_y_continuous(limits = c(0, 20)) + 
+      geom_vline(xintercept = as.Date("2008-09-15"))
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(economics, aes(x = date, y = psavert)) +
+        geom_line() + 
+        ylab("Personal Savings Rate") + 
+        xlab("Year") + 
+        scale_y_continuous(limits = c(0, 20)) + 
+        geom_vline(xintercept = as.Date("2008-09-15"))
+      '
+    )
+  Hint: "Substitute the last answer's last line!"
+
 ## demo_lesson(16)
+- Class: cmd_question
+  Output: >-
+    *Instead* of the vertical line, try plotting a horizontal line at the 
+    average value of personal savings, which is roughly 8.5 (so just use 8.5). 
+    
+    
+    Instead of {geom_vline}, you should be using {geom_hline}, and 
+    `yintercept` instead of `xintercept` within the function. 
+  CorrectAnswer: >-
+    ggplot(economics, aes(x = date, y = psavert)) +
+      geom_line() + 
+      ylab("Personal Savings Rate") + 
+      xlab("Year") + 
+      scale_y_continuous(limits = c(0, 20)) + 
+      geom_hline(yintercept = 8.5)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      ggplot(economics, aes(x = date, y = psavert)) +
+        geom_line() + 
+        ylab("Personal Savings Rate") + 
+        xlab("Year") + 
+        scale_y_continuous(limits = c(0, 20)) + 
+        geom_hline(yintercept = 8.5)
+      '
+    )
+  Hint: "Don't use {geom_vline} here but use {geom_hline}."
+
 ## demo_lesson(17)
 ## demo_lesson(18)
 ## demo_lesson(19)
@@ -74,9 +285,12 @@
 # OUTRO ========================================================================
 - Class: text
   Output: >-
-    Excellent! So that's a wrap on ggplot2. I have not covered position
+    Excellent! So that's a wrap on ggplot2. This last lesson really scrapes the 
+    surface of the many different dials you can tweak when drawing a ggplot2 
+    object. I have not covered aesthetical choices such as position
     adjustments (e.g. {geom_bar(position = "fill")}), zooming/clipping, or
-    coordinate systems, but I will leave these to you.
+    coordinate systems, facetting, and moving legend positions with {theme}, 
+    but I will leave these to you.
     
 - Class: text
   Output: >-
