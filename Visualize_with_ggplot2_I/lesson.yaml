@@ -198,7 +198,8 @@
     also tell {aes} function that we now have a `y` variable, too. 
     
     Draw a scatterplot between `carat` and `price`, with `carat` as the aes 
-    x-variable and `price` as y-variable.
+    x-variable and `price` as y-variable. Make sure to specify the x-variable
+    before the y-variable.
   CorrectAnswer: >-
     ggplot(diamonds, aes(x = carat, y = price)) +
       geom_point()
