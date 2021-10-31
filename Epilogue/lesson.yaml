@@ -22,40 +22,25 @@
     (1) how to import data
     
     
-    (2) how to tidy the data
+    (2) how to transform the data
     
     
-    (3) how to transform the data
-    
-    
-    (4) how to visualize the data
-    
-    
-    (5) how to better program 
-    
-    
-    (6) how to create statistical models
+    (3) how to visualize the data
     
 ## demo_lesson(5)
 - Class: text
   Output: >
-    Some packages that are part of the tidyverse that are not covered here
-    include {DBI}, {httr}, {jsonlite}, {xml2} (although this is loaded when
-    we worked with {rvest}), {hms}, {blob}, and {glue}.
+    Some key packages that are part of the tidyverse that are not covered here
+    include {purrr}, {tidyr}, {forcats}, {stringr}, {magrittr}, and many more. 
+    
+    I hope to cover them eventually in a more comprehensive, advanced set of 
+    swirl exercises.
     
 ## demo_lesson(6)
 - Class: text
   Output: >
-    I also haven't covered {magrittr}, which is commonly used, but currently
-    this package is undergoing a major overhaul to magrittr 2.0, so I will wait
-    to see what I want to include in the lesson.
-    
-## demo_lesson(7)
-- Class: text
-  Output: >
-    Again, as we saw with {rvest}, tidyverse alone may not be an answer to
-    everything. Look up StackOverflow if you have specific needs that are not
-    met.
+    Note that tidyverse alone may not be an answer to everything.
+    Look up StackOverflow if you have specific needs that are not met.
     
 ## demo_lesson(8)
 - Class: text
@@ -65,12 +50,12 @@
     
     
     * If you work a lot with machine learning, check out {caret} by Max Kuhn
-    at https://topepo.github.io/caret/. 
+    at https://topepo.github.io/caret/. (Note also {modelr} of {tidyverse}.)
     
     
     * {xtable} is a great package to export your data/model summaries into 
     tables, especially LaTeX files. This will be extremely useful in making
-    your results reproducible.
+    your results reproducible. Similarly, {stargazer} is also useful.
     
 # OUTRO ========================================================================
 - Class: text
