@@ -59,6 +59,7 @@
   Output: >-
     In this lesson, we will use a dataframe called "diamonds" from {ggplot2}
     package. Load it using the function {data}.
+    Note that this is not achieved through {load} but with {data}!
   CorrectAnswer: data("diamonds")
   AnswerTests: >-
     any_of_exprs(

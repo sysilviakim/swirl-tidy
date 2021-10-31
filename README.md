@@ -24,15 +24,14 @@ Table of Contents:
 04. Import_with_readr
 05. Import_with_haven
 06. Import_with_readxl
-07. Tidy_with_tidyr *
-08. Transform_with_dplyr_I
-09. Transform_with_dplyr_II
-10. Transform_with_dplyr_III
-11. Transform_with_dplyr_IV
-12. Visualize_with_ggplot2_I
-13. Visualize_with_ggplot2_II *
-14. Visualize_with_ggplot2_III *
-15. Epilogue
+07. Transform_with_dplyr_I
+08. Transform_with_dplyr_II
+09. Transform_with_dplyr_III
+10. Transform_with_dplyr_IV
+11. Visualize_with_ggplot2_I
+12. Visualize_with_ggplot2_II *
+13. Visualize_with_ggplot2_III *
+14. Epilogue
 ```
 
 Some of the topics have been moved to a separate repository where advanced
