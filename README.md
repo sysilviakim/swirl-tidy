@@ -10,9 +10,10 @@ install_course_github("sysilviakim", "swirl-tidy")
 swirl()
 ```
 
-Most of the lessons are placeholders for future development.
-Lessons under construction are marked with an asterisk. 
-Check back for updated versions of the lesson.
+This is the most basic set of lessons for beginners to tidyverse. 
+I plan to create more advanced lessons soon.
+Check back for updates on this repository. Comments, feedbacks, and 
+pull requests are welcome.
 
 
 Table of Contents:
@@ -33,6 +34,3 @@ Table of Contents:
 13. Visualize_with_ggplot2_III
 14. Epilogue
 ```
-
-Some of the topics have been moved to a separate repository where advanced
-lessons will be stored.
