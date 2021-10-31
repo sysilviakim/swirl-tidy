@@ -8,7 +8,7 @@
 
 # INTRO ========================================================================
 - Class: text
-  Output: >
+  Output: >-
     (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
   
   
@@ -348,6 +348,7 @@
   Hint: 'Just copy-paste it!'
 
 ## demo_lesson(25)
+- Class: text
   Output: >-
     Perfect! Now note that {case_when} turns value not specified in the recoding
     to zero. It does not preserve original value if you don't tell it exactly
@@ -362,7 +363,7 @@
 
 # OUTRO ========================================================================
 - Class: text
-  Output: >
+  Output: >-
     We covered lots of important material here! But {dplyr} is a giant Swiss
     army knife, and it can do a *lot* more. 
     
