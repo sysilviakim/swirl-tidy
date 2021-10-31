@@ -232,7 +232,7 @@
     Keep using {file.path} so that R can find the file in `lesson_dir`.
 
 ## demo_lesson(21)
-- Class: test
+- Class: text
   Output: >-
     As you can imagine, {read_delim} is quite versatile.
     When you have a moment, open up {?read_delim} and carefully read its default
