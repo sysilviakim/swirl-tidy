@@ -230,15 +230,15 @@
 ## demo_lesson(19)
 - Class: cmd_question
   Output: >-
-    To the previous answer, add {geom_box} with the `+` operator as usual. 
+    To the previous answer, add {geom_boxplot} with the `+` operator as usual. 
     
   CorrectAnswer: >-
-    ggplot(diamonds, aes(x = cut, y = price)) + geom_box()
+    ggplot(diamonds, aes(x = cut, y = price)) + geom_boxplot()
   AnswerTests: >-
     omnitest(
-      correctExpr = 'ggplot(diamonds, aes(x = cut, y = price)) + geom_box()'
+      correctExpr = 'ggplot(diamonds, aes(x = cut, y = price)) + geom_boxplot()'
     )
-  Hint: 'Add the {geom_box} layer to the previous answer.'
+  Hint: 'Add the {geom_boxplot} layer to the previous answer.'
 
 ## demo_lesson(20)
 - Class: text
