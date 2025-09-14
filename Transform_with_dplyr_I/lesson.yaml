@@ -311,7 +311,7 @@
     Are the rows arranged so that poptotal is increasing or decreasing?
   AnswerChoices: increasing; decreasing
   CorrectAnswer: increasing
-  AnswerTests: omnitest(correctExpr = 'increasing')
+  AnswerTests: omnitest(correctVal = 'increasing')
   Hint: 'See the output of {cat(pipe_3)} that you just printed on the console.'
 
 ## demo_lesson(26)
