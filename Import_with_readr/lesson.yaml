@@ -40,12 +40,12 @@
 ## demo_lesson(4)
 - Class: text
   Output: >-
-    As of tidyverse 1.3.0, {readr} package is one of the eight core packages.
+    As of tidyverse 2.0.0, {readr} package is one of the nine core packages.
     This package is a "fast and friendly way to read rectangular data
     (like csv, tsv, and fwf)." It has a convenient automatic parser, displays
     a progress bar to let you know how far along it is in importing data, and
     has a set of useful warnings/messages. For RStudio cheat sheet, check out
-    https://rawgit.com/rstudio/cheatsheets/master/data-import.pdf.
+    https://rstudio.github.io/cheatsheets/data-import.pdf.
 
 ## demo_lesson(5)
 - Class: text
@@ -405,10 +405,47 @@
     Sounds tedious? Some data requires you to get knee-deep in its mess!
     Otherwise, it'll come back to bite and waste your time even more.
 
+# EXPORTING WITH READR =========================================================
+- Class: text
+  Output: >-
+    So far we have only *read* files. But {readr} also provides functions to
+    *write* data. The most common is {write_csv}, which writes a tibble to
+    a CSV file. It is the counterpart to {read_csv}.
+
+- Class: cmd_question
+  Output: >-
+    Let's try it. Write "csv_comma" back to a new file. Execute
+    {write_csv(csv_comma, file.path(lesson_dir, "my_export.csv"))}.
+  CorrectAnswer: write_csv(csv_comma, file.path(lesson_dir, "my_export.csv"))
+  AnswerTests: >-
+    any_of_exprs(
+      'write_csv(csv_comma, file.path(lesson_dir, "my_export.csv"))',
+      'readr::write_csv(csv_comma, file.path(lesson_dir, "my_export.csv"))'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    {write_csv} is great for sharing data because CSV is a universal format.
+    There is also {write_tsv} for tab-delimited files and {write_delim} for
+    custom delimiters.
+
+- Class: text
+  Output: >-
+    CSV files have a limitation: they do not preserve R-specific data types
+    like factors, dates, or list-columns. If you are saving data for your own
+    later use in R, {write_rds} is a better choice. It saves the exact R
+    object, including all metadata. You read it back with {read_rds}.
+
+- Class: text
+  Output: >-
+    Rule of thumb: use {write_csv} when sharing with others or non-R tools,
+    and {write_rds} when saving intermediate results for yourself.
+
 # OUTRO ========================================================================
 - Class: text
   Output: >-
     You have completed "Import with readr" lesson of swirl-tidy!
-    Check out its official website at https://readr.tidyverse.org. 
+    Check out its official website at https://readr.tidyverse.org.
     I will see you in the next lesson.
     
