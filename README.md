@@ -3,8 +3,6 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-## Overview
-
 swirl-tidy is a series of interactive [swirl](https://swirlstats.com/)
 lessons that teach the [tidyverse](https://www.tidyverse.org/) in R.
 It covers importing, transforming, and visualizing data using tidyverse
