@@ -303,7 +303,7 @@
   Output: >-
     Now you can save it with {ggsave}. The typical usage is
     {ggsave("filename.png", plot = my_plot, width = 6, height = 4)}.
-    {ggsave} detects the format from the file extension --- it supports
+    {ggsave} detects the format from the file extension: it supports
     .png, .pdf, .svg, .jpg, and more. The `width` and `height` arguments
     control the dimensions in inches. You can set `dpi` for resolution
     (e.g., `dpi = 300` for publication quality).

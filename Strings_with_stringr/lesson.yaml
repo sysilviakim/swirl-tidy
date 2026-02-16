@@ -1,0 +1,215 @@
+- Class: meta
+  Course: swirl-tidy
+  Lesson: Strings_with_stringr
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >-
+    Welcome back! Today we will explore how to work with text strings using the
+    {stringr} package. When you see ..., press Enter.
+
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidyverse")}, if it is not already installed.
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package 'XXX' had non-zero exit status'.
+  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidyverse")',
+      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'install.packages("tidyverse")',
+      'if (!require("tidyverse")) install.packages("tidyverse")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+
+- Class: cmd_question
+  Output: 'Now load the tidyverse package.'
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Hint: 'Avoid using {require}. Use {library}.'
+
+# PREAMBLE =====================================================================
+- Class: text
+  Output: >-
+    The {stringr} package provides a consistent set of functions for working
+    with strings. All its main functions start with {str_}, making them easy to
+    find and remember.
+
+- Class: text
+  Output: >-
+    I've loaded a vector called "sample_strings" and "messy_names" for this
+    lesson. We will also use the built-in {fruit} vector from {stringr}.
+
+# STR_LENGTH ===================================================================
+- Class: cmd_question
+  Output: >-
+    Let's start simple. {str_length} returns the number of characters in a
+    string. Try {str_length("hello")}.
+  CorrectAnswer: str_length("hello")
+  AnswerTests: omnitest(correctExpr = 'str_length("hello")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    It also works on vectors. Try {str_length(fruit)} to see the length of
+    each fruit name. The {fruit} vector is built into {stringr}.
+  CorrectAnswer: str_length(fruit)
+  AnswerTests: omnitest(correctExpr = 'str_length(fruit)')
+  Hint: 'Just copy-paste it!'
+
+# CASE CONVERSION ==============================================================
+- Class: cmd_question
+  Output: >-
+    {str_to_lower}, {str_to_upper}, and {str_to_title} convert string case.
+    Try {str_to_upper("hello world")}.
+  CorrectAnswer: str_to_upper("hello world")
+  AnswerTests: omnitest(correctExpr = 'str_to_upper("hello world")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Now use {str_to_title} on the "messy_names" vector to properly capitalize
+    each name.
+  CorrectAnswer: str_to_title(messy_names)
+  AnswerTests: omnitest(correctExpr = 'str_to_title(messy_names)')
+  Hint: 'Apply str_to_title to the messy_names vector.'
+
+# STR_C ========================================================================
+- Class: cmd_question
+  Output: >-
+    {str_c} concatenates strings, similar to {paste0} but with stricter NA
+    handling. Try {str_c("Hello", " ", "World", "!")}.
+  CorrectAnswer: str_c("Hello", " ", "World", "!")
+  AnswerTests: omnitest(correctExpr = 'str_c("Hello", " ", "World", "!")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    {str_c} also has a `sep` argument. Try
+    {str_c("2024", "01", "15", sep = "-")}.
+  CorrectAnswer: str_c("2024", "01", "15", sep = "-")
+  AnswerTests: omnitest(correctExpr = 'str_c("2024", "01", "15", sep = "-")')
+  Hint: 'Just copy-paste it!'
+
+# STR_DETECT ===================================================================
+- Class: cmd_question
+  Output: >-
+    {str_detect} checks whether a pattern exists in a string and returns
+    TRUE or FALSE. This is very useful with {dplyr::filter}.
+    Try {str_detect(fruit, "berry")}.
+  CorrectAnswer: str_detect(fruit, "berry")
+  AnswerTests: omnitest(correctExpr = 'str_detect(fruit, "berry")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Now use {str_detect} with indexing to get only the fruits that contain
+    "berry". Try {fruit[str_detect(fruit, "berry")]}.
+  CorrectAnswer: fruit[str_detect(fruit, "berry")]
+  AnswerTests: omnitest(correctExpr = 'fruit[str_detect(fruit, "berry")]')
+  Hint: 'Just copy-paste it!'
+
+# STR_REPLACE ==================================================================
+- Class: cmd_question
+  Output: >-
+    {str_replace} replaces the first match of a pattern, while
+    {str_replace_all} replaces all matches. Try
+    {str_replace("banana", "a", "o")}.
+  CorrectAnswer: str_replace("banana", "a", "o")
+  AnswerTests: omnitest(correctExpr = 'str_replace("banana", "a", "o")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Notice only the first 'a' was replaced. Now try {str_replace_all} instead.
+  CorrectAnswer: str_replace_all("banana", "a", "o")
+  AnswerTests: omnitest(correctExpr = 'str_replace_all("banana", "a", "o")')
+  Hint: 'Use str_replace_all with the same arguments.'
+
+# STR_EXTRACT ==================================================================
+- Class: cmd_question
+  Output: >-
+    {str_extract} extracts the first match of a pattern.
+    Try {str_extract("My phone is 555-1234", "[0-9]+")} to extract the first
+    sequence of digits.
+  CorrectAnswer: str_extract("My phone is 555-1234", "[0-9]+")
+  AnswerTests: >-
+    omnitest(correctExpr = 'str_extract("My phone is 555-1234", "[0-9]+")')
+  Hint: 'Just copy-paste it!'
+
+# STR_SUB ======================================================================
+- Class: cmd_question
+  Output: >-
+    {str_sub} extracts substrings by position. The first argument is the string,
+    then the start and end positions. Try {str_sub("tidyverse", 1, 4)}.
+  CorrectAnswer: str_sub("tidyverse", 1, 4)
+  AnswerTests: omnitest(correctExpr = 'str_sub("tidyverse", 1, 4)')
+  Hint: 'Just copy-paste it!'
+
+# STR_TRIM / STR_SQUISH =======================================================
+- Class: cmd_question
+  Output: >-
+    {str_trim} removes whitespace from the start and end of a string.
+    {str_squish} also reduces repeated internal whitespace to a single space.
+    Try {str_trim("  hello  ")}.
+  CorrectAnswer: str_trim("  hello  ")
+  AnswerTests: omnitest(correctExpr = 'str_trim("  hello  ")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Now try {str_squish("  too   many   spaces  ")}.
+  CorrectAnswer: str_squish("  too   many   spaces  ")
+  AnswerTests: omnitest(correctExpr = 'str_squish("  too   many   spaces  ")')
+  Hint: 'Just copy-paste it!'
+
+# PIPING EXAMPLE ===============================================================
+- Class: cmd_question
+  Output: >-
+    Of course, all these functions work great with pipes! Print {cat(pipe_1)}
+    to see an example.
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_1)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: 'Copy-paste the printed code and execute it!'
+  CorrectAnswer: >-
+    sample_strings %>%
+      str_to_lower() %>%
+      str_trim()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      sample_strings %>%
+        str_to_lower() %>%
+        str_trim()
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    The strings were first converted to lowercase, then trimmed of whitespace.
+    Piping string operations together is a common and powerful pattern!
+
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    We covered {str_length}, {str_to_lower}, {str_to_upper}, {str_to_title},
+    {str_c}, {str_detect}, {str_replace}, {str_replace_all}, {str_extract},
+    {str_sub}, {str_trim}, and {str_squish}. For more, see
+    https://stringr.tidyverse.org.
+
+- Class: text
+  Output: >-
+    You have completed "Strings with stringr" lesson of swirl-tidy!
+    I will see you in the next lesson.

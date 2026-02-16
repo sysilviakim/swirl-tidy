@@ -222,10 +222,16 @@
     labelled(vec_nolabel, c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))
   AnswerTests: >-
     any_of_exprs(
-      'labelled(vec_nolabel, c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))',
-      'labelled(x = vec_nolabel, c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))',
-      'labelled(vec_nolabel, labels = c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))',
-      'labelled(x = vec_nolabel, labels = c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))'
+      paste0('labelled(vec_nolabel, ',
+        'c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))'),
+      paste0('labelled(x = vec_nolabel, ',
+        'c(DC = 1, Maryland = 2, Virginia = 3, Other = 4))'),
+      paste0('labelled(vec_nolabel, ',
+        'labels = c(DC = 1, Maryland = 2, ',
+        'Virginia = 3, Other = 4))'),
+      paste0('labelled(x = vec_nolabel, ',
+        'labels = c(DC = 1, Maryland = 2, ',
+        'Virginia = 3, Other = 4))')
     )
   Hint: 'Carefully read the documentation.'
 

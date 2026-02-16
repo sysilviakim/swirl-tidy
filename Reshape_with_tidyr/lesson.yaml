@@ -1,0 +1,249 @@
+- Class: meta
+  Course: swirl-tidy
+  Lesson: Reshape_with_tidyr
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >-
+    Welcome back! Today we will explore how to reshape and tidy data using the
+    {tidyr} package. When you see ..., press Enter.
+
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidyverse")}, if it is not already installed.
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package 'XXX' had non-zero exit status'.
+  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidyverse")',
+      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'install.packages("tidyverse")',
+      'if (!require("tidyverse")) install.packages("tidyverse")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+
+- Class: cmd_question
+  Output: 'Now load the tidyverse package.'
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Hint: 'Avoid using {require}. Use {library}.'
+
+# PREAMBLE =====================================================================
+- Class: text
+  Output: >-
+    The {tidyr} package helps you create *tidy data*. Tidy data has a consistent
+    structure: each variable is a column, each observation is a row, and each
+    value is a cell. This makes data much easier to work with in R.
+
+- Class: text
+  Output: >-
+    Real-world data is often not tidy. A common problem is that column names
+    are not variable names but *values* of a variable. Another is that a single
+    observation is scattered across multiple rows. {tidyr} provides tools to
+    fix these problems.
+
+# PIVOT_LONGER =================================================================
+- Class: cmd_question
+  Output: >-
+    Let's look at the built-in dataset {table4a}. This comes with {tidyr}.
+    Print it now.
+  CorrectAnswer: table4a
+  AnswerTests: any_of_exprs('table4a', 'print(table4a)')
+  Hint: 'Just type table4a!'
+
+- Class: text
+  Output: >-
+    Notice that the column names `1999` and `2000` are not variable names;
+    they are values of a `year` variable. The values in those columns represent
+    cases. This is called *wide* format, and we want to make it *long*.
+
+- Class: cmd_question
+  Output: >-
+    We use {pivot_longer} to fix this. I have written the code for you.
+    Print it using {cat(pipe_1)}.
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_1)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Copy-paste the printed code and execute it! The `cols` argument tells
+    {pivot_longer} which columns to pivot. `names_to` specifies the name for
+    the new column that will hold the old column names, and `values_to` names
+    the column for the values.
+  CorrectAnswer: >-
+    table4a %>%
+      pivot_longer(
+        cols = c(`1999`, `2000`),
+        names_to = "year",
+        values_to = "cases"
+      )
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      table4a %>%
+        pivot_longer(
+          cols = c(`1999`, `2000`),
+          names_to = "year",
+          values_to = "cases"
+        )'
+    )
+  Hint: 'Just copy-paste the printed code!'
+
+- Class: text
+  Output: >-
+    Each country now has two rows (one for each year) instead of two columns.
+    The data is now tidy!
+
+# PIVOT_WIDER ==================================================================
+- Class: cmd_question
+  Output: >-
+    Now let's look at {table2}. Print it.
+  CorrectAnswer: table2
+  AnswerTests: any_of_exprs('table2', 'print(table2)')
+  Hint: 'Just type table2!'
+
+- Class: text
+  Output: >-
+    Here, each observation (a country in a year) is spread across two rows:
+    one for cases and one for population. We need {pivot_wider} to fix this.
+
+- Class: cmd_question
+  Output: >-
+    I have written the code for you. Print it using {cat(pipe_2)}.
+  CorrectAnswer: cat(pipe_2)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_2)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Copy-paste and execute the code! `names_from` tells {pivot_wider} which
+    column contains the new column names, and `values_from` tells it which
+    column contains the values.
+  CorrectAnswer: >-
+    table2 %>%
+      pivot_wider(
+        names_from = type,
+        values_from = count
+      )
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      table2 %>%
+        pivot_wider(
+          names_from = type,
+          values_from = count
+        )'
+    )
+  Hint: 'Just copy-paste the printed code!'
+
+- Class: text
+  Output: >-
+    Now `cases` and `population` are separate columns. Each row is one
+    observation (country + year). This is much more useful for analysis!
+
+# SEPARATE =====================================================================
+- Class: cmd_question
+  Output: >-
+    Let's look at {table3}. Print it.
+  CorrectAnswer: table3
+  AnswerTests: any_of_exprs('table3', 'print(table3)')
+  Hint: 'Just type table3!'
+
+- Class: text
+  Output: >-
+    The `rate` column contains two values separated by a slash: cases and
+    population. We need to split this into two columns. This is what
+    {separate_wider_delim} does.
+
+- Class: cmd_question
+  Output: >-
+    Print the code I've prepared using {cat(pipe_3)}.
+  CorrectAnswer: cat(pipe_3)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_3)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Execute the code! The `cols` argument specifies which column to split,
+    `delim` is the delimiter, and `names` gives the new column names.
+  CorrectAnswer: >-
+    table3 %>%
+      separate_wider_delim(
+        cols = rate,
+        delim = "/",
+        names = c("cases", "population")
+      )
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      table3 %>%
+        separate_wider_delim(
+          cols = rate,
+          delim = "/",
+          names = c("cases", "population")
+        )'
+    )
+  Hint: 'Just copy-paste the printed code!'
+
+- Class: text
+  Output: >-
+    The `rate` column has been split into `cases` and `population`. Note that
+    the resulting columns are character type. You would use {mutate} with
+    {as.numeric} to convert them to numbers if needed.
+
+# UNITE ========================================================================
+- Class: text
+  Output: >-
+    The opposite of separating is {unite}, which combines multiple columns
+    into one. For example, if you had separate `century` and `year` columns,
+    you could combine them with {unite(new_col, century, year, sep = "")}.
+
+# MISSING VALUES ===============================================================
+- Class: text
+  Output: >-
+    {tidyr} also provides useful functions for handling missing values.
+    {drop_na()} removes rows with any missing values (or specific columns),
+    and {replace_na()} replaces NA values with a specified value.
+
+- Class: cmd_question
+  Output: >-
+    Let's create a small tibble with missing values and use {drop_na}.
+    Execute: {tibble(x = c(1, 2, NA, 4), y = c("a", NA, "c", "d")) %>%
+    drop_na()}.
+  CorrectAnswer: >-
+    tibble(x = c(1, 2, NA, 4), y = c("a", NA, "c", "d")) %>% drop_na()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      tibble(x = c(1, 2, NA, 4), y = c("a", NA, "c", "d")) %>% drop_na()
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    Only two rows survived because {drop_na()} removed any row that had at
+    least one NA. You can also target specific columns, e.g.,
+    {drop_na(x)} to only drop rows where `x` is NA.
+
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    We covered {pivot_longer}, {pivot_wider}, {separate_wider_delim},
+    {unite}, {drop_na}, and {replace_na}. These are the key tools for
+    reshaping and tidying your data. For more, see the tidyr documentation at
+    https://tidyr.tidyverse.org.
+
+- Class: text
+  Output: >-
+    You have completed "Reshape with tidyr" lesson of swirl-tidy!
+    I will see you in the next lesson.

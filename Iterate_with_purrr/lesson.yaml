@@ -1,0 +1,198 @@
+- Class: meta
+  Course: swirl-tidy
+  Lesson: Iterate_with_purrr
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >-
+    Welcome back! Today we will explore how to iterate over data using the
+    {purrr} package. When you see ..., press Enter.
+
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidyverse")}, if it is not already installed.
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package 'XXX' had non-zero exit status'.
+  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidyverse")',
+      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'install.packages("tidyverse")',
+      'if (!require("tidyverse")) install.packages("tidyverse")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+
+- Class: cmd_question
+  Output: 'Now load the tidyverse package.'
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Hint: 'Avoid using {require}. Use {library}.'
+
+# PREAMBLE =====================================================================
+- Class: text
+  Output: >-
+    The {purrr} package provides tools for working with functions and vectors.
+    Its core function, {map}, applies a function to each element of a list or
+    vector; similar to a for-loop but more concise and expressive.
+
+- Class: text
+  Output: >-
+    I've loaded "simple_list" (a list of three integer vectors) and
+    "named_list" (a named list of single numbers) for this lesson.
+
+# MAP ==========================================================================
+- Class: cmd_question
+  Output: >-
+    Print "simple_list" to see what it contains.
+  CorrectAnswer: simple_list
+  AnswerTests: any_of_exprs('simple_list', 'print(simple_list)')
+  Hint: 'Just type simple_list!'
+
+- Class: cmd_question
+  Output: >-
+    Suppose we want to compute the mean of each vector in the list. I've
+    written the code for you. Print it using {cat(pipe_1)}.
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_1)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Copy-paste and execute the code! {map} applies {mean} to each element
+    of the list and returns a list.
+  CorrectAnswer: >-
+    simple_list %>%
+      map(mean)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'simple_list %>% map(mean)'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    Notice that the result is a *list*. Each element contains the mean of
+    the corresponding input vector. This is the default behavior of {map}.
+
+# MAP_DBL / MAP_CHR / MAP_LGL =================================================
+- Class: cmd_question
+  Output: >-
+    Often you want a simpler output than a list. {map_dbl} returns a numeric
+    (double) vector instead of a list. Print {cat(pipe_2)} to see the code.
+  CorrectAnswer: cat(pipe_2)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_2)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: 'Execute the code!'
+  CorrectAnswer: >-
+    simple_list %>%
+      map_dbl(mean)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'simple_list %>% map_dbl(mean)'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    Now we get a clean numeric vector instead of a list. Similarly,
+    {map_chr} returns a character vector and {map_lgl} returns a logical vector.
+
+- Class: cmd_question
+  Output: >-
+    Try using {map_chr} to convert each element of "named_list" to a string.
+    Execute {named_list %>% map_chr(as.character)}.
+  CorrectAnswer: named_list %>% map_chr(as.character)
+  AnswerTests: >-
+    omnitest(correctExpr = 'named_list %>% map_chr(as.character)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    {map_lgl} is useful for testing conditions. Try
+    {simple_list %>% map_lgl(~ mean(.x) > 10)} to check which list elements
+    have a mean greater than 10.
+  CorrectAnswer: simple_list %>% map_lgl(~ mean(.x) > 10)
+  AnswerTests: >-
+    omnitest(correctExpr = 'simple_list %>% map_lgl(~ mean(.x) > 10)')
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    We used the formula shortcut {~ mean(.x) > 10} here. The {~} creates an
+    anonymous function where {.x} refers to each element. This is a common
+    purrr pattern.
+
+# COMBINING INTO DATAFRAMES ====================================================
+- Class: cmd_question
+  Output: >-
+    A powerful pattern is applying a function that returns a dataframe to each
+    element and combining the results. Try
+    {simple_list %>% map(~ tibble(values = .x)) %>% list_rbind()}.
+  CorrectAnswer: >-
+    simple_list %>% map(~ tibble(values = .x)) %>% list_rbind()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      simple_list %>% map(~ tibble(values = .x)) %>% list_rbind()
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    {list_rbind} combines a list of dataframes by stacking them row-wise.
+    This pattern is very useful when reading multiple CSV files and combining
+    them into a single dataframe.
+
+# WALK =========================================================================
+- Class: text
+  Output: >-
+    Sometimes you want to apply a function for its *side effects* (like
+    printing or saving files) rather than its return value. {walk} does this:
+    it works like {map} but invisibly returns the input, so it is useful
+    for tasks like {walk(file_list, ~ write_csv(.x, .y))}.
+
+# PRACTICAL EXAMPLE ============================================================
+- Class: cmd_question
+  Output: >-
+    Let's do a practical example. We'll use {map_dbl} to calculate the mean
+    price of diamonds by cut. Try
+    {diamonds %>% split(.$cut) %>% map_dbl(~ mean(.x$price))}.
+  CorrectAnswer: >-
+    diamonds %>% split(.$cut) %>% map_dbl(~ mean(.x$price))
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      diamonds %>% split(.$cut) %>% map_dbl(~ mean(.x$price))
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    {split} divided the diamonds dataset into a list of dataframes by cut,
+    and {map_dbl} calculated the mean price for each. Of course, you could
+    also achieve this with {group_by} + {summarise}, but {purrr} shines when
+    the operations are more complex or when working with lists.
+
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    We covered {map}, {map_dbl}, {map_chr}, {map_lgl}, {list_rbind},
+    {walk}, and the formula shortcut {~ .x}. These are essential tools for
+    functional programming in R. For more, see https://purrr.tidyverse.org.
+
+- Class: text
+  Output: >-
+    You have completed "Iterate with purrr" lesson of swirl-tidy!
+    I will see you in the next lesson.

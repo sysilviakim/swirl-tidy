@@ -1,0 +1,280 @@
+- Class: meta
+  Course: swirl-tidy
+  Lesson: Transform_with_dplyr_V
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >-
+    Welcome back! You have completed four dplyr lessons already; great work!
+    In this lesson we will explore some more advanced dplyr features that will
+    make your data wrangling even more powerful. When you see ..., press Enter.
+
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidyverse")}, if it is not already installed.
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package 'XXX' had non-zero exit status'.
+  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidyverse")',
+      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'install.packages("tidyverse")',
+      'if (!require("tidyverse")) install.packages("tidyverse")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+
+- Class: cmd_question
+  Output: 'Now load the tidyverse package.'
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Hint: 'Avoid using {require}. Use {library}.'
+
+# PREAMBLE =====================================================================
+- Class: text
+  Output: >-
+    I've loaded a tibble called "students" with columns `name`, `math`,
+    `science`, and `english` (all test scores). We will also use the built-in
+    "diamonds" dataset.
+
+- Class: cmd_question
+  Output: 'Print "students" to see what it looks like.'
+  CorrectAnswer: students
+  AnswerTests: any_of_exprs('students', 'print(students)')
+  Hint: 'Just type students!'
+
+# COUNT ========================================================================
+- Class: text
+  Output: >-
+    Let's start with {count}, a handy shortcut. Instead of writing
+    {group_by(cut) %>% summarise(n = n())}, you can simply use {count}.
+
+- Class: cmd_question
+  Output: >-
+    Load the "diamonds" dataset and count the number of diamonds by `cut`.
+    Execute {data(diamonds)} first, then {diamonds %>% count(cut)}.
+  CorrectAnswer: diamonds %>% count(cut)
+  AnswerTests: omnitest(correctExpr = 'diamonds %>% count(cut)')
+  Hint: 'Just type diamonds %>% count(cut).'
+
+- Class: cmd_question
+  Output: >-
+    You can add `sort = TRUE` to see the most common groups first. Try
+    {diamonds %>% count(cut, sort = TRUE)}.
+  CorrectAnswer: diamonds %>% count(cut, sort = TRUE)
+  AnswerTests: >-
+    omnitest(correctExpr = 'diamonds %>% count(cut, sort = TRUE)')
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    {count} also accepts multiple grouping variables. For example,
+    {diamonds %>% count(cut, color)} would count every combination.
+
+# RELOCATE =====================================================================
+- Class: cmd_question
+  Output: >-
+    {relocate} moves columns to a new position. By default it moves columns
+    to the front. Try {students %>% relocate(english)}.
+  CorrectAnswer: students %>% relocate(english)
+  AnswerTests: omnitest(correctExpr = 'students %>% relocate(english)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    You can also specify where to place the column using `.after` or `.before`.
+    Try {students %>% relocate(english, .after = name)}.
+  CorrectAnswer: students %>% relocate(english, .after = name)
+  AnswerTests: >-
+    omnitest(correctExpr = 'students %>% relocate(english, .after = name)')
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    {relocate} is much more readable than the old trick of using {select}
+    to reorder columns. Use it whenever you need to rearrange your dataframe.
+
+# ACROSS =======================================================================
+- Class: text
+  Output: >-
+    {across} is one of the most powerful modern dplyr features. It lets you
+    apply the same transformation to multiple columns at once inside {mutate}
+    or {summarise}.
+
+- Class: cmd_question
+  Output: >-
+    I've prepared a code example. Print it using {cat(pipe_1)}.
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_1)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Execute the code! This divides all three score columns by 100 to convert
+    them to proportions. The {~ .x / 100} is an anonymous function applied
+    to each column specified in the first argument.
+  CorrectAnswer: >-
+    students %>%
+      mutate(
+        across(c(math, science, english), ~ .x / 100)
+      )
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      students %>%
+        mutate(
+          across(c(math, science, english), ~ .x / 100)
+        )'
+    )
+  Hint: 'Just copy-paste the printed code!'
+
+- Class: cmd_question
+  Output: >-
+    {across} also works with {summarise}. Try calculating the mean of all
+    numeric columns:
+    {students %>% summarise(across(where(is.numeric), mean))}.
+  CorrectAnswer: students %>% summarise(across(where(is.numeric), mean))
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'students %>% summarise(across(where(is.numeric), mean))'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    {where(is.numeric)} is a tidyselect helper that selects all numeric
+    columns. Other useful selectors include {starts_with()}, {ends_with()},
+    {contains()}, and {everything()}. These work inside {across}, {select},
+    and {relocate}.
+
+# ROWWISE ======================================================================
+- Class: text
+  Output: >-
+    Sometimes you need to compute across *rows* rather than columns. For
+    example, calculating each student's average score across subjects.
+    {rowwise} makes this possible.
+
+- Class: cmd_question
+  Output: >-
+    Print the prepared code using {cat(pipe_2)}.
+  CorrectAnswer: cat(pipe_2)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_2)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Execute the code! {rowwise} tells dplyr to compute row by row, and
+    {c_across} selects columns within the row context. Don't forget
+    {ungroup} at the end to remove the rowwise grouping!
+  CorrectAnswer: >-
+    students %>%
+      rowwise() %>%
+      mutate(avg = mean(c_across(math:english))) %>%
+      ungroup()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      students %>%
+        rowwise() %>%
+        mutate(avg = mean(c_across(math:english))) %>%
+        ungroup()
+      '
+    )
+  Hint: 'Just copy-paste the printed code!'
+
+- Class: text
+  Output: >-
+    Each student now has their own average. Without {rowwise}, {mean} would
+    have computed the overall mean of all values. Just like with {group_by},
+    always remember to {ungroup} when you are done!
+
+# .BY ARGUMENT =================================================================
+- Class: text
+  Output: >-
+    In modern dplyr (1.1.0+), you can use the {.by} argument directly in
+    {mutate} and {summarise} instead of {group_by} + {ungroup}. This is
+    called *per-operation grouping* and is more concise.
+
+- Class: cmd_question
+  Output: >-
+    Compare the old way with the new. Instead of
+    {diamonds %>% group_by(cut) %>% summarise(avg = mean(price)) %>% ungroup()},
+    try {diamonds %>% summarise(avg = mean(price), .by = cut)}.
+  CorrectAnswer: diamonds %>% summarise(avg = mean(price), .by = cut)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'diamonds %>% summarise(avg = mean(price), .by = cut)'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    Same result, but shorter and no need to remember {ungroup}! The {.by}
+    argument works in {mutate}, {summarise}, {filter}, and {slice} functions.
+    Note that unlike {group_by}, the result is always ungrouped.
+
+- Class: cmd_question
+  Output: >-
+    {.by} also accepts multiple grouping columns. Try
+    {diamonds %>% summarise(avg = mean(price), .by = c(cut, color))}.
+  CorrectAnswer: >-
+    diamonds %>% summarise(avg = mean(price), .by = c(cut, color))
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      diamonds %>% summarise(avg = mean(price), .by = c(cut, color))
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+# SLICE FAMILY =================================================================
+- Class: text
+  Output: >-
+    The {slice} family provides more ways to select rows.
+    {slice_head(n = 5)} gives the first 5 rows (like {head}),
+    {slice_tail(n = 5)} gives the last 5, {slice_sample(n = 5)} gives a
+    random sample, and {slice_min}/{slice_max} give the rows with the
+    smallest/largest values of a variable.
+
+- Class: cmd_question
+  Output: >-
+    Get the 3 cheapest diamonds. Try
+    {diamonds %>% slice_min(price, n = 3)}.
+  CorrectAnswer: diamonds %>% slice_min(price, n = 3)
+  AnswerTests: omnitest(correctExpr = 'diamonds %>% slice_min(price, n = 3)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Now combine with {.by} to get the most expensive diamond per cut.
+    Try {diamonds %>% slice_max(price, n = 1, .by = cut)}.
+  CorrectAnswer: diamonds %>% slice_max(price, n = 1, .by = cut)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'diamonds %>% slice_max(price, n = 1, .by = cut)'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    This gives you the single most expensive diamond in each cut category.
+    The combination of {slice_*} functions with {.by} is very expressive.
+
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    We covered {count}, {relocate}, {across}, {rowwise} + {c_across},
+    the {.by} argument, and the {slice} family. These modern dplyr features
+    will help you write cleaner, more concise data wrangling code.
+
+- Class: text
+  Output: >-
+    You have completed "Transform with dplyr V" lesson of swirl-tidy!
+    I will see you in the next lesson.

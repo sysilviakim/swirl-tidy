@@ -1,0 +1,249 @@
+- Class: meta
+  Course: swirl-tidy
+  Lesson: Dates_with_lubridate
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >-
+    Welcome back! Today we will learn how to work with dates and times using
+    the {lubridate} package, which is a core tidyverse package as of
+    tidyverse 2.0.0. When you see ..., press Enter.
+
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidyverse")}, if it is not already installed.
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package 'XXX' had non-zero exit status'.
+  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidyverse")',
+      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'install.packages("tidyverse")',
+      'if (!require("tidyverse")) install.packages("tidyverse")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+
+- Class: cmd_question
+  Output: 'Now load the tidyverse package.'
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Hint: 'Avoid using {require}. Use {library}.'
+
+# PREAMBLE =====================================================================
+- Class: text
+  Output: >-
+    Dates and times are notoriously tricky to work with. Different formats
+    (2024-01-15 vs 01/15/2024 vs "January 15, 2024"), time zones, leap years,
+    and daylight saving time all make things complicated. {lubridate} makes
+    this much easier with a consistent, intuitive set of functions.
+
+- Class: text
+  Output: >-
+    I've loaded some sample data for this lesson: "date_strings" (ISO format
+    dates), "us_dates" (US format dates), and "events" (a tibble with an
+    `event` column and a `date` column).
+
+# PARSING DATES ================================================================
+- Class: cmd_question
+  Output: >-
+    The most important lubridate functions are the date parsers. The function
+    name tells lubridate the order of components: {ymd} means
+    year-month-day. Try {ymd("2024-01-15")}.
+  CorrectAnswer: ymd("2024-01-15")
+  AnswerTests: omnitest(correctExpr = 'ymd("2024-01-15")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    {ymd} is smart about separators. It handles dashes, slashes, and even no
+    separators. Try {ymd("20240115")}.
+  CorrectAnswer: ymd("20240115")
+  AnswerTests: omnitest(correctExpr = 'ymd("20240115")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    For US-style dates (month/day/year), use {mdy}. Try
+    {mdy("01/15/2024")}.
+  CorrectAnswer: mdy("01/15/2024")
+  AnswerTests: omnitest(correctExpr = 'mdy("01/15/2024")')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    For European-style (day-month-year), use {dmy}. Try
+    {dmy("15-01-2024")}.
+  CorrectAnswer: dmy("15-01-2024")
+  AnswerTests: omnitest(correctExpr = 'dmy("15-01-2024")')
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    The pattern is simple: arrange the letters y, m, d in the order they
+    appear in your date string. There are also variants with time components:
+    {ymd_hms}, {ymd_hm}, {mdy_hms}, etc.
+
+- Class: cmd_question
+  Output: >-
+    These functions work on vectors too. Try {ymd(date_strings)}.
+  CorrectAnswer: ymd(date_strings)
+  AnswerTests: omnitest(correctExpr = 'ymd(date_strings)')
+  Hint: 'Just copy-paste it!'
+
+# EXTRACTING COMPONENTS ========================================================
+- Class: text
+  Output: >-
+    Once you have a proper date object, you can extract individual components
+    using accessor functions.
+
+- Class: cmd_question
+  Output: >-
+    Print "events" to see our sample data.
+  CorrectAnswer: events
+  AnswerTests: any_of_exprs('events', 'print(events)')
+  Hint: 'Just type events!'
+
+- Class: cmd_question
+  Output: >-
+    Extract the year from each event date. Try {year(events$date)}.
+  CorrectAnswer: year(events$date)
+  AnswerTests: omnitest(correctExpr = 'year(events$date)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Now try {month(events$date)} to extract the month number.
+  CorrectAnswer: month(events$date)
+  AnswerTests: omnitest(correctExpr = 'month(events$date)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    You can also get month names by adding `label = TRUE`. Try
+    {month(events$date, label = TRUE)}.
+  CorrectAnswer: month(events$date, label = TRUE)
+  AnswerTests: >-
+    omnitest(correctExpr = 'month(events$date, label = TRUE)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    {wday} returns the day of the week. Try
+    {wday(events$date, label = TRUE)}.
+  CorrectAnswer: wday(events$date, label = TRUE)
+  AnswerTests: >-
+    omnitest(correctExpr = 'wday(events$date, label = TRUE)')
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    Other useful accessors include {day()} for the day of the month,
+    {hour()}, {minute()}, and {second()} for time components, and {yday()}
+    for the day of the year (1-366).
+
+# USING WITH DPLYR =============================================================
+- Class: cmd_question
+  Output: >-
+    These functions work great inside {mutate}. Let's add a `month_name`
+    column to our events tibble. Try
+    {events %>% mutate(month_name = month(date, label = TRUE))}.
+  CorrectAnswer: >-
+    events %>% mutate(month_name = month(date, label = TRUE))
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      events %>% mutate(month_name = month(date, label = TRUE))
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Let's add a `weekday` column too. Try
+    {events %>% mutate(weekday = wday(date, label = TRUE))}.
+  CorrectAnswer: >-
+    events %>% mutate(weekday = wday(date, label = TRUE))
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      events %>% mutate(weekday = wday(date, label = TRUE))
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+# DATE ARITHMETIC ==============================================================
+- Class: text
+  Output: >-
+    One of lubridate's best features is intuitive date arithmetic. You can
+    add or subtract time periods using functions like {days()}, {weeks()},
+    {months()}, and {years()}.
+
+- Class: cmd_question
+  Output: >-
+    What date is 30 days from January 1, 2024? Try
+    {ymd("2024-01-01") + days(30)}.
+  CorrectAnswer: ymd("2024-01-01") + days(30)
+  AnswerTests: omnitest(correctExpr = 'ymd("2024-01-01") + days(30)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    What about 2 months later? Try {ymd("2024-01-01") + months(2)}.
+  CorrectAnswer: ymd("2024-01-01") + months(2)
+  AnswerTests: omnitest(correctExpr = 'ymd("2024-01-01") + months(2)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    You can also calculate the difference between dates. How many days are
+    between New Year and Christmas? Try
+    {ymd("2024-12-25") - ymd("2024-01-01")}.
+  CorrectAnswer: ymd("2024-12-25") - ymd("2024-01-01")
+  AnswerTests: >-
+    omnitest(correctExpr = 'ymd("2024-12-25") - ymd("2024-01-01")')
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    Note the difference between {days()} (a period: always 1 calendar day)
+    and {ddays()} (a duration: always exactly 86400 seconds). For most
+    everyday work, the period functions ({days}, {months}, {years}) are what
+    you want.
+
+# TODAY AND NOW ================================================================
+- Class: cmd_question
+  Output: >-
+    {today()} returns the current date and {now()} returns the current
+    date-time. Try {today()}.
+  CorrectAnswer: today()
+  AnswerTests: omnitest(correctExpr = 'today()')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    How many days until the end of this year? Try
+    {ymd("2026-12-31") - today()}.
+  CorrectAnswer: ymd("2026-12-31") - today()
+  AnswerTests: omnitest(correctExpr = 'ymd("2026-12-31") - today()')
+  Hint: 'Just copy-paste it!'
+
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    We covered parsing dates ({ymd}, {mdy}, {dmy}), extracting components
+    ({year}, {month}, {wday}, {day}), date arithmetic ({days}, {months},
+    {years}), and {today}/{now}. For more, see
+    https://lubridate.tidyverse.org.
+
+- Class: text
+  Output: >-
+    You have completed "Dates with lubridate" lesson of swirl-tidy!
+    I will see you in the next lesson.

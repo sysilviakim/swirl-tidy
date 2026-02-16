@@ -1,0 +1,226 @@
+- Class: meta
+  Course: swirl-tidy
+  Lesson: Factors_with_forcats
+  Author: Seo-young Silvia Kim
+  Type: Standard
+  Organization: American University
+  Version: 0.1.0
+
+# INTRO ========================================================================
+- Class: text
+  Output: >-
+    Welcome back! Today we will explore how to work with categorical data
+    using the {forcats} package. When you see ..., press Enter.
+
+- Class: cmd_question
+  Output: >-
+    Run {install.packages("tidyverse")}, if it is not already installed.
+    You can type "skip()" if this package is already installed.
+    Remember to close all other sessions of R (if Windows) before this step.
+    Otherwise, you may run into error messages such as 'Warning in
+    install.packages : installation of package 'XXX' had non-zero exit status'.
+  CorrectAnswer: if (!require("tidyverse")) install.packages("tidyverse")
+  AnswerTests: >-
+    any_of_exprs(
+      'install.packages(pkgs = "tidyverse")',
+      'if (!require("tidyverse")) install.packages(pkgs = "tidyverse")',
+      'install.packages("tidyverse")',
+      'if (!require("tidyverse")) install.packages("tidyverse")',
+      'skip()'
+    )
+  Hint: 'If the package is already installed, type skip().'
+
+- Class: cmd_question
+  Output: 'Now load the tidyverse package.'
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
+  Hint: 'Avoid using {require}. Use {library}.'
+
+# PREAMBLE =====================================================================
+- Class: text
+  Output: >-
+    Factors are R's way of representing categorical data: variables that have
+    a fixed set of possible values (called *levels*). They matter because they
+    control the order of categories in plots and tables.
+
+- Class: text
+  Output: >-
+    The {forcats} package (an anagram of "factors"!) provides tools for
+    working with factors. We will use the {gss_cat} dataset that comes with
+    {forcats}. It contains a sample from the General Social Survey.
+
+# EXPLORING GSS_CAT ============================================================
+- Class: cmd_question
+  Output: >-
+    Let's take a look at the dataset. Print the first six lines of "gss_cat".
+  CorrectAnswer: head(gss_cat)
+  AnswerTests: >-
+    any_of_exprs(
+      'head(gss_cat, 6)',
+      'head(gss_cat)',
+      'print(head(gss_cat, 6))',
+      'print(head(gss_cat))',
+      'skip()'
+    )
+  Hint: 'Use {head} function to print the first few lines of the data.'
+
+- Class: cmd_question
+  Output: >-
+    Let's see what levels the `marital` factor has. Use {levels} on the
+    `marital` column of "gss_cat".
+  CorrectAnswer: levels(gss_cat$marital)
+  AnswerTests: omnitest(correctExpr = 'levels(gss_cat$marital)')
+  Hint: 'Use levels(gss_cat$marital).'
+
+# FCT_INFREQ ==================================================================
+- Class: cmd_question
+  Output: >-
+    A common task is counting how many observations are in each level.
+    Try {gss_cat %>% count(marital)}.
+  CorrectAnswer: gss_cat %>% count(marital)
+  AnswerTests: omnitest(correctExpr = 'gss_cat %>% count(marital)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    {fct_infreq} reorders factor levels by their frequency (most common first).
+    This is very useful for bar plots.
+    Try {ggplot(gss_cat, aes(x = fct_infreq(marital))) + geom_bar()}.
+  CorrectAnswer: >-
+    ggplot(gss_cat, aes(x = fct_infreq(marital))) + geom_bar()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'ggplot(gss_cat, aes(x = fct_infreq(marital))) + geom_bar()'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    The bars are now ordered by frequency, making the plot much more
+    informative at a glance!
+
+# FCT_REORDER =================================================================
+- Class: text
+  Output: >-
+    {fct_reorder} reorders factor levels by another variable. This is
+    especially useful when making horizontal bar charts or dot plots.
+
+- Class: cmd_question
+  Output: >-
+    I've prepared a plotting example. Print it using {cat(pipe_1)}.
+  CorrectAnswer: cat(pipe_1)
+  AnswerTests: omnitest(correctExpr = 'cat(pipe_1)')
+  Hint: 'Just copy-paste it!'
+
+- Class: cmd_question
+  Output: >-
+    Copy-paste and execute the code! This counts marital statuses, then
+    creates a bar chart with levels reordered by count.
+  CorrectAnswer: >-
+    gss_cat %>%
+      count(marital) %>%
+      ggplot(aes(x = n, y = fct_reorder(marital, n))) +
+      geom_col()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      gss_cat %>%
+        count(marital) %>%
+        ggplot(aes(x = n, y = fct_reorder(marital, n))) +
+        geom_col()
+      '
+    )
+  Hint: 'Just copy-paste the printed code!'
+
+- Class: text
+  Output: >-
+    Compare this to a plot without {fct_reorder}; the bars would be in
+    the default factor level order, which is often alphabetical and less useful.
+
+# FCT_RELEVEL =================================================================
+- Class: cmd_question
+  Output: >-
+    {fct_relevel} lets you manually move specific levels to the front. This is
+    useful when you want a particular reference category.
+    Try {fct_relevel(gss_cat$marital, "Never married") %>% levels()}.
+  CorrectAnswer: fct_relevel(gss_cat$marital, "Never married") %>% levels()
+  AnswerTests: >-
+    omnitest(
+      correctExpr = 'fct_relevel(gss_cat$marital, "Never married") %>% levels()'
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    "Never married" is now the first level, while the rest remain in their
+    original order. This is commonly done before running regression models.
+
+# FCT_RECODE ===================================================================
+- Class: cmd_question
+  Output: >-
+    {fct_recode} lets you rename factor levels. Try recoding the `partyid`
+    variable:
+    {gss_cat %>% mutate(partyid = fct_recode(partyid, "Republican" =
+    "Strong republican", "Democrat" = "Strong democrat")) %>% count(partyid)}.
+  CorrectAnswer: >-
+    gss_cat %>%
+      mutate(partyid = fct_recode(partyid,
+        "Republican" = "Strong republican",
+        "Democrat" = "Strong democrat")) %>%
+      count(partyid)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      gss_cat %>%
+        mutate(partyid = fct_recode(partyid,
+          "Republican" = "Strong republican",
+          "Democrat" = "Strong democrat")) %>%
+        count(partyid)
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    "Strong republican" was renamed to "Republican" and "Strong democrat" to
+    "Democrat". The format is {"new_name" = "old_name"}.
+
+# FCT_LUMP_N ==================================================================
+- Class: cmd_question
+  Output: >-
+    When a factor has many levels, you may want to collapse the rarest ones
+    into an "Other" category. {fct_lump_n} keeps the `n` most frequent levels.
+    Try {gss_cat %>% mutate(relig = fct_lump_n(relig, n = 5)) %>%
+    count(relig, sort = TRUE)}.
+  CorrectAnswer: >-
+    gss_cat %>%
+      mutate(relig = fct_lump_n(relig, n = 5)) %>%
+      count(relig, sort = TRUE)
+  AnswerTests: >-
+    omnitest(
+      correctExpr = '
+      gss_cat %>%
+        mutate(relig = fct_lump_n(relig, n = 5)) %>%
+        count(relig, sort = TRUE)
+      '
+    )
+  Hint: 'Just copy-paste it!'
+
+- Class: text
+  Output: >-
+    The five most common religions are kept, and everything else is lumped into
+    "Other". {fct_lump_min} is similar but uses a minimum count threshold
+    instead of keeping the top n.
+
+# OUTRO ========================================================================
+- Class: text
+  Output: >-
+    We covered {fct_infreq}, {fct_reorder}, {fct_relevel}, {fct_recode},
+    and {fct_lump_n}. These make it much easier to control the behavior of
+    categorical variables in your analysis and plots. For more, see
+    https://forcats.tidyverse.org.
+
+- Class: text
+  Output: >-
+    You have completed "Factors with forcats" lesson of swirl-tidy!
+    I will see you in the next lesson.
