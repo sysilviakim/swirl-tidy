@@ -11,7 +11,7 @@
   Output: >-
     Welcome back! Today we will explore how to export data using the {readr}
     package. When you see ..., press Enter.
-    
+
 - Class: cmd_question
   Output: >-
     Run {install.packages("tidyverse")}, if it is not already installed.
@@ -29,7 +29,7 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 - Class: cmd_question
   Output: 'Now load the tidyverse package.'
   CorrectAnswer: library("tidyverse")
@@ -59,11 +59,11 @@
   Output: >-
     Before we begin, I must warn you that reading a file may depend on (1)
     which operating system the file was written in, and (2) which operating
-    system is reading the file. This is because a Windows requires both a 
+    system is reading the file. This is because a Windows requires both a
     carriage return (CR) and a line feed (LF) to signal a newline (\n), whereas
     in Unix systems it's only line feed. For an overview, see
     https://en.wikipedia.org/wiki/Newline. Point is, if something is not working
-    you may want to pull your file up in Notepad++ or similar and in "View", 
+    you may want to pull your file up in Notepad++ or similar and in "View",
     "Show Symbol/Show End of Line" and see if that is causing your problem.
 
 # READING DIFFERENT FILE TYPES =================================================
@@ -85,7 +85,7 @@
   CorrectAnswer: csv_comma <- read_csv(file.path(lesson_dir, "file.csv"))
   AnswerTests: >-
     any_of_exprs(
-      'csv_comma <- readr::read_csv(file.path(lesson_dir, "file.csv"))', 
+      'csv_comma <- readr::read_csv(file.path(lesson_dir, "file.csv"))',
       'csv_comma <- read_csv(file.path(lesson_dir, "file.csv"))'
     )
   Hint: >-
@@ -95,14 +95,14 @@
 ## demo_lesson(9)
 - Class: text
   Output: >-
-    Great job!! You should have seen a message that said 
+    Great job!! You should have seen a message that said
     "Parsed with column specification:
     cols(
       a = col_double(),
       b = col_double(),
       c = col_double()
     )".
-    Essentially, the parser has told us that it thinks the data that it read 
+    Essentially, the parser has told us that it thinks the data that it read
     are all numeric (double).
 
 ## demo_lesson(10)
@@ -119,36 +119,36 @@
     Columns `a`, `b`, and `c` indeed all contain just numbers, although there's
     a missing value at column `c`. We'll come back to this automatic parsing
     later.
-    
+
 ## demo_lesson(12)
 - Class: text
   Output: >-
     That was easy, wasn't it? You just read in a plain old comma delimited file.
     But when you deal with real-world data, there are many other delimiters used
-    such as semi-colon, vertical bar, two vertical bars, tab, ... 
-    
+    such as semi-colon, vertical bar, two vertical bars, tab, ...
+
 ## demo_lesson(13)
 - Class: mult_question
-  Output: 
+  Output:
     What is the delimiter used for the following tabular data?
     "a;b;c\n1;2;3\n4;5;NA"
   AnswerChoices: comma; semi-colon; vertical bar; tab
   CorrectAnswer: semi-colon
   AnswerTests: omnitest(correctVal = 'semi-colon')
   Hint: '\n is a newline operator.'
-  
+
 ## demo_lesson(14)
 - Class: cmd_question
   Output: >-
-    Semi-colon delimited files are read by "read_csv2". Note the *2*. 
+    Semi-colon delimited files are read by "read_csv2". Note the *2*.
     Let's try reading "file2.csv" into "csv_semicolon". Similarly use
     {file.path(lesson_dir, "file2.csv")} as path.
   CorrectAnswer: csv_semicolon <- read_csv2(file.path(lesson_dir, "file2.csv"))
   AnswerTests: >-
     any_of_exprs(
-      'csv_semicolon <- 
-         read::read_csv2(file = file.path(lesson_dir, "file2.csv"))', 
-      'csv_semicolon <- 
+      'csv_semicolon <-
+         read::read_csv2(file = file.path(lesson_dir, "file2.csv"))',
+      'csv_semicolon <-
          read_csv2(file = file.path(lesson_dir, "file2.csv"))'
     )
   Hint: >-
@@ -165,7 +165,7 @@
   CorrectAnswer: readLines(file.path(lesson_dir, "file2.csv"), n = 1)
   AnswerTests: >-
     any_of_exprs(
-      'readLines(con = file.path(lesson_dir, "file2.csv"), n = 1)', 
+      'readLines(con = file.path(lesson_dir, "file2.csv"), n = 1)',
       'base::readLines(con = file.path(lesson_dir, "file2.csv"), n = 1)'
     )
   Hint: >-
@@ -183,9 +183,9 @@
 - Class: text
   Output: >-
     Some datasets are configured with different delimiters. In that case,
-    {read_delim}, which is similar to {utils::read.delim} but forces you to 
+    {read_delim}, which is similar to {utils::read.delim} but forces you to
     specify the delimiter explicitly.
-    
+
 ## demo_lesson(18)
 - Class: cmd_question
   Output: >-
@@ -194,7 +194,7 @@
   CorrectAnswer: readLines(file.path(lesson_dir, "file.txt"), n = 1)
   AnswerTests: >-
     any_of_exprs(
-      'readLines(con = file.path(lesson_dir, "file.txt"), n = 1)', 
+      'readLines(con = file.path(lesson_dir, "file.txt"), n = 1)',
       'base::readLines(con = file.path(lesson_dir, "file.txt"), n = 1)'
     )
   Hint: >-
@@ -208,7 +208,7 @@
   CorrectAnswer: vertical bar
   AnswerTests: omnitest(correctVal = 'vertical bar')
   Hint: 'What operator separated values `a`, `b`, and `c`?'
-  
+
 ## demo_lesson(20)
 - Class: cmd_question
   Output: >-
@@ -220,9 +220,9 @@
     test_delim <- read_delim(file.path(lesson_dir, "file.txt"), delim = "|")
   AnswerTests: >-
     any_of_exprs(
-      'test_delim <- 
-         read_delim(file = file.path(lesson_dir, "file.txt"), delim = "|")', 
-      'test_delim <- 
+      'test_delim <-
+         read_delim(file = file.path(lesson_dir, "file.txt"), delim = "|")',
+      'test_delim <-
          readr::read_delim(
            file = file.path(lesson_dir, "file.txt"), delim = "|"
          )'
@@ -237,7 +237,7 @@
     As you can imagine, {read_delim} is quite versatile.
     When you have a moment, open up {?read_delim} and carefully read its default
     arguments, especially `quote = "\""`, `col_names = TRUE`, `na = c("", "NA")`
-    , and `trim_ws = FALSE`. 
+    , and `trim_ws = FALSE`.
 
 ## demo_lesson(22)
 - Class: text
@@ -252,8 +252,8 @@
   Output: >-
     You have successfully navigated how to import files with different
     delimiters! Great job!!
-    
-    What we have not done yet is specifying different arguments in 
+
+    What we have not done yet is specifying different arguments in
     read_* functions. Now this can give you a *real* headache with real-life
     messy data.
 
@@ -278,7 +278,7 @@
   Output: >-
     All of sudden you see a warning message that says
     "Warning: 1 parsing failure." What is this error? The rest of the message
-    should be deciphered as follows: "I expected to find a double (numeric), but 
+    should be deciphered as follows: "I expected to find a double (numeric), but
     actually, I found 'some string'. This happened in row 1,001, column `b`."
 
 ## demo_lesson(26)
@@ -288,9 +288,9 @@
   CorrectAnswer: tail(csv_mess)
   AnswerTests: >-
     any_of_exprs(
-      'tail(csv_mess, n = 6)', 
+      'tail(csv_mess, n = 6)',
       'utils::tail(csv_mess, n = 6)',
-      'tail(csv_mess)', 
+      'tail(csv_mess)',
       'utils::tail(csv_mess)'
     )
   Hint: 'Use function {tail}.'
@@ -313,7 +313,7 @@
   CorrectAnswer: csv_mess2 <- read.csv(file.path(lesson_dir, "file_mess.csv"))
   AnswerTests: >-
     any_of_exprs(
-      'csv_mess2 <- utils::read.csv(file.path(lesson_dir, "file_mess.csv"))', 
+      'csv_mess2 <- utils::read.csv(file.path(lesson_dir, "file_mess.csv"))',
       'csv_mess2 <- read.csv(file.path(lesson_dir, "file_mess.csv"))'
     )
   Hint: >-
@@ -328,9 +328,9 @@
   CorrectAnswer: tail(csv_mess2)
   AnswerTests: >-
     any_of_exprs(
-      'tail(csv_mess2, n = 6)', 
+      'tail(csv_mess2, n = 6)',
       'utils::tail(csv_mess2, n = 6)',
-      'tail(csv_mess2)', 
+      'tail(csv_mess2)',
       'utils::tail(csv_mess2)'
     )
   Hint: 'Use function {tail}.'
@@ -342,8 +342,8 @@
     'some string'. But by default, "readr only looks at the first 1000 rows.
     This keeps file parsing speedy, but can generate incorrect guesses"
     (https://readr.tidyverse.org/articles/readr.html).
-    
-    
+
+
     Because the first thousand rows for column `b` had only numbers, it decided
     to assume that the column type was `col_double()`.
 
@@ -358,7 +358,7 @@
 ## demo_lesson(32)
 - Class: cmd_question
   Output: >-
-    Read the same file with {read_csv}, but this time, specify 
+    Read the same file with {read_csv}, but this time, specify
     `col_types = cols(.default = "c")` as an argument. Store it to "csv_mess3".
   CorrectAnswer: >-
     csv_mess3 <- readr::read_csv(
@@ -370,7 +370,7 @@
       'csv_mess3 <- readr::read_csv(
          file.path(lesson_dir, "file_mess.csv"),
          col_types = cols(.default = "c")
-      )', 
+      )',
       'csv_mess3 <- read_csv(
          file.path(lesson_dir, "file_mess.csv"),
          col_types = cols(.default = "c")
@@ -387,21 +387,21 @@
   CorrectAnswer: tail(csv_mess3)
   AnswerTests: >-
     any_of_exprs(
-      'tail(csv_mess3, n = 6)', 
+      'tail(csv_mess3, n = 6)',
       'utils::tail(csv_mess3, n = 6)',
-      'tail(csv_mess3)', 
+      'tail(csv_mess3)',
       'utils::tail(csv_mess3)'
     )
   Hint: 'Use function {tail}.'
-  
+
 ## demo_lesson(34)
 - Class: text
   Output: >
     This time, all columns were imported as strings ('<chr>'). This way you can
     inspect the column types and then wrangle them. You can also go through the
     raw data outside R and then specify `col_types` for each variable!
-    
-    
+
+
     Sounds tedious? Some data requires you to get knee-deep in its mess!
     Otherwise, it'll come back to bite and waste your time even more.
 
@@ -448,4 +448,3 @@
     You have completed "Import with readr" lesson of swirl-tidy!
     Check out its official website at https://readr.tidyverse.org.
     I will see you in the next lesson.
-    

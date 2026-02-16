@@ -11,19 +11,19 @@
   Output: >-
     Welcome aboard! These exercises are created to introduce you to tidyverse
     through a series of interactive exercises. When you see ..., press Enter.
-    
+
 ## demo_lesson(2)
 - Class: text
-  Output: >- 
+  Output: >-
     One thing that should be clear is that people have different opinions about
     which packages they want to rely on. Indeed, the introduction page to
     tidyverse states that it is an "opinionated collection of R packages."
     Using tidyverse as opposed to base R has its pros and cons, but because of
     its consistent and intuitive grammar for data frames, it is widely used.
-    
+
 ## demo_lesson(3)
 - Class: text
-  Output: >- 
+  Output: >-
     For many simple operations, you do not need tidyverse. Besides, many
     components of base R are incorporated into tidyverse code.
     With that in mind, for more information about what tidyverse is, visit
@@ -36,23 +36,23 @@
     knowledge of the basics of R. These include things such as package
     installation, working directory, library paths, basic arithmetics, objects,
     assignments, Global Environment, and so on. I also suggest reviewing this:
-    https://r4ds.had.co.nz/workflow-basics.html.
-    
+    https://r4ds.hadley.nz/workflow-basics.
+
 ## demo_lesson(5)
 - Class: text
-  Output: >- 
+  Output: >-
     We will use (1) double quotes to indicate R object names, (2) single quotes
     to indicate character strings, and (3) curly brackets to indicate R syntax
     or package names, and (4) backticks to indicate column names in data frames
     and function argument names.
     All double/single quotes inside curly brackets are as-is.
-    
+
 # INSTALLATION =================================================================
 ## demo_lesson(6)
 - Class: text
   Output: >-
     First, let's install tidyverse!
-    
+
 ## demo_lesson(7)
 - Class: cmd_question
   Output: >-
@@ -71,35 +71,36 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 ## demo_lesson(8)
 - Class: cmd_question
   Output: >-
     Now that tidyverse is installed, let us load it.
     Type {library("tidyverse")}. This will load 8 different packages
-    (as of tidyverse 1.3.0): ggplot2, purrr, tibble, dplyr, tidyr, stringr,
-    readr, and forcats.
+    (as of tidyverse 2.0.0): ggplot2, purrr, tibble, dplyr, tidyr, stringr,
+    readr, forcats, and lubridate.
   CorrectAnswer: library("tidyverse")
   AnswerTests: any_of_exprs('library(tidyverse)', 'library("tidyverse")')
   Hint: >
     Avoid using {require}. Use {library}.
     See https://stackoverflow.com/questions/5595512 for more on this.
-    
+
 ## demo_lesson(9)
 - Class: text
   Output: >-
     I will ask you to check installations/call libraries in each lesson.
     This is to prevent an unwanted installation of a new version of an existing
-    package or messing with packages already open. 
-    
+    package or messing with packages already open.
+
 ## demo_lesson(10)
 - Class: text
   Output: >-
     The sequence of lessons follows the data science project workflow by R4DS:
-    Wickham, Hadley, and Garrett Grolemund. R for Data Science: Import,
-    Tidy, Transform, Visualize, and Model Data}. O'Reilly Media, Inc., 2016.
-    This is available at https://r4ds.had.co.nz/.
-    
+    Wickham, Hadley, Mine Cetinkaya-Rundel, and Garrett Grolemund. R for Data
+    Science: Import, Tidy, Transform, Visualize, and Model Data (2e).
+    O'Reilly Media, Inc., 2023.
+    This is available at https://r4ds.hadley.nz/.
+
 ## demo_lesson(10)
 - Class: text
   Output: >-
@@ -107,7 +108,7 @@
     (4) visualize, (5) model, and (6) communication. Many of the exercises are
     based on what R4DS book teaches, or tidyverse cheatsheets available at
     https://rstudio.com/resources/cheatsheets/.
-    
+
 ## demo_lesson(11)
 - Class: text
   Output: >-
@@ -118,7 +119,7 @@
     to fail. Another possibility is that conflicting function names may get
     overwritten. But this is just for your precaution. In this preliminary foray
     into tidyverse, there will be no such need!
-    
+
 # OUTRO ========================================================================
 - Class: text
   Output: >-

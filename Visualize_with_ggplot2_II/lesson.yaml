@@ -11,7 +11,7 @@
   Output: >
     Welcome back! Today we will continue to explore how to visualize your data
     using {ggplot2} package. When you see ..., press Enter.
-    
+
 - Class: cmd_question
   Output: >-
     Run {install.packages("tidyverse")}, if it is not already installed.
@@ -29,7 +29,7 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 - Class: cmd_question
   Output: 'Now load the tidyverse package.'
   CorrectAnswer: library("tidyverse")
@@ -41,11 +41,11 @@
 - Class: text
   Output: >-
     Welcome back. We covered a lot of basic one- to two-variable visualization
-    in the first lesson of {ggplot2}. 
-    
-    
-    In this lesson, we will cover {geom_line} that draws a line plot, 
-    {geom_smooth} that shows conditional means, 
+    in the first lesson of {ggplot2}.
+
+
+    In this lesson, we will cover {geom_line} that draws a line plot,
+    {geom_smooth} that shows conditional means,
     and {geom_boxplot} that displays box plots.
 
 ## demo_lesson(5)
@@ -64,9 +64,9 @@
   CorrectAnswer: head(economics)
   AnswerTests: >-
     any_of_exprs(
-      'head(economics, 6)', 
+      'head(economics, 6)',
       'head(economics)',
-      'print(head(economics, 6))', 
+      'print(head(economics, 6))',
       'print(head(economics))',
       'skip()'
     )
@@ -75,7 +75,7 @@
 ## demo_lesson(7)
 - Class: text
   Output: >-
-    Note that we have a date variable here. This is a time-series dataset from 
+    Note that we have a date variable here. This is a time-series dataset from
     the Federal Reserve Bank of St. Louis. Using this, we are going to plot
     personal savings rate (the `psavert` column) over time.
 
@@ -91,13 +91,13 @@
 ## demo_lesson(9)
 - Class: cmd_question
   Output: >-
-    As we've done in the first lesson of {ggplot2}, we need to specify 
-    what we are trying to draw, as well as the aesthetics. 
-    First, specify in the {ggplot} function that our x-axis is column `date` 
-    and our y-axis variable is column `psavert`. Make sure to specify the 
+    As we've done in the first lesson of {ggplot2}, we need to specify
+    what we are trying to draw, as well as the aesthetics.
+    First, specify in the {ggplot} function that our x-axis is column `date`
+    and our y-axis variable is column `psavert`. Make sure to specify the
     x-variable before the y-variable.
   CorrectAnswer: ggplot(economics, aes(x = date, y = psavert))
-  AnswerTests: >- 
+  AnswerTests: >-
     any_of_exprs(
       'ggplot(economics, aes(x = date, y = psavert))',
       'skip()'
@@ -123,30 +123,30 @@
 ## demo_lesson(11)
 - Class: text
   Output: >-
-    Fantastic! You have successfully drawn a line plot and can observe how 
-    personal savings rate has declined over time until mid-2000s. Note that 
-    this is akin to {plot(economics$date, economics$psavert, type = "l")} in 
+    Fantastic! You have successfully drawn a line plot and can observe how
+    personal savings rate has declined over time until mid-2000s. Note that
+    this is akin to {plot(economics$date, economics$psavert, type = "l")} in
     base R.
-    
-    
+
+
     Now, you may be thinking that you would like to see a smoothed line over
-    these jagged trends, so that the general trend is better visualized. 
+    these jagged trends, so that the general trend is better visualized.
     In these cases, you would want to add {geom_smooth}.
 
 ## demo_lesson(12)
 - Class: cmd_question
   Output: >-
-    *Add* {geom_smooth} to the last code by the `+` operator, 
+    *Add* {geom_smooth} to the last code by the `+` operator,
     after {geom_line}. Do not specify anything inside {geom_smooth}.
   CorrectAnswer: >-
     ggplot(economics, aes(x = date, y = psavert)) +
-      geom_line() + 
+      geom_line() +
       geom_smooth()
   AnswerTests: >-
     omnitest(
       correctExpr = '
-      ggplot(economics, aes(x = date, y = psavert)) + 
-        geom_line() + 
+      ggplot(economics, aes(x = date, y = psavert)) +
+        geom_line() +
         geom_smooth()
       '
     )
@@ -155,30 +155,30 @@
 ## demo_lesson(13)
 - Class: text
   Output: >-
-    A blue line with the conditional mean and its standard error (the gray 
-    band) has appeared on top of the line plot, which shows a smoother 
-    summary. Note that the output has printed the following message: 
+    A blue line with the conditional mean and its standard error (the gray
+    band) has appeared on top of the line plot, which shows a smoother
+    summary. Note that the output has printed the following message:
     `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-    
-    
-    Does y ~ x look familiar? This is the usual format for specifying linear 
-    regressions in R, such as lm(y ~ x). What if we want a linear relationship, 
+
+
+    Does y ~ x look familiar? This is the usual format for specifying linear
+    regressions in R, such as lm(y ~ x). What if we want a linear relationship,
     not the smooth nonlinear one?
 
 ## demo_lesson(14)
 - Class: cmd_question
   Output: >-
-    Specify the argument `method = "lm"` inside {geom_smooth}, using the same 
+    Specify the argument `method = "lm"` inside {geom_smooth}, using the same
     code as above.
   CorrectAnswer: >-
     ggplot(economics, aes(x = date, y = psavert)) +
-      geom_line() + 
+      geom_line() +
       geom_smooth(method = "lm")
   AnswerTests: >-
     omnitest(
       correctExpr = '
-      ggplot(economics, aes(x = date, y = psavert)) + 
-        geom_line() + 
+      ggplot(economics, aes(x = date, y = psavert)) +
+        geom_line() +
         geom_smooth(method = "lm")
       '
     )
@@ -187,18 +187,18 @@
 ## demo_lesson(15)
 - Class: text
   Output: >-
-    Notice how the conditional means are calculated/visualized can tell a 
+    Notice how the conditional means are calculated/visualized can tell a
     different story here. Make sure to choose an appropriate method!
 
 ## demo_lesson(16)
 - Class: cmd_question
   Output: >-
-    Great. We've now covered how to draw a line plot and a smoothed 
+    Great. We've now covered how to draw a line plot and a smoothed
     conditional means. Now let's learn how to draw a box plot, using a different
-    dataframe. 
-    
+    dataframe.
+
     Load again the "diamonds" dataset using {data}.
-    
+
   CorrectAnswer: data("diamonds")
   AnswerTests: any_of_exprs('data(diamonds)', 'data("diamonds")', 'skip()')
   Hint: 'Use {data} function to load the "diamonds" dataset.'
@@ -206,19 +206,19 @@
 ## demo_lesson(17)
 - Class: text
   Output: >-
-    Last time, we drew the relationship between `carat` and `price`. 
-    This time, we want to summarize the relationship between `cut` and `price`. 
-    Remember how we used {group_by} and {summarise} to produce the average 
+    Last time, we drew the relationship between `carat` and `price`.
+    This time, we want to summarize the relationship between `cut` and `price`.
+    Remember how we used {group_by} and {summarise} to produce the average
     price per cut category when learning to use {dplyr}?
-    
+
     This time, we want to visualize it and in a more informative way.
 
 ## demo_lesson(18)
 - Class: cmd_question
   Output: >-
-    Using {aes}, specify within {ggplot} that the x-variable is `cut` and 
+    Using {aes}, specify within {ggplot} that the x-variable is `cut` and
     y-variable is `price`.
-    
+
   CorrectAnswer: >-
     ggplot(diamonds, aes(x = cut, y = price))
   AnswerTests: >-
@@ -230,8 +230,8 @@
 ## demo_lesson(19)
 - Class: cmd_question
   Output: >-
-    To the previous answer, add {geom_boxplot} with the `+` operator as usual. 
-    
+    To the previous answer, add {geom_boxplot} with the `+` operator as usual.
+
   CorrectAnswer: >-
     ggplot(diamonds, aes(x = cut, y = price)) + geom_boxplot()
   AnswerTests: >-
@@ -244,11 +244,11 @@
 - Class: text
   Output: >-
     The box plot displays the distribution of a continuous variable.
-    The thick line shows the median, the box shows the first and the third 
-    quartiles, and the whiskers show a 1.5 * IQR (interquartile range) of the 
-    distribution. 
-    
-    Looks like the relationship between cut and price are not that 
+    The thick line shows the median, the box shows the first and the third
+    quartiles, and the whiskers show a 1.5 * IQR (interquartile range) of the
+    distribution.
+
+    Looks like the relationship between cut and price are not that
     straightforward!
 
 ## demo_lesson(21)
@@ -260,12 +260,11 @@
 # OUTRO ========================================================================
 - Class: text
   Output: >-
-    Excellent! To recap, we have covered {geom_line}, {geom_smooth}, and 
-    {geom_boxplot}. In the next lesson, we will learn how to tweak the 
+    Excellent! To recap, we have covered {geom_line}, {geom_smooth}, and
+    {geom_boxplot}. In the next lesson, we will learn how to tweak the
     aesthetics of the plots that we've drawn so far.
-    
+
 - Class: text
   Output: >-
     You have completed "Visualize with ggplot2 II" lesson of swirl-tidy!
     I will see you in the next lesson.
-    
