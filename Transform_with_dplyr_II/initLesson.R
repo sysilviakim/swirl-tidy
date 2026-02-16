@@ -7,13 +7,13 @@
 # set.seed(123)
 # cces <- x %>%
 #   select(CC16_410a, pid7, gender, race, educ, faminc, CC16_326) %>%
-#   sample_n(500)
+#   slice_sample(n = 500)
 # dput(cces)
 cces <- structure(
   list(
     CC16_410a = structure(
       c(
-        NA, 1L, 2L, 2L, 2L, 2L, NA, NA, 2L, 1L, NA, 1L, NA, 2L, NA, 2L, 
+        NA, 1L, 2L, 2L, 2L, 2L, NA, NA, 2L, 1L, NA, 1L, NA, 2L, NA, 2L,
         1L, 1L, 1L, 2L, 3L, 1L,
         2L, 2L, 2L, 1L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, NA, NA, 3L, 2L, 2L,
         1L, 1L, 1L, 1L, 1L, 1L, 1L, NA, 1L, 2L, 1L, 2L, 2L, 2L, 2L, 1L,
@@ -48,11 +48,11 @@ cces <- structure(
       ),
       .Label = c(
         "Donald Trump (Republican)",
-        "Hillary Clinton (Democrat)", 
-        "Gary Johnson (Libertarian)", 
+        "Hillary Clinton (Democrat)",
+        "Gary Johnson (Libertarian)",
         "Jill Stein (Green)",
-        "Other", 
-        "I didn't vote in this election", 
+        "Other",
+        "I didn't vote in this election",
         "I'm not sure",
         "Evan McMullin (Independent)",
         "Skipped", "Not Asked"
@@ -94,8 +94,8 @@ cces <- structure(
       2L, 1L, 2L, 1L, 1L, 4L, 7L, 4L, 1L, 4L, 7L, 4L, 3L, 1L, 3L, 1L,
       2L, 6L, 1L, 6L, 1L, 4L, 7L, 4L, 3L, 6L, 1L, 4L
     ), .Label = c(
-      "Strong Democrat", "Not very strong Democrat", "Lean Democrat", 
-      "Independent", "Lean Republican", 
+      "Strong Democrat", "Not very strong Democrat", "Lean Democrat",
+      "Independent", "Lean Republican",
       "Not very strong Republican", "Strong Republican", "Not sure",
       "Skipped", "Not Asked"
     ), comment = "7 point Party ID", class = c(
@@ -393,7 +393,7 @@ cces <- structure(
 )
 pipe_1 <- "cces %>%\n  mutate()"
 pipe_2 <- paste0(
-  'cces %>%\n  mutate(vc = if_else(', 
+  'cces %>%\n  mutate(vc = if_else(',
   'CC16_410a == "Hillary Clinton (Democrat)", 0, 1',
   '))'
 )

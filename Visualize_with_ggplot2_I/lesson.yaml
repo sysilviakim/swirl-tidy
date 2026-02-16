@@ -8,13 +8,10 @@
 
 # INTRO ========================================================================
 - Class: text
-  Output: >
-    (THIS LESSON IS A PLACEHOLDER FOR FUTURE DEVELOPMENT. CHECK BACK LATER!)
-  
-  
+  Output: >-
     Welcome back! Today we will explore how to visualize your data using
     {ggplot2} package. When you see ..., press Enter.
-    
+
 - Class: cmd_question
   Output: >-
     Run {install.packages("tidyverse")}, if it is not already installed.
@@ -32,7 +29,7 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 - Class: cmd_question
   Output: 'Now load the tidyverse package.'
   CorrectAnswer: library("tidyverse")
@@ -43,14 +40,14 @@
 ## demo_lesson(4)
 - Class: text
   Output: >-
-    As of tidyverse 1.3.0, {ggplot2} package is one of the eight core packages.
+    As of tidyverse 2.0.0, {ggplot2} package is one of the nine core packages.
     For the RStudio cheatsheet, go to
-    https://rawgit.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf.
+    https://rstudio.github.io/cheatsheets/data-visualization.pdf.
 
 ## demo_lesson(5)
 - Class: text
   Output: >-
-    There's a lot of ground to cover, and ggplot2's learning curve may feel 
+    There's a lot of ground to cover, and ggplot2's learning curve may feel
     steep to some. So the lesson is split into three parts. In this first lesson
     we will cover how to do the very basic visualization, such as
     histograms, bar plots, line plots, scatterplots, and so on. We will also
@@ -72,9 +69,9 @@
   CorrectAnswer: head(diamonds)
   AnswerTests: >-
     any_of_exprs(
-      'head(diamonds, 6)', 
+      'head(diamonds, 6)',
       'head(diamonds)',
-      'print(head(diamonds, 6))', 
+      'print(head(diamonds, 6))',
       'print(head(diamonds))',
       'skip()'
     )
@@ -83,8 +80,8 @@
 ## demo_lesson(8)
 - Class: text
   Output: >-
-    Let's say that we want to visualize the distribution of `carat`. 
-    We are going to draw a histogram. While in base R, the code is simply 
+    Let's say that we want to visualize the distribution of `carat`.
+    We are going to draw a histogram. While in base R, the code is simply
     {hist(diamonds$carat)}, ggplot2's structure is slightly different.
 
 ## demo_lesson(9)
@@ -100,8 +97,8 @@
 - Class: text
   Output: >-
     You won't see anything but a gray screen in the Plots pane. This is normal!
-    This is because we haven't specified what to draw with the new ggplot 
-    object. 
+    This is because we haven't specified what to draw with the new ggplot
+    object.
 
 ## demo_lesson(11)
 - Class: cmd_question
@@ -118,12 +115,12 @@
   Output: >-
     `aes` stands for aesthetics. That is to say, we are going to tell {ggplot}
     which parts of the data correspond to the visual properties (= aesthetics).
-    {aes} function takes `x` and `y` as arguments. 
+    {aes} function takes `x` and `y` as arguments.
 
 ## demo_lesson(13)
 - Class: cmd_question
   Output: >-
-    Since a histogram only requires one variable, try 
+    Since a histogram only requires one variable, try
     {ggplot(diamonds, aes(x = carat))}. In fact, {ggplot(diamonds, aes(carat))}
     is also fine.
   CorrectAnswer: ggplot(diamonds, aes(x = carat))
@@ -140,13 +137,13 @@
   Output: >-
     You'll see that the x-axis is specified, but besides that and a few lines,
     the pane is still gray and empty. This is because we specified the mapping,
-    but didn't tell {ggplot} *what* to draw. We'll achieve this using the 
+    but didn't tell {ggplot} *what* to draw. We'll achieve this using the
     {geom_histogram} function.
-    
-    How do we merge {geom_histogram} to what we have? Given a blank canvas, 
+
+    How do we merge {geom_histogram} to what we have? Given a blank canvas,
     adding elements to ggplot objects is achieved by the `+` operator. Think of
     this as a pipe but for {ggplot2}.
-    
+
 ## demo_lesson(15)
 - Class: cmd_question
   Output: Type in {ggplot(diamonds, aes(x = carat)) + geom_histogram()}.
@@ -162,15 +159,15 @@
 ## demo_lesson(16)
 - Class: text
   Output: >-
-    Excellent! You've now drawn your first ggplot2. Congratulations! 
+    Excellent! You've now drawn your first ggplot2. Congratulations!
     We will cover how to beautify this or control the display in other lessons.
-    
+
 ## demo_lesson(17)
 - Class: cmd_question
   Output: >-
-    Now try drawing a bar plot for the `cut` variable. 
+    Now try drawing a bar plot for the `cut` variable.
     Unlike `carat`, which was continuous, the `cut` variable is a categorical
-    variable, so the bar plot is more appropriate. 
+    variable, so the bar plot is more appropriate.
     Instead of {geom_histogram}, you would be using {geom_bar}.
   CorrectAnswer: >-
     ggplot(diamonds, aes(x = cut)) +
@@ -186,18 +183,18 @@
   Output: >-
     Good job! This shows the distribution of the five types of diamond cuts in
     the given data.
-    
+
     So far, we've drawn distributions of a single variable. But what should we
     do to visualize the distribution of two variables jointly?
-    
+
 ## demo_lesson(19)
 - Class: cmd_question
   Output: >-
-    Let's draw a scatterplot between `carat` and `price` to visualize the 
-    relationship between them. Now we will rely on {geom_point}, but we must 
-    also tell {aes} function that we now have a `y` variable, too. 
-    
-    Draw a scatterplot between `carat` and `price`, with `carat` as the aes 
+    Let's draw a scatterplot between `carat` and `price` to visualize the
+    relationship between them. Now we will rely on {geom_point}, but we must
+    also tell {aes} function that we now have a `y` variable, too.
+
+    Draw a scatterplot between `carat` and `price`, with `carat` as the aes
     x-variable and `price` as y-variable. Make sure to specify the x-variable
     before the y-variable.
   CorrectAnswer: >-
@@ -212,10 +209,10 @@
 ## demo_lesson(20)
 - Class: text
   Output: >-
-    Great work! But we can take one further step to make this more informative. 
+    Great work! But we can take one further step to make this more informative.
     `clarity` might be interacting with `carat` to determine the diamond price.
     Let's see if we can visualize this through {aes}'s `colour` argument.
-    
+
 ## demo_lesson(21)
 - Class: cmd_question
   Output: >-
@@ -226,7 +223,7 @@
   AnswerTests: >-
     omnitest(
       correctExpr = '
-      ggplot(diamonds, aes(x = carat, y = price, colour = clarity)) + 
+      ggplot(diamonds, aes(x = carat, y = price, colour = clarity)) +
       geom_point()
       '
     )
@@ -235,9 +232,9 @@
 ## demo_lesson(22)
 - Class: text
   Output: >-
-    This clearly shows that on average, given the same carat, diamonds with 
+    This clearly shows that on average, given the same carat, diamonds with
     higher clarity (IF is the highest level of clarity) have higher price.
-    
+
 ## demo_lesson(23)
 ## demo_lesson(24)
 ## demo_lesson(25)
@@ -246,21 +243,20 @@
 - Class: text
   Output: >-
     Excellent! We covered {geom_bar}, {geom_point},
-    {geom_histogram}, and basics of {aes}. We will cover {geom_line} 
+    {geom_histogram}, and basics of {aes}. We will cover {geom_line}
     in the next lesson.
-    
+
 - Class: text
   Output: >-
     Of course, these are not the only visualization geom_* functions that
     ggplot2 carries. You can draw geographic maps/contours, QQ plots, area
     plots, violin plots, vertical/horizontal lines, smoothed conditional mean,
-    and so on. 
-    
-    
+    and so on.
+
+
     Look up available learning materials at https://ggplot2.tidyverse.org.
-    
+
 - Class: text
   Output: >-
     You have completed "Visualize with ggplot2 I" lesson of swirl-tidy!
     I will see you in the next lesson.
-    

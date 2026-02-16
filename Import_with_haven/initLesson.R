@@ -7,8 +7,8 @@
 # library(haven)
 # df <- read_dta("cces18_common_vv.dta")
 # set.seed(123)
-# cces18 <- df %>% 
-#   sample_n(50) %>% 
+# cces18 <- df %>%
+#   slice_sample(n = 50) %>%
 #   select(inputstate, birthyr, gender, educ, race, pid3)
 
 lesson_dir <- file.path(

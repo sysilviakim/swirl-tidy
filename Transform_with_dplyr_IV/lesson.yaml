@@ -9,9 +9,9 @@
 # INTRO ========================================================================
 - Class: text
   Output: >
-    Welcome back! This is our final {dplyr} lesson!!
+    Welcome back! Today we will cover joining operations with {dplyr}.
     When you see ..., press Enter.
-    
+
 - Class: cmd_question
   Output: >-
     Run {install.packages("tidyverse")}, if it is not already installed.
@@ -29,7 +29,7 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 - Class: cmd_question
   Output: 'Now load the tidyverse package.'
   CorrectAnswer: library("tidyverse")
@@ -40,9 +40,9 @@
 ## demo_lesson(4)
 - Class: text
   Output: >-
-    You've done so well to complete the previous three lessons! 
+    You've done so well to complete the previous three lessons!
     We covered {select}, {filter}, {arrange}, {mutate}, {if_else}, {case_when},
-    {group_by}, {ungroup}, and {summarise}. Wow! 
+    {group_by}, {ungroup}, and {summarise}. Wow!
 
 ## demo_lesson(5)
 - Class: text
@@ -56,7 +56,7 @@
   Output: >-
     But first, let's do a more simple type of table combining.
     Suppose you are keeping track of book sales. You have data from 2016 to 2018
-    in data frame "df1". You want to update them with 2019 and 2020 sales data. 
+    in data frame "df1". You want to update them with 2019 and 2020 sales data.
 
 ## demo_lesson(7)
 - Class: cmd_question
@@ -64,21 +64,21 @@
   CorrectAnswer: df1
   AnswerTests: any_of_exprs('df1', 'print(df1)')
   Hint: 'You can {print} or just type it into the console.'
-    
+
 ## demo_lesson(8)
 - Class: cmd_question
   Output: >-
     You want to expand "df1" so that you have two more columns
     `year2019` and `year2020`
-    
-    
+
+
     While you *can* do something like df1$year2020 <- c(30, 42, 31, 25, 48),
     suppose you have another data frame "df2" that contains
     them as a similarly structured tibble. Print out "df2".
   CorrectAnswer: df2
   AnswerTests: any_of_exprs('df2', 'print(df2)')
   Hint: 'You can {print} or just type it into the console.'
-    
+
 ## demo_lesson(9)
 - Class: cmd_question
   Output: >-
@@ -89,7 +89,7 @@
   CorrectAnswer: bind_cols(df1, df2)
   AnswerTests: omnitest(correctExpr = 'bind_cols(df1, df2)')
   Hint: 'Look up the documentation by {?bind_cols} if you are not sure.'
-    
+
 ## demo_lesson(10)
 - Class: cmd_question
   Output: >-
@@ -107,17 +107,17 @@
   CorrectAnswer: bind_rows(df1, df2)
   AnswerTests: omnitest(correctExpr = 'bind_rows(df3, df4)')
   Hint: 'Look up the documentation by {?bind_rows} if you are not sure.'
-    
+
 ## demo_lesson(12)
 - Class: text
   Output: >-
     Now, the {bind} operations we just performed assume that the data is
     properly configured so that the rows (or columns) correspond to each other
-    in their position. 
-    
-    
+    in their position.
+
+
     Well, real life data is never usually that simple...
-    
+
 # JOIN OPERATIONS PRIMER =======================================================
 ## demo_lesson(13)
 - Class: cmd_question
@@ -140,15 +140,15 @@
   Output: >-
     What do you see? The row orders of "df6" are no longer arranged neatly by
     variable `Year`. If you {bind_cols} directly to "df5" and "df6" as before,
-    you would be merging wrongly + have a duplicate `Year` variable! 
-    
+    you would be merging wrongly + have a duplicate `Year` variable!
+
 ## demo_lesson(16)
 - Class: text
   Output: >-
     So what should you do? You should tell R that instead of matching the
     columns of two tibbles using their row position, it should match based on
     the values of variable `Year`.
-  
+
 ## demo_lesson(17)
 - Class: text
   Output: >-
@@ -172,8 +172,8 @@
   Output: >-
     The console just said 'Joining, by = "Year"' and magically, we have a
     dataframe with all the data in the right place. What just happened?!
-    
-    
+
+
     Unbeknownst to you, you have told R that "df5" and "df6" are *relational
     data*, and given no instruction on how they were related, found the only
     common variable `Year`, and used it as a *key* to connect the two tibbles.
@@ -183,20 +183,20 @@
   Output: >-
     We can't cover relational data in a single swirl exercise,
     so if you are interested, you should start from
-    https://r4ds.had.co.nz/relational-data.html. 
+    https://r4ds.hadley.nz/joins.
 
 ## demo_lesson(21)
 - Class: text
   Output: >-
-    There are a few different join functions, such as {right_join}, 
+    There are a few different join functions, such as {right_join},
     {inner_join}, {full_join}, {anti_join}, ...
-    
-    
+
+
     left_join(x, y) tells you that you want to include *all* rows in *x*
     (the first argument) but not y. In this simple example, the keys matched
     exactly, so it actually didn't matter too much which *_join function you
     used.
-    
+
 ## demo_lesson(22)
 - Class: cmd_question
   Output: >-
@@ -224,7 +224,7 @@
     Because we used {left_join} with "df5" as the reference (`x`), all "df5"
     rows are kept. The missing row for "df6" is filled by NA, hence two missing
     values.
-    
+
 ## demo_lesson(24)
 - Class: mult_question
   Output: >-
@@ -249,7 +249,7 @@
   Output: >-
     Now in our example, between the tibbles, there was a common variable named
     `Year`. If no common variable can be found, you cannot "join" unless you
-    tell the computer what the common variables are. 
+    tell the computer what the common variables are.
 
 ## demo_lesson(27)
 - Class: cmd_question
@@ -264,8 +264,8 @@
     What's different from "df7"?! Well, look closer... variable `Year` is now
     `year` with a lowercase y. Because R is case-sensitive, such details can
     really mess things up.
-    
-    
+
+
     So when you perform {left_join(df5, df7)}, you will be doused in an error
     message that says "Error: `by` must be supplied when `x` and `y` have no
     common variables. i use by = character()` to perform a cross-join."
@@ -276,8 +276,8 @@
     Do {left_join} between "df5" and "df7" but with argument
     `by = c("Year" = "year")`. It tells you what key you should merge the
     data by.
-    
-    
+
+
     The left hand side is the variable in the first
     tibble, and the right hand side is the variable in the second tibble.
   CorrectAnswer: left_join(df5, df7, by = c("Year" = "year"))
@@ -298,11 +298,10 @@
 - Class: text
   Output: >-
     So that's a wrap on table joins with {dplyr}! Explore what other types of
-    *_join functions do as well. Joins are particularly useful if you are 
+    *_join functions do as well. Joins are particularly useful if you are
     merging data from different sources about the thing.
-    
+
 - Class: text
   Output: >-
     You have completed "Transform with dplyr IV" lesson of swirl-tidy!
     I will see you in the next lesson.
-    

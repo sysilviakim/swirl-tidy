@@ -11,7 +11,7 @@
   Output: >-
     Welcome back! Today we will further explore data wrangling with {dplyr}.
     When you see ..., press Enter.
-    
+
 - Class: cmd_question
   Output: >-
     Run {install.packages("tidyverse")}, if it is not already installed.
@@ -29,7 +29,7 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 - Class: cmd_question
   Output: 'Now load the tidyverse package.'
   CorrectAnswer: library("tidyverse")
@@ -40,9 +40,9 @@
 ## demo_lesson(4)
 - Class: text
   Output: >-
-    You've done so well to complete the previous lesson! 
+    You've done so well to complete the previous lesson!
     We covered {select}, {filter}, and {arrange}. In this lesson we will cover
-    {mutate}, {if_else}, and {case_when}. 
+    {mutate}, {if_else}, and {case_when}.
     This could be a tough lesson, so buckle up...
 
 ## demo_lesson(5)
@@ -50,11 +50,11 @@
   Output: >-
     This lesson will work with a sample from real survey data. I have loaded
     a sample of the Cooperative Congressional Election Study (CCES) 2016 data.
-    For the full codebook, see https://doi.org/10.7910/DVN/GDF6Z0. 
-    
-    
-    Suppose we are interested in the presidential vote choice. We have 500 
-    U.S. residents surveyed in a dataframe called "cces." 
+    For the full codebook, see https://doi.org/10.7910/DVN/GDF6Z0.
+
+
+    Suppose we are interested in the presidential vote choice. We have 500
+    U.S. residents surveyed in a dataframe called "cces."
 
 ## demo_lesson(6)
 - Class: cmd_question
@@ -63,9 +63,9 @@
   CorrectAnswer: head(cces)
   AnswerTests: >-
     any_of_exprs(
-      'head(cces, 6)', 
+      'head(cces, 6)',
       'head(cces)',
-      'print(head(cces, 6))', 
+      'print(head(cces, 6))',
       'print(head(cces))',
       'skip()'
     )
@@ -74,7 +74,7 @@
 ## demo_lesson(7)
 - Class: cmd_question
   Output: >-
-    Let's say that we want to create another column `year` with value 2016, 
+    Let's say that we want to create another column `year` with value 2016,
     so that it is clear which year these survey results correspond to.
     This is where {mutate} comes in.
 
@@ -97,12 +97,12 @@
   AnswerTests: >-
     omnitest(correctExpr = 'cces %>% mutate(year = 2016)')
   Hint: 'Just copy-paste the expression into the parentheses!'
-  
+
 ## demo_lesson(9)
 - Class: text
   Output: >-
-    Great work! You should have been flooded by a lot of printing on the 
-    console, but you should also have seen the newly created `year` column, 
+    Great work! You should have been flooded by a lot of printing on the
+    console, but you should also have seen the newly created `year` column,
     with all rows having value 2016.
 
 ## demo_lesson(10)
@@ -112,9 +112,9 @@
   CorrectAnswer: head(cces)
   AnswerTests: >-
     any_of_exprs(
-      'head(cces, 6)', 
+      'head(cces, 6)',
       'head(cces)',
-      'print(head(cces, 6))', 
+      'print(head(cces, 6))',
       'print(head(cces))',
       'skip()'
     )
@@ -123,7 +123,7 @@
 ## demo_lesson(11)
 - Class: text
   Output: >-
-    Where did our hard work go?! Re-read the code that we executed above. R 
+    Where did our hard work go?! Re-read the code that we executed above. R
     didn't actually *store* the output, but just printed after executing
     the job we told it to. So we need to store the changes we make.
 
@@ -131,10 +131,10 @@
 - Class: cmd_question
   Output: >-
     Try creating `year` column again, but this time, store the output into
-    an object called "cces2." (This is a lazy naming convention but we'll 
-    skip that debate.) 
-    
-    
+    an object called "cces2." (This is a lazy naming convention but we'll
+    skip that debate.)
+
+
     Although you can technically have the assignment operator after the piping
     operations end, I believe it's better to assign in the first line of the
     code, so that "cces2" appears earlier than "cces". This clearly shows
@@ -145,7 +145,7 @@
   AnswerTests: >-
     omnitest(correctExpr = 'cces2 <- cces %>% mutate(year = 2016)')
   Hint: 'cces2 <- cces, then pipe the {mutate} operation we did above!'
-  
+
 ## demo_lesson(13)
 - Class: cmd_question
   Output: >-
@@ -153,9 +153,9 @@
   CorrectAnswer: head(cces2)
   AnswerTests: >-
     any_of_exprs(
-      'head(cces2, 6)', 
+      'head(cces2, 6)',
       'head(cces2)',
-      'print(head(cces2, 6))', 
+      'print(head(cces2, 6))',
       'print(head(cces2))',
       'skip()'
     )
@@ -170,45 +170,43 @@
 ## demo_lesson(15)
 - Class: text
   Output: >-
-    Now note that `CC16_410a` has recorded the vote choice of the 
-    respondents in 2016. Suppose we want to regress the vote choice on voter's 
+    Now note that `CC16_410a` has recorded the vote choice of the
+    respondents in 2016. Suppose we want to regress the vote choice on voter's
     political and demographic information. In that case, we have to turn the
     variable into a number, not the current character form.
 
 ## demo_lesson(16)
 - Class: cmd_question
   Output: >-
-    This is where {mutate} function comes in, along with {if_else}. 
+    This is where {mutate} function comes in, along with {if_else}.
     We want to tell R to follow this recoding logic:
-    
-    
+
+
     * Hillary Clinton (Democrat) ---> 0
-    
-    
+
+
     * Donald Trump (Republican) ---> 1
-
-
 
     I've done the first {mutate} + {if_else} for you! Print this by using
     {cat(pipe_2).}
   CorrectAnswer: cat(pipe_2)
   AnswerTests: omnitest(correctExpr = 'cat(pipe_2)')
   Hint: 'Just copy-paste it!'
-  
+
 ## demo_lesson(17)
 - Class: cmd_question
   Output: >-
     copy-paste the printed output and run it!
-  
-  
+
+
     While it's okay to use base R's {ifelse}, let's stick to using {if_else}.
-    For differences between the functions, check out 
+    For differences between the functions, check out
     https://stackoverflow.com/questions/50646133. TL;DR, {dplyr::if_else} tries
     to ensure less mistakes.
   CorrectAnswer: >-
     cces %>%
       mutate(vc = if_else(CC16_410a == "Hillary Clinton (Democrat)", 0, 1))
-  AnswerTests: >- 
+  AnswerTests: >-
     omnitest(
       correctExpr = '
       cces %>%
@@ -220,20 +218,20 @@
 ## demo_lesson(18)
 - Class: text
   Output: >-
-    Good job! We've created a new variable `vc`. 
+    Good job! We've created a new variable `vc`.
     See how NA values in the original variable are coded as NA
-    in the mutated variable? 
+    in the mutated variable?
 
 ## demo_lesson(19)
 - Class: cmd_question
   Output: >-
-    Let's try another {mutate} exercise. Create a binary variable `white` that 
+    Let's try another {mutate} exercise. Create a binary variable `white` that
     takes the value 1 if the `race` variable has a response of "White" and 0
     if otherwise. Use the "cces" dataset again.
   CorrectAnswer: >-
     cces %>%
       mutate(white = if_else(race == "White", 1, 0))
-  AnswerTests: >- 
+  AnswerTests: >-
     omnitest(
       correctExpr = '
       cces %>%
@@ -247,16 +245,16 @@
   Output: >-
     Fantastic. But how about when we want to recode a categorical variable of
     multiple types? For example, if we wanted to turn the 7-point party
-    identification variable (`pid7`) into numeric, do we have to write 
+    identification variable (`pid7`) into numeric, do we have to write
     *seven* {if_else} lines?
-    
-    
+
+
     Not really! {case_when} can help you simplify the coding in such cases.
 
 ## demo_lesson(21)
 - Class: cmd_question
   Output: >-
-    Suppose we want the following recoding: 
+    Suppose we want the following recoding:
     Strong Democrat (3), Not very strong Democrat (2), Lean Democrat (1),
     Independent (0), Lean Republican (-1), Not very strong Republican (-2),
     and Strong Republican (-3).
@@ -266,15 +264,15 @@
   CorrectAnswer: cat(pipe_3)
   AnswerTests: omnitest(correctExpr = 'cat(pipe_3)')
   Hint: 'Just copy-paste it!'
-  
+
 ## demo_lesson(22)
 - Class: cmd_question
   Output: >-
     copy-paste the printed output and run it!
-  
-  
+
+
     While it's okay to use base R's {ifelse}, let's stick to using {if_else}.
-    For differences between the functions, check out 
+    For differences between the functions, check out
     https://stackoverflow.com/questions/50646133. TL;DR, {dplyr::if_else} tries
     to ensure less mistakes.
   CorrectAnswer: >-
@@ -285,7 +283,7 @@
           pid7 == "Not very strong Democrat" ~ 2
         )
       )
-  AnswerTests: >- 
+  AnswerTests: >-
     omnitest(
       correctExpr = '
       cces %>%
@@ -301,18 +299,18 @@
 ## demo_lesson(23)
 - Class: text
   Output: >-
-    Great work. {case_when} allows you to vectorize multiple {if_else}s. 
-    It looks much less cluttered this way. 
-    
-    
+    Great work. {case_when} allows you to vectorize multiple {if_else}s.
+    It looks much less cluttered this way.
+
+
     Now, note that the above {case_when} operation is incomplete.
-    There's a lot of missing values at the newly created `pid7_number` 
+    There's a lot of missing values at the newly created `pid7_number`
     variable.
 
 ## demo_lesson(24)
 - Class: cmd_question
   Output: >-
-    Using the above logic of recoding party identification (3 to -3), finish 
+    Using the above logic of recoding party identification (3 to -3), finish
     the seven-line {case_when} operation and run it! Make sure, for consistency,
     to have the recoding values in a consistent order from 3 to -3.
   CorrectAnswer: >-
@@ -328,7 +326,7 @@
           pid7 == "Strong Republican" ~ -3
         )
       )
-  AnswerTests: >- 
+  AnswerTests: >-
     omnitest(
       correctExpr = '
       cces %>%
@@ -351,12 +349,12 @@
   Output: >-
     Perfect! Now note that {case_when} turns value not specified in the recoding
     to zero. It does not preserve original value if you don't tell it exactly
-    what to do---or to use the manual's expression, "if no cases match."" 
-    
+    what to do---or to use the manual's expression, "if no cases match.""
+
     For example, we have values of "Not sure" for `pid7`, which will
     be NA values in `pid7_number`, because {case_when} doesn't know what to do
     with them.
-    
+
     So it's always safe to do a quick sanity check on missing values after you
     work with {case_when}.
 
@@ -364,20 +362,19 @@
 - Class: text
   Output: >-
     We covered lots of important material here! But {dplyr} is a giant Swiss
-    army knife, and it can do a *lot* more. 
-    
-    
+    army knife, and it can do a *lot* more.
+
+
     You can create lagged variables with
     `lag`, mutate all or some variables in a single line by `across`,
-    create random samples using `sample_n`, 
+    create random samples using `slice_sample`,
     rename variables with `rename`, count the number of rows with `n`,
-    and so on. 
-    
-  
+    and so on.
+
+
     If you are interested check these functions out!
-    
+
 - Class: text
   Output: >-
     You have completed "Transform with dplyr II" lesson of swirl-tidy!
     I will see you in the next lesson.
-    

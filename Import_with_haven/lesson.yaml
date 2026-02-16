@@ -11,7 +11,7 @@
   Output: >
     Welcome back! Today we will explore how to export data using the {haven}
     package. When you see ..., press Enter.
-    
+
 - Class: cmd_question
   Output: >-
     Run {install.packages("haven")}, if it is not already installed.
@@ -29,7 +29,7 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 - Class: cmd_question
   Output: 'Now load the haven package.'
   CorrectAnswer: library("haven")
@@ -40,7 +40,7 @@
 ## demo_lesson(4)
 - Class: text
   Output: >-
-    The {haven} package is not one of the core tidyverse packages (as of 1.3.0),
+    The {haven} package is not one of the core tidyverse packages (as of 2.0.0),
     but is nevertheless popular as many people work with files created from
     other programming languages.
     This one lets you import from/export to Stata, SAS, and SPSS files.
@@ -111,23 +111,23 @@
 - Class: text
   Output: >
     You should see four value-label pairs printed, that says
-    
-    
+
+
     Labels:
-    
-    
+
+
      value     label
-     
-     
+
+
      1      Male
-     
-     
+
+
      2    Female
-     
-     
+
+
      8   skipped
-     
-     
+
+
      9 not asked
 
 ## demo_lesson(12)
@@ -177,8 +177,8 @@
   Output: >-
     You should see a regular factor with 10 levels, with a "label" attribute.
     For more on factors, you may want to check out the forcats package lesson.
-    
-    
+
+
     What's neat about {as_factor} is that it accepts an *entire* tibble!
     You do not have to take a separate action to convert all columns.
     Try applying {as_factor} to "df" itself, and not to a specific column.
@@ -197,8 +197,8 @@
   Output: >-
     You should see a regular factor with 10 levels, with a "label" attribute.
     For more on factors, you may want to check out the forcats package lesson.
-    
-    
+
+
     What's neat about {as_factor} is that it accepts an *entire* tibble!
     You do not have to take a separate action to convert all columns.
     Try applying {as_factor} to "df" itself, and not to a specific column.
@@ -214,8 +214,8 @@
     1 to 4. Let's say this is actually a survey response for home address,
     and you want to code "1" as "DC", "2" as "Maryland", "3" as "Virginia", and
     "4" as "Other".
-    
-    
+
+
     Use function {labelled}. Look up its documentation by {?labelled} to
     see how you would achieve this.
   CorrectAnswer: >-
@@ -244,27 +244,26 @@
     One last point that should be made though is that R allows you to specify
     which versio of Stata that you are importing from or exporting to.
     Suppose you have a Stata version 12 but your friend sent you a data file
-    written with Stata 14. Your Stata 12 will not be able to read it! 
-    
+    written with Stata 14. Your Stata 12 will not be able to read it!
+
 ## demo_lesson(21)
 - Class: text
   Output: >-
     So what to do? Read it into R using {haven::read_dta} using `version = 14`
     argument, and then export it to a .dta again with {haven::write_dta}
     using `version = 12`! Voila, your Stata can now read that file!
-    
-    
+
+
     Neat, wouldn't you say?
-    
+
 # OUTRO ========================================================================
 - Class: text
   Output: >-
     So that's a wrap on {haven}! Check out the parts about
     tagging missing values and removing attributes at
-    https://haven.tidyverse.org/reference/index.html. 
-    
+    https://haven.tidyverse.org/reference/index.html.
+
 - Class: text
   Output: >-
     You have completed "Import with haven" lesson of swirl-tidy!
     I will see you in the next lesson.
-    

@@ -11,7 +11,7 @@
   Output: >-
     Welcome back! Today we will explore what a pipe-operator is, a central
     concept in tidyverse. When you see ..., press Enter.
-    
+
 - Class: cmd_question
   Output: >-
     Run {install.packages("tidyverse")}, if it is not already installed.
@@ -29,7 +29,7 @@
       'skip()'
     )
   Hint: 'If the package is already installed, type skip().'
-    
+
 - Class: cmd_question
   Output: 'Now load the tidyverse package.'
   CorrectAnswer: library("tidyverse")
@@ -42,8 +42,8 @@
   Output: >-
     A pipe operator {%>%} is a key concept in tidyverse, and it will be best to
     explain its basics before we move onto lessons such as data manipulation
-    with {dplyr} package. See Chapter 18 of R4DS at 
-    https://r4ds.had.co.nz/pipes.html. 
+    with {dplyr} package. See Chapter 18 of R4DS at
+    https://r4ds.hadley.nz/workflow-pipes.
 
 ## demo_lesson(5)
 - Class: text
@@ -54,7 +54,7 @@
     the mixture, (6) temper it, (7) pour it into a mold, and finally (8) package
     it! Your raw data is your cocoa beans. The packaged chocolate bar is
     your final product, whether it be a regression result, table, figure, or
-    a tidied-up data itself. 
+    a tidied-up data itself.
 
 ## demo_lesson(6)
 - Class: text
@@ -66,7 +66,7 @@
 # QUICK DEMO ===================================================================
 ## demo_lesson(7)
 - Class: cmd_question
-  Output: >- 
+  Output: >-
     Let's demonstrate this by a sample dataset. Load a dataset called "midwest".
     This is part of the {ggplot2} package.
   CorrectAnswer: data(midwest)
@@ -75,7 +75,7 @@
 
 ## demo_lesson(8)
 - Class: cmd_question
-  Output: >- 
+  Output: >-
     Let's first peruse the dataset as if it is a spreadsheet. Pull it up
     into the Data Viewer.
   CorrectAnswer: View(midwest)
@@ -96,7 +96,7 @@
 - Class: cmd_question
   Output: 'Copy-paste the above printed code and execute it.'
   CorrectAnswer: >-
-    midwest %>% 
+    midwest %>%
       filter(state == "IN")
   AnswerTests: omnitest(correctExpr = 'midwest %>% filter(state == "IN")')
   Hint: 'Just copy-paste it!'
@@ -106,7 +106,7 @@
   Output: >-
     Good job! What do you see? Whereas the Data Viewer one shows you rows
     starting with Illinois counties, now you only see those in Indiana.
-    
+
 ## demo_lesson(12)
 - Class: text
   Output: >-
@@ -137,13 +137,13 @@
   Output: 'Copy-paste the above printed code and execute it.'
   CorrectAnswer: >-
     midwest %>%
-      filter(state == "IN") %>% 
+      filter(state == "IN") %>%
       select(-PID, -area, -popdensity)
   AnswerTests: >-
     omnitest(
       correctExpr = '
       midwest %>%
-      filter(state == "IN") %>% 
+      filter(state == "IN") %>%
       select(-PID, -area, -popdensity)
       '
     )
@@ -169,14 +169,14 @@
   Output: 'Copy-paste the above printed code and execute it.'
   CorrectAnswer: >-
     midwest %>%
-      filter(state == "IN") %>% 
+      filter(state == "IN") %>%
       select(-PID, -area, -popdensity) %>%
       arrange(desc(poptotal))
   AnswerTests: >-
     omnitest(
       correctExpr = '
       midwest %>%
-      filter(state == "IN") %>% 
+      filter(state == "IN") %>%
       select(-PID, -area, -popdensity) %>%
       arrange(desc(poptotal))
       '
@@ -187,41 +187,62 @@
 - Class: text
   Output: "Your remaining data has been arranged by population in a descending \
     order! \n\n
-    
+
     (1) The data is still contains only Indiana counties, and \
     (2) still does not variables called `PID`, `area`, and `popdensity`. \
     Now, it has then (3) been arranged by `poptotal`. \n\n
-    
+
     The tibble was subject to {filter}, *then* {select}, *then* {arrange}.
     Accordingly, there were three pipe operators in our code."
-    
+
 ## demo_lesson(20)
 - Class: text
   Output: >-
-    Note that the piped output is not stored anywhere yet. We have merely 
-    printed it on the console. If you want to store the output, you should 
+    Note that the piped output is not stored anywhere yet. We have merely
+    printed it on the console. If you want to store the output, you should
     do an explicit assignment.
+
+# NATIVE PIPE ==================================================================
+- Class: text
+  Output: >-
+    One more thing before we wrap up. Starting with R 4.1.0 (released 2021),
+    R has a built-in native pipe operator {|>}. It works similarly to {%>%}
+    for most use cases.
+
+- Class: text
+  Output: >-
+    The key difference is that {%>%} comes from the {magrittr} package (loaded
+    automatically with tidyverse), while {|>} is built into base R and requires
+    no packages at all.
+
+- Class: text
+  Output: >-
+    For this course, we use {%>%} because it is the traditional tidyverse pipe
+    and you will see it in most existing code and tutorials. However, you should
+    be aware that {|>} exists and works the same way in most situations.
+    For example, {diamonds %>% filter(cut == "Ideal")} is the same as
+    {diamonds |> filter(cut == "Ideal")}.
 
 # OUTRO ========================================================================
 - Class: text
   Output: >-
     So that was the very basic introduction to pipes! This is essential as we
     move on to the key lessons. See how it is similar to a chocolate factory?
-    
+
 - Class: text
   Output: >-
     Pipe operator helps keep track of your actions in a more readable form.
-    In addition, you do not have to store all the intermediate outputs. It is 
-    of course good practice to keep checking that each step is doing what you 
+    In addition, you do not have to store all the intermediate outputs. It is
+    of course good practice to keep checking that each step is doing what you
     think it should be doing!
-    
+
 - Class: text
   Output: >-
-    Again, see Chapter 18 of R4DS for why {%>%} is good (and when not to use
-    them). Also check out the documentation by typing {?magrittr::`%>%`}. 
+    See the Pipes chapter of R4DS at https://r4ds.hadley.nz/workflow-pipes
+    for why pipes are good (and when not to use them). Also check out the
+    documentation by typing {?magrittr::`%>%`}.
 
 - Class: text
   Output: >-
     You have completed "Introduction to pipes" lesson of swirl-tidy!
     I will see you in the next lesson.
-    
