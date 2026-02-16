@@ -1,4 +1,4 @@
-# swirl-tidy <img src="logo.svg" align="right" height="139" />
+# swirl-tidy <a href="https://github.com/sysilviakim/swirl-tidy"><img src="logo.svg" align="right" height="139" alt="swirl-tidy logo" /></a>
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -19,6 +19,8 @@ library(swirl)
 install_course_github("sysilviakim", "swirl-tidy")
 swirl()
 ```
+
+<br clear="all" />
 
 ## Lessons
 
