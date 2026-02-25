@@ -15,7 +15,7 @@ lesson_dir <- file.path(
 # write_file("a|b|c\n1|2|3\n4|5|NA", file.path(lesson_dir, "file.txt"))
 # write_file("a b c\n1 2 3\n4 5 NA", file.path(lesson_dir, "file.fwf"))
 # write_file("a\tb\tc\n1\t2\t3\n4\t5\tNA", file.path(lesson_dir, "file.tsv"))
-write_file(
+writeLines(
   expand.grid(
     a = seq(1, 30, by = 3),
     b = seq(2, 30, by = 3),
